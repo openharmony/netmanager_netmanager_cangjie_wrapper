@@ -24,11 +24,11 @@ ohos_cj_library("ohos.net.http") {
   external_deps = [ "netstack:cj_net_http_ffi" ]
 
   cj_external_deps = [
-    "arkui_cangjie_api:ohos.base",
-    "cangjie_api:ohos.ffi",
-    "cangjie_api:ohos.labels",
-    "cangjie_api:ohos.encoding.json",
-    "hiviewdfx_cangjie_api:ohos.hilog",
+    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.ffi",
+    "cangjie_ark_interop:ohos.labels",
+    "cangjie_ark_interop:ohos.encoding.json",
+    "hiviewdfx_cangjie_wrapper:ohos.hilog",
   ]
 
   cj_deps = [
@@ -36,6 +36,6 @@ ohos_cj_library("ohos.net.http") {
   ]
 
   subsystem_name = "netmanager"
-  part_name = "netmanager_cangjie_api"
+  part_name = "netmanager_cangjie_wrapper"
   lib_name = "net.http"
 }

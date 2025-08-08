@@ -17,7 +17,7 @@
 ## 目录<a name="section119mcpsimp"></a>
 
 ```
-foundation/communication/netmanager_cangjie_api
+foundation/communication/netmanager_cangjie_wrapper
 ├── ohos             # 仓颉网络管理子系统接口实现
 ├── kit              # 仓颉kit化代码
 ├── figures          # 存放readme中的架构图
@@ -27,6 +27,6 @@ foundation/communication/netmanager_cangjie_api
 
 **网络管理子系统**
 
-netmanager_cangjie_api
+netmanager_cangjie_wrapper
 
 [communication_netmanager_base](https://gitee.com/openharmony/communication_netmanager_base/blob/master/README_zh.md)
