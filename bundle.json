@@ -1,0 +1,45 @@
+{
+    "name": "@ohos/netmanager_cangjie_api",
+    "description": "The WLAN module provides basic WLAN functions, peer-to-peer (P2P) connection, and WLAN notification, enabling your application to communicate with other devices through a WLAN.",
+    "version": "6.0",
+    "license": "Apache-2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "foundation/communication/netmanager_cangjie_api"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "netmanager_cangjie_api",
+        "subsystem": "communication",
+        "syscap": [
+            "SystemCapability.Communication.WiFi.STA",
+            "SystemCapability.Communication.WiFi.AP.Core",
+            "SystemCapability.Communication.WiFi.P2P",
+            "SystemCapability.Communication.WiFi.Core"
+        ],
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "30000KB",
+        "ram": "100000KB",
+        "deps": {
+            "components": [
+                "cangjie_api"
+            ]
+        },
+        "build": {
+            "sub_component": [
+                "//foundation/communication/netmanager_cangjie_api/ohos/net/connection:ohos.net.connection",
+                "//foundation/communication/netmanager_cangjie_api/ohos/net/http:ohos.net.http",
+                "//foundation/communication/netmanager_cangjie_api/ohos/net:ohos.net",
+                "//foundation/communication/netmanager_cangjie_api/kit/NetworkKit:kit.NetworkKit"
+            ],
+            "inner_kits": [
+            ],
+            "test": [
+            ]
+        }
+    }
+}
