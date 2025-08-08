@@ -25,6 +25,6 @@ ohos_cj_library("kit.NetworkKit") {
 
   kit = true
   subsystem_name = "netmanager"
-  part_name = "netmanager_cangjie_api"
+  part_name = "netmanager_cangjie_wrapper"
   lib_name = "NetworkKit"
 }

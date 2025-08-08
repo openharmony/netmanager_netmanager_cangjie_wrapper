@@ -18,6 +18,6 @@ ohos_cj_library("ohos.net") {
   sources = ["net.cj"]
 
   subsystem_name = "netmanager"
-  part_name = "netmanager_cangjie_api"
+  part_name = "netmanager_cangjie_wrapper"
   lib_name = "net"
 }

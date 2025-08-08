@@ -17,7 +17,7 @@ The figure below shows the architecture of the network management subsystem. The
 ## Directory Structure<a name="section119mcpsimp"></a>
 
 ```
-foundation/communication/netmanager_cangjie_api
+foundation/communication/netmanager_cangjie_wrapper
 ├── ohos             # Cangjie Network Management code
 ├── kit              # Cangjie kit code
 ├── figures          # architecture pictures
@@ -27,6 +27,6 @@ foundation/communication/netmanager_cangjie_api
 
 **Network Management Subsystem**
 
-netmanager_cangjie_api
+netmanager_cangjie_wrapper
 
 [communication_netmanager_base](https://gitee.com/openharmony/communication_netmanager_base/blob/master/README.md)
