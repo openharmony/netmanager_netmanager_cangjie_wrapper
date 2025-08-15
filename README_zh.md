@@ -1,8 +1,8 @@
-# 网络管理仓颉<a name="ZH-CN_TOPIC_0000001162422291"></a>
+# 网络管理仓颉接口<a name="ZH-CN_TOPIC_0000001162422291"></a>
 
 ## 简介<a name="section104mcpsimp"></a>
 
-网络管理仓颉，作为设备联网的必备组件，提供了对不同类型网络连接的统一管理、流量管理、策略管理、网络共享，并提供了网络协议栈能力。应用可以通过调用API来获取数据网络的连接信息，查询和订阅数据网络的连接状态，网络流量数据，网络策略以及网络共享等，并可通过网络协议栈进行数据传输。
+网络管理仓颉接口是在 OpenHarmony 上基于网络管理子系统能力之上封装的仓颉API。网络管理子系统，作为设备联网的必备组件，提供了对不同类型网络连接的统一管理、流量管理、策略管理、网络共享，并提供了网络协议栈能力。应用可以通过调用API来获取数据网络的连接信息，查询和订阅数据网络的连接状态，网络流量数据，网络策略以及网络共享等，并可通过网络协议栈进行数据传输。
 
 下图所示为网络管理仓颉架构图。各个部件主要作用如下：
 
@@ -25,8 +25,6 @@ foundation/communication/netmanager_cangjie_wrapper
 
 ## 相关仓<a name="section152mcpsimp"></a>
 
-**网络管理仓颉**
-
-netmanager_cangjie_wrapper
-
 [communication_netmanager_base](https://gitee.com/openharmony/communication_netmanager_base/blob/master/README_zh.md)
+
+[communication_netstack](https://gitee.com/openharmony/communication_netstack/blob/master/README_zh.md)
