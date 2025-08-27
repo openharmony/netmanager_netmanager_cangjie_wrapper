@@ -15,9 +15,8 @@
 
 package ohos.net.http
 
-import ohos.base.*
 import ohos.ffi.*
-import ohos.net.connection.{HttpProxy, CHttpProxy}
+import ohos.net.connection.CHttpProxy
 import std.collection.*
 
 foreign {
@@ -108,7 +107,7 @@ struct CHttpRequestOptions {
 
     init(ops: HttpRequestOptions) {
         this.method = CString(CPointer())
-        this.extraData = ops.extraData?.getCData() ?? CArrUI8(CPointer<UInt8>(), 0)
+        this.extraData = ops.extraData.getCData()
         this.expectDataType = ops.expectDataType?.getValue() ?? 3
         this.usingCache = ops.usingCache
         this.priority = ops.priority
@@ -118,8 +117,8 @@ struct CHttpRequestOptions {
         this.usingProtocol = ops.usingProtocol?.getValue() ?? -1
         this.usingDefaultProxy = false
         this.usingProxy = CPointer<CHttpProxy>()
-        this.resumeFrom = ops.resumeFrom ?? 0
-        this.resumeTo = ops.resumeTo ?? 0
+        this.resumeFrom = ops.resumeFrom
+        this.resumeTo = ops.resumeTo
         this.maxLimit = ops.maxLimit
         this.dnsOverHttps = CString(CPointer())
         this.dnsServers = CArrString(CPointer(), 0)
@@ -174,9 +173,9 @@ struct CHttpRequestOptions {
 func parseUsingProxy(usingProxy: UsingProxy): (Bool, CPointer<CHttpProxy>) {
     unsafe {
         match (usingProxy) {
-            case NOT_USE => (false, CPointer<CHttpProxy>())
-            case USE_DEFAULT => (true, CPointer<CHttpProxy>())
-            case USE_SPECIFIED(proxy) =>
+            case NotUse => (false, CPointer<CHttpProxy>())
+            case UseDefault => (true, CPointer<CHttpProxy>())
+            case UseSpecified(proxy) =>
                 let useProxy = safeMalloc<CHttpProxy>()
                 try {
                     useProxy.write(CHttpProxy(proxy))
@@ -379,10 +378,7 @@ struct CMultiFormData {
         this.contentType = CString(CPointer())
         this.remoteFileName = CString(CPointer())
         this.filePath = CString(CPointer())
-        this.data = match (formData.data) {
-            case Some(v) => v.getCData()
-            case None => CArrUI8(CPointer<UInt8>(), 0)
-        }
+        this.data = formData.data.getCData()
         unsafe {
             try {
                 this.name = LibC.mallocCString(formData.name)

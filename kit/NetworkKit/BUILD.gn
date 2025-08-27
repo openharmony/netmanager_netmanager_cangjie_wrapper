@@ -14,7 +14,7 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("kit.NetworkKit") {
+ohos_cangjie_shared_library("kit.NetworkKit") {
   sources = [ "index.cj" ]
 
   cj_deps = [
@@ -23,8 +23,6 @@ ohos_cj_library("kit.NetworkKit") {
     "../../ohos/net/http:ohos.net.http",
   ]
 
-  kit = true
   subsystem_name = "netmanager"
   part_name = "netmanager_cangjie_wrapper"
-  lib_name = "NetworkKit"
 }
