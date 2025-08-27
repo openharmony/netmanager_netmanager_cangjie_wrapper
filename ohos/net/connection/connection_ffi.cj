@@ -16,8 +16,6 @@
 package ohos.net.connection
 
 import ohos.ffi.*
-import ohos.base.*
-import std.collection.*
 
 foreign {
     func CJ_CreateNetConnection(netSpecifier: CNetSpecifier, timeout: UInt32): Int64
@@ -84,7 +82,7 @@ struct CNetSpecifier {
     init(netSpecifier: NetSpecifier) {
         this.netCapabilities = CNetCapabilities(netSpecifier.netCapabilities)
         this.bearerPrivateIdentifier = try {
-            unsafe { LibC.mallocCString(netSpecifier.bearerPrivateIdentifier ?? "") }
+            unsafe { LibC.mallocCString(netSpecifier.bearerPrivateIdentifier) }
         } catch (e: Exception) {
             netCapabilities.free()
             throw e
@@ -115,12 +113,12 @@ protected struct CHttpProxy {
         protected let exclusionListSize: Int64
     ) {}
     protected init(httpProxy: HttpProxy) {
-        this.host = unsafe { LibC.mallocCString(httpProxy.host ?? "") }
-        this.port = httpProxy.port ?? 0
-        this.exclusionListSize = httpProxy.exclusionList?.size ?? 0
+        this.host = unsafe { LibC.mallocCString(httpProxy.host) }
+        this.port = UInt16(httpProxy.port)
+        this.exclusionListSize = httpProxy.exclusionList.size
         unsafe {
             try {
-                this.exclusionList = cjArr2CArr<String, CString>(httpProxy.exclusionList ?? Array<String>(0, repeat: ""),
+                this.exclusionList = cjArr2CArr<String, CString>(httpProxy.exclusionList,
                     {str => LibC.mallocCString(str)}) {cstr => LibC.free(cstr)}
             } catch (e: Exception) {
                 LibC.free(host)
@@ -201,14 +199,10 @@ struct CNetCapabilities {
     ) {}
 
     init(netCapabilities: NetCapabilities) {
-        this.linkUpBandwidthKbps = netCapabilities.linkUpBandwidthKbps ?? 0
-        this.linkDownBandwidthKbps = netCapabilities.linkDownBandwidthKbps ?? 0
+        this.linkUpBandwidthKbps = netCapabilities.linkUpBandwidthKbps
+        this.linkDownBandwidthKbps = netCapabilities.linkDownBandwidthKbps
         this.bearedTypeSize = netCapabilities.bearerTypes.size
-
-        let networkCapArr = match (netCapabilities.networkCap) {
-            case Some(v) => v
-            case None => Array<NetCap>()
-        }
+        let networkCapArr = netCapabilities.networkCap
         this.networkCapSize = networkCapArr.size
         unsafe {
             this.bearerTypes = cjArr2CArr<NetBearType, Int32>(netCapabilities.bearerTypes, {enums => enums.getValue()})
