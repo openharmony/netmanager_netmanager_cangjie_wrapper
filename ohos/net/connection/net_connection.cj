@@ -17,10 +17,11 @@ package ohos.net.connection
 
 import ohos.ffi.*
 import ohos.hilog.*
-import std.collection.*
-import ohos.base.*
-import std.deriving.*
+import ohos.business_exception.BusinessException
+import ohos.callback_invoke.*
 import ohos.labels.*
+
+import std.deriving.Derive
 
 let CONNECTION_LOG = HilogChannel(0, 0xD0015B0, "CJ-net-Connection")
 
@@ -30,11 +31,10 @@ let CONNECTION_LOG = HilogChannel(0, 0xD0015B0, "CJ-net-Connection")
  * @param { UInt32 } timeout - The time in milliseconds to attempt looking for a suitable network before
  * {@link NetConnection#netUnavailable} is called.
  * @returns { NetConnection } the NetConnection of the NetSpecifier.
+ * @relation createNetConnection(netSpecifier?: NetSpecifier, timeout?: number): NetConnection
  */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -61,10 +61,10 @@ public func createNetConnection(netSpecifier!: ?NetSpecifier = None, timeout!: U
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
+ * @relation getDefaultNet(): Promise<NetHandle>
  */
 @!APILevel[
     21,
-    atomicservice: true,
     permission: "ohos.permission.GET_NETWORK_INFO",
     stagemodelonly: true,
     syscap: "SystemCapability.Communication.NetManager.Core"
@@ -92,7 +92,7 @@ public func getDefaultNet(): NetHandle {
  * @returns { HttpProxy } the promise returned by the function.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @syscap SystemCapability.Communication.NetManager.Core
+ * @relation getDefaultHttpProxy(): Promise<HttpProxy>
  */
 @!APILevel[
     21,
@@ -121,8 +121,7 @@ public func getDefaultHttpProxy(): HttpProxy {
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @syscap SystemCapability.Communication.NetManager.Core
- * @brief getAppNetSync(): NetHandle;
+ * @relation function getAppNetSync(): NetHandle
  */
 @!APILevel[
     21,
@@ -153,8 +152,7 @@ public func getAppNet(): NetHandle {
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @syscap SystemCapability.Communication.NetManager.Core
- * @brief setAppNet(netHandle: NetHandle): Promise<void>;
+ * @relation setAppNet(netHandle: NetHandle): Promise<void>
  */
 @!APILevel[
     21,
@@ -181,6 +179,7 @@ public func setAppNet(netHandle: NetHandle): Unit {
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
+ * @relation getAllNets(): Promise<Array<NetHandle>>
  */
 @!APILevel[
     21,
@@ -214,6 +213,7 @@ public func getAllNets(): Array<NetHandle> {
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
+ * @relation getConnectionProperties(netHandle: NetHandle): Promise<ConnectionProperties>
  */
 @!APILevel[
     21,
@@ -251,10 +251,10 @@ public func getConnectionProperties(netHandle: NetHandle): ConnectionProperties 
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
+ * @relation getNetCapabilities(netHandle: NetHandle, callback: AsyncCallback<NetCapabilities>): void
  */
 @!APILevel[
     21,
-    atomicservice: true,
     permission: "ohos.permission.GET_NETWORK_INFO",
     stagemodelonly: true,
     syscap: "SystemCapability.Communication.NetManager.Core"
@@ -285,6 +285,7 @@ public func getNetCapabilities(netHandle: NetHandle): NetCapabilities {
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
+ * @relation isDefaultNetMetered(): Promise<boolean>
  */
 @!APILevel[
     21,
@@ -312,10 +313,10 @@ public func isDefaultNetMetered(): Bool {
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
+ * @relation hasDefaultNet(): Promise<boolean>
  */
 @!APILevel[
     21,
-    crossplatform: true,
     permission: "ohos.permission.GET_NETWORK_INFO",
     stagemodelonly: true,
     syscap: "SystemCapability.Communication.NetManager.Core"
@@ -342,10 +343,11 @@ public func hasDefaultNet(): Bool {
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
+ * @relation reportNetConnected(netHandle: NetHandle): Promise<void>
  */
 @!APILevel[
     21,
-    permission: "ohos.permission.GET_NETWORK_INFO & ohos.permission.INTERNET",
+    permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET",
     stagemodelonly: true,
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -369,10 +371,11 @@ public func reportNetConnected(netHandle: NetHandle): Unit {
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
+ * @relation reportNetDisconnected(netHandle: NetHandle): Promise<void>
  */
 @!APILevel[
     21,
-    permission: "ohos.permission.GET_NETWORK_INFO & ohos.permission.INTERNET",
+    permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET",
     stagemodelonly: true,
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -396,12 +399,10 @@ public func reportNetDisconnected(netHandle: NetHandle): Unit {
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @syscap SystemCapability.Communication.NetManager.Core
- * @brief getAddressesByName(host: string): Promise<Array<NetAddress>>;
+ * @relation getAddressesByName(host: string): Promise<Array<NetAddress>>
  */
 @!APILevel[
     21,
-    atomicservice: true,
     permission: "ohos.permission.INTERNET",
     stagemodelonly: true,
     syscap: "SystemCapability.Communication.NetManager.Core"
@@ -410,10 +411,13 @@ public func getAddressesByName(host: String): Array<NetAddress> {
     getDefaultNet().getAddressesByName(host)
 }
 
+/**
+ * Represents the network connection handle.
+ * 
+ * @relation export interface NetConnection
+ */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -427,10 +431,20 @@ public class NetConnection <: RemoteDataLite {
         releaseFFIData(myDataId)
     }
 
+    /**
+     * Receives status change notifications of a specified network.
+     * @permission ohos.permission.GET_NETWORK_INFO
+     * @param { AsyncCallback<void> } callback - the callback of register.
+     * @throws { BusinessException } 201 - Permission denied.
+     * @throws { BusinessException } 401 - Parameter error.
+     * @throws { BusinessException } 2100002 - Failed to connect to the service.
+     * @throws { BusinessException } 2100003 - System internal error.
+     * @throws { BusinessException } 2101008 - The callback already exists.
+     * @throws { BusinessException } 2101022 - The number of requests exceeded the maximum allowed.
+     * @relation register(callback: AsyncCallback<void>): void
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         permission: "ohos.permission.GET_NETWORK_INFO",
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
@@ -445,10 +459,16 @@ public class NetConnection <: RemoteDataLite {
         CONNECTION_LOG.info("register success")
     }
 
+    /**
+     * Cancels listening for network status changes.
+     * @throws { BusinessException } 401 - Parameter error.
+     * @throws { BusinessException } 2100002 - Failed to connect to the service.
+     * @throws { BusinessException } 2100003 - System internal error.
+     * @throws { BusinessException } 2101007 - The callback does not exist.
+     * @relation unregister(callback: AsyncCallback<void>): void
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
@@ -462,58 +482,79 @@ public class NetConnection <: RemoteDataLite {
         CONNECTION_LOG.info("unregister success")
     }
 
+    /**
+     * Registers a listener for netAvailable events.
+     * Registers a listener for netLost events.
+     * @throws { IllegalArgumentException } The parameter check failed.
+     * @relation on(type: 'netAvailable', callback: Callback<NetHandle>): void
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public func onNetAvailable(callback: (NetHandle) -> Unit): Unit {
-        CONNECTION_LOG.info("onNetAvailable start register")
+    public func on(event: NetConnectionEvent, callback: Callback1Argument<NetHandle>): Unit {
         let wrapper = {
             netId: Int32 =>
             let handle = NetHandle(netId)
-            callback(handle)
+            callback.invoke(None, handle)
         }
         let registerCall = Callback1Param<Int32, Unit>(wrapper)
-        unsafe { CJ_OnNetAvailable(getID(), registerCall.getID()) }
-        CONNECTION_LOG.info("onNetAvailable register success")
+        unsafe {
+            match (event) {
+                case NetConnectionEvent.NetAvailable => CJ_OnNetAvailable(getID(), registerCall.getID())
+                case NetConnectionEvent.NetLost => CJ_OnNetLost(getID(), registerCall.getID())
+                case _ => throw IllegalArgumentException("The parameter check failed.")
+            }
+        }
     }
 
+    /**
+     * Registers a listener for netBlockStatusChange events.
+     * @throws { IllegalArgumentException } The parameter check failed.
+     * @relation on(type: 'netBlockStatusChange', callback: Callback<NetBlockStatusInfo>): void
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public func onNetBlockStatusChange(callback: (NetHandle, Bool) -> Unit): Unit {
+    public func on(event: NetConnectionEvent, callback: Callback1Argument<NetBlockStatusInfo>): Unit {
         CONNECTION_LOG.info("onNetBlockStatusChange start register")
+        if (event != NetConnectionEvent.NetBlockStatusChange) {
+            throw IllegalArgumentException("The parameter check failed.")
+        }
         let wrapper = {
             netId: Int32, block: Bool =>
             let handle = NetHandle(netId)
-            callback(handle, block)
+            let info = NetBlockStatusInfo(handle, block)
+            callback.invoke(None, info)
         }
         let registerCall = Callback2Param<Int32, Bool, Unit>(wrapper)
         unsafe { CJ_OnNetBlockStatusChange(getID(), registerCall.getID()) }
         CONNECTION_LOG.info("onNetBlockStatusChange register success")
     }
 
+    /**
+     * Registers a listener for **netCapabilitiesChange** events.
+     * @throws { IllegalArgumentException } The parameter check failed.
+     * @relation on(type: 'netCapabilitiesChange', callback: Callback<NetCapabilityInfo>): void
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public func onNetCapabilitiesChange(callback: (NetCapabilityInfo) -> Unit): Unit {
+    public func on(event: NetConnectionEvent, callback: Callback1Argument<NetCapabilityInfo>): Unit {
         CONNECTION_LOG.info("onNetCapabilitiesChange start register")
+        if (event != NetConnectionEvent.NetCapabilitiesChange) {
+            throw IllegalArgumentException("The parameter check failed.")
+        }
         let wrapper = {
             info: CNetCapabilityInfo =>
             CONNECTION_LOG.info("onNetCapabilitiesChange callback called")
             let capabilitiesInfo = NetCapabilityInfo(info)
-            callback(capabilitiesInfo)
+            callback.invoke(None, capabilitiesInfo)
             CONNECTION_LOG.info("onNetCapabilitiesChange callback end")
         }
         let registerCall = Callback1Param<CNetCapabilityInfo, Unit>(wrapper)
@@ -521,19 +562,28 @@ public class NetConnection <: RemoteDataLite {
         CONNECTION_LOG.info("onNetCapabilitiesChange register success")
     }
 
+    /**
+     * Registers a listener for netConnectionPropertiesChange events.
+     * @throws { IllegalArgumentException } The parameter check failed.
+     * @relation on(type: 'netConnectionPropertiesChange', callback: Callback<NetConnectionPropertyInfo>): void
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public func onNetConnectionPropertiesChange(callback: (NetHandle, ConnectionProperties) -> Unit): Unit {
+    public func on(event: NetConnectionEvent, callback: Callback1Argument<NetConnectionPropertyInfo>): Unit {
         CONNECTION_LOG.info("onNetConnectionPropertiesChange start register")
+        if (event != NetConnectionEvent.NetConnectionPropertiesChange) {
+            throw IllegalArgumentException("The parameter check failed.")
+        }
         let wrapper = {
             netId: Int32, props: CConnectionProperties =>
             CONNECTION_LOG.info("onNetConnectionPropertiesChange callback called")
             let handle = NetHandle(netId)
             let connectionProprties = ConnectionProperties(props)
-            callback(handle, connectionProprties)
+            let info = NetConnectionPropertyInfo(handle, connectionProprties)
+            callback.invoke(None, info)
             CONNECTION_LOG.info("onNetConnectionPropertiesChange callback end")
         }
         let registerCall = Callback2Param<Int32, CConnectionProperties, Unit>(wrapper)
@@ -541,62 +591,59 @@ public class NetConnection <: RemoteDataLite {
         CONNECTION_LOG.info("onNetConnectionPropertiesChange register success")
     }
 
+    /**
+     * Registers a listener for netUnavailable events.
+     * @throws { IllegalArgumentException } The parameter check failed.
+     * @relation on(type: 'netUnavailable', callback: Callback<void>): void
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public func onNetLost(callback: (NetHandle) -> Unit): Unit {
-        CONNECTION_LOG.info("onNetLost start register")
-        let wrapper = {
-            netId: Int32 =>
-            let handle = NetHandle(netId)
-            callback(handle)
+    public func on(event: NetConnectionEvent, callback: Callback0Argument): Unit {
+        CONNECTION_LOG.info("onNetUnavailable start register")
+        if (event != NetConnectionEvent.NetUnavailable) {
+            throw IllegalArgumentException("The parameter check failed.")
         }
-        let registerCall = Callback1Param<Int32, Unit>(wrapper)
-        unsafe { CJ_OnNetLost(getID(), registerCall.getID()) }
-        CONNECTION_LOG.info("onNetLost register success")
-    }
-
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Communication.NetManager.Core"
-    ]
-    public func onNetUnavailable(callback: () -> Unit): Unit {
-        CONNECTION_LOG.info("onNetAvailable start register")
-        let registerCall = Callback0Param<Unit>(callback)
+        let wrapper = { =>
+            callback.invoke(None)
+        }
+        let registerCall = Callback0Param<Unit>(wrapper)
         unsafe { CJ_OnNetUnavailable(getID(), registerCall.getID()) }
-        CONNECTION_LOG.info("onNetAvailable register success")
+        CONNECTION_LOG.info("onNetUnavailable register success")
     }
 }
 
 /**
  * Defines the handle of the data network.
+ * 
+ * @relation export interface NetHandle
  */
-@Derive[ToString]
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetHandle {
-    // Network ID, a value of 0 means that there is no default network,
-    // and the other values must be greater than or equal to 100.
+    /**
+     * Network ID, a value of 0 means that there is no default network, and the other values must be greater than or equal to 100.
+     *
+     * @relation netId: number
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public NetHandle(public let netId: Int32) {}
+    public var netId: Int32
+    
+    /**
+     * NetHandle constructor
+     */
+    init(netId: Int32 ) {
+        this.netId = netId
+    }
 
     /**
      * Resolves a host name to obtain all IP addresses based on the specified NetHandle.
@@ -608,10 +655,11 @@ public class NetHandle {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
      * @throws { BusinessException } 2100003 - System internal error.
+     * @relation getAddressesByName(host: string): Promise<Array<NetAddress>>
      */
     @!APILevel[
         21,
-        atomicservice: true,
+        permission: "ohos.permission.INTERNET",
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
@@ -650,10 +698,11 @@ public class NetHandle {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
      * @throws { BusinessException } 2100003 - System internal error.
+     * @relation getAddressByName(host: string): Promise<NetAddress>
      */
     @!APILevel[
         21,
-        atomicservice: true,
+        permission: "ohos.permission.INTERNET",
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
@@ -665,5 +714,81 @@ public class NetHandle {
         // code address not found
         let errCode = 2101019i32
         throw BusinessException(errCode, "NetHandle getAddressesByName failed: ${getErrorMsg(errCode)}")
+    }
+}
+
+/**
+ * Get information about network connections.
+ * @relation export interface NetConnectionPropertyInfo
+ */
+@!APILevel[
+    21,
+    stagemodelonly: true,
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
+public class NetConnectionPropertyInfo {
+    /**
+     * Defines the handle of the data network.
+     * @relation netHandle: NetHandle
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
+    public var netHandle: NetHandle
+
+    /**
+     * Defines the network connection properties.
+     * @relation connectionProperties: ConnectionProperties
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
+    public var connectionProperties: ConnectionProperties
+
+    init(netHandle: NetHandle, connectionProperties: ConnectionProperties) {
+        this.netHandle = netHandle
+        this.connectionProperties = connectionProperties
+    }
+}
+
+/**
+ * Get network status information.
+ * @relation export interface NetBlockStatusInfo
+ */
+@!APILevel[
+    21,
+    stagemodelonly: true,
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
+public class NetBlockStatusInfo {
+    /**
+     * Defines the handle of the data network.
+     * @relation netHandle: NetHandle
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
+    public var netHandle: NetHandle
+
+    /**
+     * Check whether the current state is blocked.
+     * @relation blocked: boolean
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
+    public var blocked: Bool
+
+    init(netHandle: NetHandle, blocked: Bool) {
+        this.netHandle = netHandle
+        this.blocked = blocked
     }
 }

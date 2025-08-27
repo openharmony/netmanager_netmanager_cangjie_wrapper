@@ -14,10 +14,9 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.net") {
+ohos_cangjie_shared_library("ohos.net") {
   sources = ["net.cj"]
 
   subsystem_name = "netmanager"
   part_name = "netmanager_cangjie_wrapper"
-  lib_name = "net"
 }
