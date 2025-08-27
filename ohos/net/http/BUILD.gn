@@ -14,7 +14,7 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.net.http") {
+ohos_cangjie_shared_library("ohos.net.http") {
   sources = [
     "http.cj",
     "http_common.cj",
@@ -24,7 +24,8 @@ ohos_cj_library("ohos.net.http") {
   external_deps = [ "netstack:cj_net_http_ffi" ]
 
   cj_external_deps = [
-    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.business_exception",
+    "cangjie_ark_interop:ohos.callback_invoke",
     "cangjie_ark_interop:ohos.ffi",
     "cangjie_ark_interop:ohos.labels",
     "cangjie_ark_interop:ohos.encoding.json",
@@ -37,5 +38,4 @@ ohos_cj_library("ohos.net.http") {
 
   subsystem_name = "netmanager"
   part_name = "netmanager_cangjie_wrapper"
-  lib_name = "net.http"
 }

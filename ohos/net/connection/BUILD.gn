@@ -14,7 +14,7 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.net.connection") {
+ohos_cangjie_shared_library("ohos.net.connection") {
   sources = [
     "connection_common.cj",
     "connection_ffi.cj",
@@ -22,7 +22,8 @@ ohos_cj_library("ohos.net.connection") {
   ]
 
   cj_external_deps = [
-    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.business_exception",
+    "cangjie_ark_interop:ohos.callback_invoke",
     "cangjie_ark_interop:ohos.ffi",
     "cangjie_ark_interop:ohos.labels",
     "hiviewdfx_cangjie_wrapper:ohos.hilog",
@@ -32,5 +33,4 @@ ohos_cj_library("ohos.net.connection") {
 
   subsystem_name = "netmanager"
   part_name = "netmanager_cangjie_wrapper"
-  lib_name = "net.connection"
 }
