@@ -1,8 +1,8 @@
 {
     "name": "@ohos/netmanager_cangjie_wrapper",
-    "description": "The WLAN module provides basic WLAN functions, peer-to-peer (P2P) connection, and WLAN notification, enabling your application to communicate with other devices through a WLAN.",
+    "description": "The netmanager_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony based on the capabilities of the net management Subsystem.",
     "version": "6.0",
-    "license": "Apache-2.0",
+    "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
         "destPath": "foundation/communication/netmanager_cangjie_wrapper"
@@ -40,10 +40,8 @@
                 "//foundation/communication/netmanager_cangjie_wrapper/ohos/net:ohos.net",
                 "//foundation/communication/netmanager_cangjie_wrapper/kit/NetworkKit:kit.NetworkKit"
             ],
-            "inner_kits": [
-            ],
-            "test": [
-            ]
+            "inner_kits": [],
+            "test": []
         }
     }
 }
