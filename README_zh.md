@@ -6,7 +6,7 @@
 
 ## 系统架构
 
-![](figures/netmanager_cangjie_wrapper_architecture.png)
+![网络管理仓颉架构图](figures/netmanager_cangjie_wrapper_architecture.png)
 
 **图 1** 网络管理仓颉架构图
 
@@ -28,7 +28,8 @@ foundation/communication/netmanager_cangjie_wrapper
 ├── kit              # 仓颉kit化代码
 │   └── NetworkKit
 └── ohos             # 仓颉网络管理接口实现
-    └── net
+│   └── net
+└── test             # 测试代码
 ```
 
 ## 使用说明
