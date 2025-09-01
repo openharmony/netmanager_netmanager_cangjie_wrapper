@@ -6,7 +6,7 @@ The netmanager_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony base
 
 ## System Architecture
 
-![](figures/netmanager_cangjie_wrapper_architecture_en.png)
+![Architecture of the netmanager_cangjie_wrapper](figures/netmanager_cangjie_wrapper_architecture_en.png)
 
 **Figure 1** Architecture of the netmanager_cangjie_wrapper
 
@@ -28,7 +28,8 @@ foundation/communication/netmanager_cangjie_wrapper
 ├── kit              # Cangjie kit code
 │   └── NetworkKit
 └── ohos             # Cangjie Network Management code
-    └── net
+│   └── net
+└── test             # Cangjie test cases
 ```
 ## Usage
 
