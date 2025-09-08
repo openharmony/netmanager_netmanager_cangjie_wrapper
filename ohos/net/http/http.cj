@@ -542,7 +542,6 @@ public class HttpRequest {
     /**
      * Registers an observer for HTTP Response Header events.
      * @param { (HashMap<String, String>) -> Unit } callback - the callback used to return the result.
-     * @throws { IllegalArgumentException } The parameter check failed.
      * @relation on(type: "headersReceive", callback: Callback<Object>): void
      */
     @!APILevel[
@@ -550,13 +549,9 @@ public class HttpRequest {
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetStack"
     ]
-    public func on(event: HttpRequestEvent, callback: Callback1Argument<HashMap<String, String>>): Unit {
+    public func onHeadersReceive(callback: Callback1Argument<HashMap<String, String>>): Unit {
         HTTP_LOG.info("HttpRequest register onHeadersReceive start")
-        if (event != HttpRequestEvent.HeadersReceive) {
-            HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.HeadersReceive")
-            throw IllegalArgumentException("The parameter check failed.")
-        }
-        commonSubscribe1Arg(event, callback) {
+        commonSubscribe1Arg(HttpRequestEvent.HeadersReceive, callback) {
             cArrString: CArrString =>
             let map = cArrString2Map(cArrString)
             cArrString.free()
@@ -566,9 +561,29 @@ public class HttpRequest {
     }
 
     /**
+     * Unregisters the observer for HTTP Response Header events.
+     * @relation off(type: "headersReceive", callback?: Callback<Object>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func offHeadersReceive(callback!: ?Callback1Argument<HashMap<String, String>> = None): Unit {
+        let event = HttpRequestEvent.HeadersReceive
+        if (!callBackMap.contains(event)) {
+            return
+        }
+        if (let Some(v) <- callback) {
+            findCallbackObject(event, v, remove: true)
+            return
+        }
+        callBackMap[event].clear()
+    }
+
+    /**
      * Registers a one-time observer for HTTP Response Header events.
      * @param { (HashMap<String, String>) -> Unit } callback - the callback used to return the result.
-     * @throws { IllegalArgumentException } The parameter check failed.
      * @relation once(type: "headersReceive", callback: Callback<Object>): void
      */
     @!APILevel[
@@ -576,12 +591,8 @@ public class HttpRequest {
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetStack"
     ]
-    public func once(event: HttpRequestEvent, callback: Callback1Argument<HashMap<String, String>>): Unit {
+    public func onceHeadersReceive(callback: Callback1Argument<HashMap<String, String>>): Unit {
         HTTP_LOG.info("HttpRequest register onceHeadersReceive start")
-        if (event != HttpRequestEvent.HeadersReceive) {
-            HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.HeadersReceive")
-            throw IllegalArgumentException("The parameter check failed.")
-        }
         let wrapper = {
             cArrString: CArrString =>
             let map = cArrString2Map(cArrString)
@@ -596,7 +607,6 @@ public class HttpRequest {
     /**
      * Registers an observer for receiving HTTP Response data events continuously.
      * @param { callback: (Array<Byte>) -> Unit } callback - the callback used to return the result.
-     * @throws { IllegalArgumentException } The parameter check failed.
      * @relation on(type: "dataReceive", callback: Callback<ArrayBuffer>): void
      */
     @!APILevel[
@@ -604,13 +614,9 @@ public class HttpRequest {
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetStack"
     ]
-    public func on(event: HttpRequestEvent, callback: Callback1Argument<Array<Byte>>): Unit {
+    public func onDataReceive(callback: Callback1Argument<Array<Byte>>): Unit {
         HTTP_LOG.info("HttpRequest register onDataReceive start")
-        if (event != HttpRequestEvent.DataReceive) {
-            HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.DataReceive")
-            throw IllegalArgumentException("The parameter check failed.")
-        }
-        commonSubscribe1Arg(event, callback) {
+        commonSubscribe1Arg(HttpRequestEvent.DataReceive, callback) {
             cstr: CArrUI8 => unsafe {
                 let bytes = cArr2cjArr<UInt8, UInt8>(cstr.size, cstr.head, {i => i})
                 LibC.free(cstr.head)
@@ -621,84 +627,16 @@ public class HttpRequest {
     }
 
     /**
-     * Registers an observer for receiving HTTP Response data ends events.
-     * @param { () -> Unit } callback - the callback used to return the result.
-     * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: "dataEnd", callback: Callback<void>): void
+     * Unregisters an observer for receiving HTTP Response data events continuously.
+     * @relation off(type: "dataReceive", callback?: Callback<ArrayBuffer>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetStack"
     ]
-    public func on(event: HttpRequestEvent, callback: Callback0Argument): Unit {
-        HTTP_LOG.info("HttpRequest register onDataEnd start")
-        if (event != HttpRequestEvent.DataEnd) {
-            HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.DataEnd")
-            throw IllegalArgumentException("The parameter check failed.")
-        }
-        commonSubscribe0Arg(event, callback)
-        HTTP_LOG.info("HttpRequest register onDataEnd end")
-    }
-
-    /**
-     * Registers an observer for progress of receiving HTTP Response data events.
-     * @param { (DataReceiveProgressInfo) -> Unit } callback - the callback used to return the result.
-     * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: 'dataReceiveProgress', callback: Callback<DataReceiveProgressInfo>): void
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
-    public func on(event: HttpRequestEvent, callback: Callback1Argument<DataReceiveProgressInfo>): Unit {
-        HTTP_LOG.info("HttpRequest register onDataReceiveProgress start")
-        if (event != HttpRequestEvent.DataReceiveProgress) {
-            HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.DataReceiveProgress")
-            throw IllegalArgumentException("The parameter check failed.")
-        }
-        commonSubscribe1Arg(event, callback) {
-            info: CDataReceiveProgressInfo => DataReceiveProgressInfo(info)
-        }
-        HTTP_LOG.info("HttpRequest register onDataReceiveProgress end")
-    }
-
-    /**
-     * Registers an observer for progress of sendSize HTTP Response data events.
-     * @param { (DataSendProgressInfo) -> Unit } callback - the callback of on.
-     * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: 'dataSendProgress', callback: Callback<DataSendProgressInfo>): void
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
-    public func on(event: HttpRequestEvent, callback: Callback1Argument<DataSendProgressInfo>): Unit {
-        HTTP_LOG.info("HttpRequest register onDataSendProgress start")
-        if (event != HttpRequestEvent.DataSendProgress) {
-            HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.DataSendProgress")
-            throw IllegalArgumentException("The parameter check failed.")
-        }
-        commonSubscribe1Arg(event, callback) {
-            info: CDataSendProgressInfo => DataSendProgressInfo(info)
-        }
-        HTTP_LOG.info("HttpRequest register onDataSendProgress end")
-    }
-
-    /**
-     * Unregisters the observer for HttpRequest.
-     * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation off(type: "headersReceive", callback?: Callback<Object>): void
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
-    public func off(event: HttpRequestEvent, callback!: ?CallbackObject = None): Unit {
-        HTTP_LOG.info("unsubscribe stateChange")
+    public func offDataReceive(callback!: ?Callback1Argument<Array<Byte>> = None): Unit {
+        let event = HttpRequestEvent.DataReceive
         if (!callBackMap.contains(event)) {
             return
         }
@@ -708,6 +646,122 @@ public class HttpRequest {
         }
         callBackMap[event].clear()
     }
+
+    /**
+     * Registers an observer for receiving HTTP Response data ends events.
+     * @param { () -> Unit } callback - the callback used to return the result.
+     * @relation on(type: "dataEnd", callback: Callback<void>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func onDataEnd(callback: Callback0Argument): Unit {
+        HTTP_LOG.info("HttpRequest register onDataEnd start")
+        commonSubscribe0Arg(HttpRequestEvent.DataEnd, callback)
+        HTTP_LOG.info("HttpRequest register onDataEnd end")
+    }
+
+    /**
+     * Unregisters an observer for receiving HTTP Response data ends events.
+     * @relation off(type: "dataEnd", callback?: Callback<void>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func offDataEnd(callback!: ?Callback0Argument = None): Unit {
+        let event = HttpRequestEvent.DataEnd
+        if (!callBackMap.contains(event)) {
+            return
+        }
+        if (let Some(v) <- callback) {
+            findCallbackObject(event, v, remove: true)
+            return
+        }
+        callBackMap[event].clear()
+    }
+
+    /**
+     * Registers an observer for progress of receiving HTTP Response data events.
+     * @param { (DataReceiveProgressInfo) -> Unit } callback - the callback used to return the result.
+     * @relation on(type: 'dataReceiveProgress', callback: Callback<DataReceiveProgressInfo>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func onDataReceiveProgress(callback: Callback1Argument<DataReceiveProgressInfo>): Unit {
+        HTTP_LOG.info("HttpRequest register onDataReceiveProgress start")
+        commonSubscribe1Arg(HttpRequestEvent.DataReceiveProgress, callback) {
+            info: CDataReceiveProgressInfo => DataReceiveProgressInfo(info)
+        }
+        HTTP_LOG.info("HttpRequest register onDataReceiveProgress end")
+    }
+
+    /**
+     * Unregisters an observer for progress of receiving HTTP Response data events.
+     * @relation off(type: 'dataReceiveProgress', callback?: Callback<DataReceiveProgressInfo>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func offDataReceiveProgress(callback!: ?Callback1Argument<DataReceiveProgressInfo> = None): Unit {
+        let event = HttpRequestEvent.DataReceiveProgress
+        if (!callBackMap.contains(event)) {
+            return
+        }
+        if (let Some(v) <- callback) {
+            findCallbackObject(event, v, remove: true)
+            return
+        }
+        callBackMap[event].clear()
+    }
+
+    /**
+     * Registers an observer for progress of sendSize HTTP Response data events.
+     * @param { (DataSendProgressInfo) -> Unit } callback - the callback of on.
+     * @relation on(type: 'dataSendProgress', callback: Callback<DataSendProgressInfo>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func onDataSendProgress(callback: Callback1Argument<DataSendProgressInfo>): Unit {
+        HTTP_LOG.info("HttpRequest register onDataSendProgress start")
+        commonSubscribe1Arg(HttpRequestEvent.DataSendProgress, callback) {
+            info: CDataSendProgressInfo => DataSendProgressInfo(info)
+        }
+        HTTP_LOG.info("HttpRequest register onDataSendProgress end")
+    }
+
+    /**
+     * Unregisters an observer for progress of sendSize HTTP Response data events.
+     * @relation off(type: 'dataSendProgress', callback?: Callback<DataSendProgressInfo>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func offDataSendProgress(callback!: ?Callback1Argument<DataSendProgressInfo> = None): Unit {
+        let event = HttpRequestEvent.DataSendProgress
+        if (!callBackMap.contains(event)) {
+            return
+        }
+        if (let Some(v) <- callback) {
+            findCallbackObject(event, v, remove: true)
+            return
+        }
+        callBackMap[event].clear()
+    }
+
 }
 
 /**
