@@ -21,64 +21,31 @@ import ohos.net.connection.HttpProxy
 import std.collection.*
 import std.deriving.Derive
 
-/**
- * http request event type.
- */
 @Derive[Equatable, Hashable]
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.Communication.NetStack"
-]
-public enum HttpRequestEvent {
+enum HttpRequestEvent {
     /**
      * headersReceive
      */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
     HeadersReceive
     |
     /**
      * dataReceive
      */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
     DataReceive
     |
     /**
      * dataEnd
      */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
     DataEnd
     |
     /**
      * dataReceiveProgress
      */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
     DataReceiveProgress
     |
     /**
      * dataSendProgress
      */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
     DataSendProgress
     | ...
 }
