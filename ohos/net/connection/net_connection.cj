@@ -484,7 +484,6 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Registers a listener for netAvailable events.
-     * Registers a listener for netLost events.
      * @throws { IllegalArgumentException } The parameter check failed.
      * @relation on(type: 'netAvailable', callback: Callback<NetHandle>): void
      */
@@ -493,25 +492,38 @@ public class NetConnection <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public func on(event: NetConnectionEvent, callback: Callback1Argument<NetHandle>): Unit {
+    public func onNetAvailable(callback: Callback1Argument<NetHandle>): Unit {
         let wrapper = {
             netId: Int32 =>
             let handle = NetHandle(netId)
             callback.invoke(None, handle)
         }
         let registerCall = Callback1Param<Int32, Unit>(wrapper)
-        unsafe {
-            match (event) {
-                case NetConnectionEvent.NetAvailable => CJ_OnNetAvailable(getID(), registerCall.getID())
-                case NetConnectionEvent.NetLost => CJ_OnNetLost(getID(), registerCall.getID())
-                case _ => throw IllegalArgumentException("The parameter check failed.")
-            }
+        unsafe { CJ_OnNetAvailable(getID(), registerCall.getID()) }
+    }
+
+    /**
+     * Registers a listener for netLost events.
+     * @throws { IllegalArgumentException } The parameter check failed.
+     * @relation on(type: 'netLost', callback: Callback<NetHandle>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
+    public func onNetLost(callback: Callback1Argument<NetHandle>): Unit {
+        let wrapper = {
+            netId: Int32 =>
+            let handle = NetHandle(netId)
+            callback.invoke(None, handle)
         }
+        let registerCall = Callback1Param<Int32, Unit>(wrapper)
+        unsafe { CJ_OnNetLost(getID(), registerCall.getID()) }
     }
 
     /**
      * Registers a listener for netBlockStatusChange events.
-     * @throws { IllegalArgumentException } The parameter check failed.
      * @relation on(type: 'netBlockStatusChange', callback: Callback<NetBlockStatusInfo>): void
      */
     @!APILevel[
@@ -519,11 +531,8 @@ public class NetConnection <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public func on(event: NetConnectionEvent, callback: Callback1Argument<NetBlockStatusInfo>): Unit {
+    public func onNetBlockStatusChange(callback: Callback1Argument<NetBlockStatusInfo>): Unit {
         CONNECTION_LOG.info("onNetBlockStatusChange start register")
-        if (event != NetConnectionEvent.NetBlockStatusChange) {
-            throw IllegalArgumentException("The parameter check failed.")
-        }
         let wrapper = {
             netId: Int32, block: Bool =>
             let handle = NetHandle(netId)
@@ -537,7 +546,6 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Registers a listener for **netCapabilitiesChange** events.
-     * @throws { IllegalArgumentException } The parameter check failed.
      * @relation on(type: 'netCapabilitiesChange', callback: Callback<NetCapabilityInfo>): void
      */
     @!APILevel[
@@ -545,11 +553,8 @@ public class NetConnection <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public func on(event: NetConnectionEvent, callback: Callback1Argument<NetCapabilityInfo>): Unit {
+    public func onNetCapabilitiesChange(callback: Callback1Argument<NetCapabilityInfo>): Unit {
         CONNECTION_LOG.info("onNetCapabilitiesChange start register")
-        if (event != NetConnectionEvent.NetCapabilitiesChange) {
-            throw IllegalArgumentException("The parameter check failed.")
-        }
         let wrapper = {
             info: CNetCapabilityInfo =>
             CONNECTION_LOG.info("onNetCapabilitiesChange callback called")
@@ -564,7 +569,6 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Registers a listener for netConnectionPropertiesChange events.
-     * @throws { IllegalArgumentException } The parameter check failed.
      * @relation on(type: 'netConnectionPropertiesChange', callback: Callback<NetConnectionPropertyInfo>): void
      */
     @!APILevel[
@@ -572,11 +576,8 @@ public class NetConnection <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public func on(event: NetConnectionEvent, callback: Callback1Argument<NetConnectionPropertyInfo>): Unit {
+    public func onNetConnectionPropertiesChange(callback: Callback1Argument<NetConnectionPropertyInfo>): Unit {
         CONNECTION_LOG.info("onNetConnectionPropertiesChange start register")
-        if (event != NetConnectionEvent.NetConnectionPropertiesChange) {
-            throw IllegalArgumentException("The parameter check failed.")
-        }
         let wrapper = {
             netId: Int32, props: CConnectionProperties =>
             CONNECTION_LOG.info("onNetConnectionPropertiesChange callback called")
@@ -593,7 +594,6 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Registers a listener for netUnavailable events.
-     * @throws { IllegalArgumentException } The parameter check failed.
      * @relation on(type: 'netUnavailable', callback: Callback<void>): void
      */
     @!APILevel[
@@ -601,11 +601,8 @@ public class NetConnection <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public func on(event: NetConnectionEvent, callback: Callback0Argument): Unit {
+    public func onNetUnavailable(callback: Callback0Argument): Unit {
         CONNECTION_LOG.info("onNetUnavailable start register")
-        if (event != NetConnectionEvent.NetUnavailable) {
-            throw IllegalArgumentException("The parameter check failed.")
-        }
         let wrapper = { =>
             callback.invoke(None)
         }
