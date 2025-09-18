@@ -30,8 +30,7 @@ const MAX_CACHE_SIZE: UInt32 = 10 * 1024 * 1024
  * @relation createHttp(): HttpRequest
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public func createHttp(): HttpRequest {
@@ -46,8 +45,7 @@ public func createHttp(): HttpRequest {
  * @relation createHttpResponseCache(cacheSize?: number): HttpResponseCache
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public func createHttpResponseCache(cacheSize!: UInt32 = MAX_CACHE_SIZE): HttpResponseCache {
@@ -67,8 +65,7 @@ public func createHttpResponseCache(cacheSize!: UInt32 = MAX_CACHE_SIZE): HttpRe
  * @relation export interface HttpRequest
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class HttpRequest {
@@ -118,9 +115,8 @@ public class HttpRequest {
      * @relation request(url: string, options: HttpRequestOptions, callback: AsyncCallback<HttpResponse>): void
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.permission.INTERNET",
-        stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func request(url: String, options: HttpRequestOptions, callback: AsyncCallback<HttpResponse>): Unit {
@@ -200,9 +196,8 @@ public class HttpRequest {
      * @relation request(url: string, callback: AsyncCallback<HttpResponse>): void
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.permission.INTERNET",
-        stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func request(url: String, callback: AsyncCallback<HttpResponse>): Unit {
@@ -247,8 +242,7 @@ public class HttpRequest {
      * @relation destroy(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func destroy(): Unit {
@@ -299,9 +293,8 @@ public class HttpRequest {
      * @relation requestInStream(url: string, options: HttpRequestOptions, callback: AsyncCallback<number>): void
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.permission.INTERNET",
-        stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func requestInStream(url: String, options: HttpRequestOptions, callback: AsyncCallback<UInt32>): Unit {
@@ -383,9 +376,8 @@ public class HttpRequest {
      * @relation requestInStream(url: string, callback: AsyncCallback<number>): void
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.permission.INTERNET",
-        stagemodelonly: true,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func requestInStream(url: String, callback: AsyncCallback<UInt32>): Unit {
@@ -546,8 +538,7 @@ public class HttpRequest {
      * @relation on(type: "headersReceive", callback: Callback<Object>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<HashMap<String, String>>): Unit {
@@ -572,8 +563,7 @@ public class HttpRequest {
      * @relation once(type: "headersReceive", callback: Callback<Object>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func once(event: HttpRequestEvent, callback: Callback1Argument<HashMap<String, String>>): Unit {
@@ -600,8 +590,7 @@ public class HttpRequest {
      * @relation on(type: "dataReceive", callback: Callback<ArrayBuffer>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<Array<Byte>>): Unit {
@@ -627,8 +616,7 @@ public class HttpRequest {
      * @relation on(type: "dataEnd", callback: Callback<void>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func on(event: HttpRequestEvent, callback: Callback0Argument): Unit {
@@ -648,8 +636,7 @@ public class HttpRequest {
      * @relation on(type: 'dataReceiveProgress', callback: Callback<DataReceiveProgressInfo>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<DataReceiveProgressInfo>): Unit {
@@ -671,8 +658,7 @@ public class HttpRequest {
      * @relation on(type: 'dataSendProgress', callback: Callback<DataSendProgressInfo>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<DataSendProgressInfo>): Unit {
@@ -693,8 +679,7 @@ public class HttpRequest {
      * @relation off(type: "headersReceive", callback?: Callback<Object>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func off(event: HttpRequestEvent, callback!: ?CallbackObject = None): Unit {
@@ -715,8 +700,7 @@ public class HttpRequest {
  * @relation export interface HttpResponseCache
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class HttpResponseCache {
@@ -727,8 +711,7 @@ public class HttpResponseCache {
      * @relation flush(callback: AsyncCallback<void>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func flush(): Unit {
@@ -747,8 +730,7 @@ public class HttpResponseCache {
      * @relation delete(): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func delete(): Unit {
