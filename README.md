@@ -12,11 +12,11 @@ The netmanager_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony base
 
 As shown in the architecture diagram:
 
--   Network Connection Management: Provides network management capabilities.
--   Data Request: Provides HTTP data request capabilities.
--   Cangjie network management FFI interface definition: Responsible for defining the C interoperability Cangjie interface, which is used to realize the Cangjie network management capabilities.
--   Basic Network Management: Responsible for providing the basic functions of network management, and providing the package C interface to Cangjie for interoperability.
--   Network Protocal Stacks: Responsible for providing the basic functions of network protocal stacks, and providing the package C interface to Cangjie for interoperability.
+- Network Connection Management: Provides network management capabilities.
+- Data Request: Provides HTTP data request capabilities.
+- Cangjie network management FFI interface definition: Responsible for defining the C Language interoperability Cangjie interface, which is used to realize the Cangjie network management capabilities.
+- Basic Network Management: Responsible for providing the basic functions of network management, and providing the package C Language interface to Cangjie for interoperability.
+- Network Protocal Stacks: Responsible for providing the basic functions of network protocal stacks, and providing the package C Language interface to Cangjie for interoperability.
 
 ## Directory Structure
 
@@ -24,35 +24,37 @@ The structure of the repository directory is as follows:
 
 ```
 foundation/communication/netmanager_cangjie_wrapper
-├── figures          # architecture pictures
-├── kit              # Cangjie kit code
+├── figures                 # architecture pictures
+├── kit                     # Cangjie kit code
 │   └── NetworkKit
-└── ohos             # Cangjie Network Management code
+└── ohos                    # Cangjie Network Management code
 │   └── net
-└── test             # Cangjie test cases
+│       └── connection      # The interface for network connection
+│       └── http            # The interface for HttpRequest
+└── test                    # Cangjie test cases
 ```
 ## Usage
 
 The netmanager_cangjie_wrapper provides the following capabilities:
 
--   Network Connection Management.
--   Data Request.
+- Network Connection Management.
+- Data Request.
 
 Compared to ArkTS, the following features are currently not supported:
 
--   Ethernet Connection Management.
--   mDNS Management.
--   Network Policy Management.
--   Socket Connection.
--   Traffic Management.
--   Network Sharing.
--   Enhanced VPN Management.
--   VPN Management.
--   WebSocket Connection.
--   Network Firewall.
--   Network Security.
--   Extensible Authentication.
--   Enhanced VPN Management.
+- Ethernet Connection Management.
+- mDNS Management.
+- Network Policy Management.
+- Socket Connection.
+- Traffic Management.
+- Network Sharing.
+- Enhanced VPN Management.
+- VPN Management.
+- WebSocket Connection.
+- Network Firewall.
+- Network Security.
+- Extensible Authentication.
+- Enhanced VPN Management.
 
 For netmanager APIs, please refer to:
 1. [ohos.net.connection](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/NetworkKit/cj-apis-net-connection.md)
@@ -66,6 +68,10 @@ Developers are welcome to contribute code, documentation, etc. For specific cont
 
 ## Repositories Involved
 
-[communication_netmanager_base](https://gitee.com/openharmony/communication_netmanager_base/blob/master/README.md)
+[ark_compiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
 
-[communication_netstack](https://gitee.com/openharmony/communication_netstack/blob/master/READEME.md)
+[communication_netmanager_base](https://gitcode.com/openharmony/communication_netmanager_base)
+
+[communication_netstack](https://gitcode.com/openharmony/communication_netstack)
+
+[hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)

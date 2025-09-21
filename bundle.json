@@ -26,7 +26,6 @@
         "ram": "524KB",
         "deps": {
             "components": [
-                "arkui_cangjie_wrapper",
                 "cangjie_ark_interop",
                 "hiviewdfx_cangjie_wrapper",
                 "netmanager_base",
