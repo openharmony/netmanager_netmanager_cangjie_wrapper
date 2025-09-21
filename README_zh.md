@@ -12,11 +12,11 @@
 
 如架构图所示：
 
--   网络连接管理：提供管理网络能力。
--   数据请求：提供HTTP数据请求能力。
--   仓颉网络管理FFI接口定义：定义C互操作仓颉接口，用于实现仓颉网络管理能力。
--   网络管理基础：提供基础网络连接管理能力，封装C接口提供给仓颉进行互操作。
--   网络协议栈：提供基础的网络协议栈，封装C接口提供给仓颉进行互操作。
+- 网络连接管理：提供管理网络能力。
+- 数据请求：提供HTTP数据请求能力。
+- 仓颉网络管理FFI接口定义：定义C语言互操作仓颉接口，用于实现仓颉网络管理能力。
+- 网络管理基础：提供基础网络连接管理能力，封装C语言接口提供给仓颉进行互操作。
+- 网络协议栈：提供基础的网络协议栈，封装C语言接口提供给仓颉进行互操作。
 
 ## 目录
 
@@ -24,36 +24,38 @@
 
 ```
 foundation/communication/netmanager_cangjie_wrapper
-├── figures          # 存放README中的架构图
-├── kit              # 仓颉kit化代码
+├── figures                 # 存放README中的架构图
+├── kit                     # 仓颉kit化代码
 │   └── NetworkKit
-└── ohos             # 仓颉网络管理接口实现
+└── ohos                    # 仓颉网络管理接口实现
 │   └── net
-└── test             # 测试代码
+│       └── connection      # 网络连接管理相关接口
+│       └── http            # 数据请求相关接口
+└── test                    # 测试代码
 ```
 
 ## 使用说明
 
 如架构图所示，网络管理仓颉接口提供了以下功能，开发者可以根据使用诉求，综合使用一类或多类接口：
 
--   网络连接管理。
--   数据请求。
+- 网络连接管理。
+- 数据请求。
 
 与ArkTS相比，暂不支持以下功能：
 
--   以太网连接管理。
--   MDNS管理。
--   网络策略管理。
--   Socket连接。
--   流量管理。
--   网络共享管理。
--   VPN增强管理。
--   VPN管理。
--   WebSocket连接。WebSocket 
--   网络防火墙。
--   网络安全。
--   扩展认证。
--   三方VPN能力。
+- 以太网连接管理。
+- MDNS管理。
+- 网络策略管理。
+- Socket连接。
+- 流量管理。
+- 网络共享管理。
+- VPN增强管理。
+- VPN管理。
+- WebSocket连接。WebSocket 
+- 网络防火墙。
+- 网络安全。
+- 扩展认证。
+- 三方VPN能力。
 
 网络管理相关API请参见：
 1. [ohos.net.connection](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/NetworkKit/cj-apis-net-connection.md)
@@ -67,6 +69,10 @@ foundation/communication/netmanager_cangjie_wrapper
 
 ## 相关仓
 
-[communication_netmanager_base](https://gitee.com/openharmony/communication_netmanager_base/blob/master/README_zh.md)
+[ark_compiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
 
-[communication_netstack](https://gitee.com/openharmony/communication_netstack/blob/master/README_zh.md)
+[communication_netmanager_base](https://gitcode.com/openharmony/communication_netmanager_base)
+
+[communication_netstack](https://gitcode.com/openharmony/communication_netstack)
+
+[hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)
