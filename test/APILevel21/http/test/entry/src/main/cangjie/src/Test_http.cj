@@ -15,7 +15,7 @@
 
 package ohos_app_cangjie_entry
 
-internal import kit.NetworkKit.*
+internal import NetworkKit.*
 import std.unittest.testmacro.*
 import std.unittest.*
 import std.unittest.common.*
