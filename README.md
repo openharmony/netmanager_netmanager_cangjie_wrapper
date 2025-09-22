@@ -32,7 +32,11 @@ foundation/communication/netmanager_cangjie_wrapper
 │       └── connection      # The interface for network connection
 │       └── http            # The interface for HttpRequest
 └── test                    # Cangjie test cases
+    └── APILevel22
+        └── connection      # connection test cases
+        └── http            # http test cases
 ```
+
 ## Usage
 
 The netmanager_cangjie_wrapper provides the following capabilities:
@@ -57,8 +61,8 @@ Compared to ArkTS, the following features are currently not supported:
 - Enhanced VPN Management.
 
 For netmanager APIs, please refer to:
-1. [ohos.net.connection](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/NetworkKit/cj-apis-net-connection.md)
-2. [ohos.net.http](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/NetworkKit/cj-apis-net-http.md)
+1. [Network Connection Management](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/NetworkKit/cj-apis-net-connection.md)
+2. [Data Request](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/NetworkKit/cj-apis-net-http.md)
 
 For relevation guidance, please refer to [Network Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/network)
 
