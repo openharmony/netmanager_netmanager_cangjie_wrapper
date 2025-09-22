@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package kit.NetworkKit
+package NetworkKit
 
 public import ohos.net.*
 public import ohos.net.connection.*
