@@ -27,7 +27,7 @@ import std.deriving.Derive
  * @relation export interface NetSpecifier
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetSpecifier {
@@ -37,7 +37,7 @@ public class NetSpecifier {
      * @relation netCapabilities: NetCapabilities
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var netCapabilities: NetCapabilities
@@ -47,7 +47,7 @@ public class NetSpecifier {
      * @relation bearerPrivateIdentifier?: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var bearerPrivateIdentifier: String 
@@ -56,7 +56,7 @@ public class NetSpecifier {
      * NetSpecifier constructor
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public init(netCapabilities: NetCapabilities, bearerPrivateIdentifier!: String = "") {
@@ -71,7 +71,7 @@ public class NetSpecifier {
  * @relation export interface NetCapabilityInfo
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetCapabilityInfo {
@@ -81,7 +81,7 @@ public class NetCapabilityInfo {
      * @relation netHandle: NetHandle
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var netHandle: NetHandle
@@ -91,7 +91,7 @@ public class NetCapabilityInfo {
      * @relation netCap: NetCapabilities
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var netCap: NetCapabilities
@@ -119,7 +119,7 @@ public class NetCapabilityInfo {
  * @relation export interface NetCapabilities
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetCapabilities {
@@ -129,7 +129,7 @@ public class NetCapabilities {
      * @relation bearerTypes: Array<NetBearType>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var bearerTypes: Array<NetBearType>
@@ -139,7 +139,7 @@ public class NetCapabilities {
      * @relation linkUpBandwidthKbps?: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var linkUpBandwidthKbps: UInt32 
@@ -149,7 +149,7 @@ public class NetCapabilities {
      * @relation linkDownBandwidthKbps?: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var linkDownBandwidthKbps: UInt32 
@@ -159,7 +159,7 @@ public class NetCapabilities {
      * @relation networkCap?: Array<NetCap>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var networkCap: Array<NetCap>
@@ -168,7 +168,7 @@ public class NetCapabilities {
      * NetCapabilities constructor
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public init(bearerTypes: Array<NetBearType>, linkUpBandwidthKbps!: UInt32 = 0, linkDownBandwidthKbps!: UInt32 = 0,
@@ -210,7 +210,7 @@ public class NetCapabilities {
  * @relation export interface ConnectionProperties
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class ConnectionProperties {
@@ -220,7 +220,7 @@ public class ConnectionProperties {
      * @relation interfaceName: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var interfaceName: String
@@ -230,7 +230,7 @@ public class ConnectionProperties {
      * @relation domains: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var domains: String
@@ -240,7 +240,7 @@ public class ConnectionProperties {
      * @relation linkAddresses: Array<LinkAddress>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var linkAddresses: Array<LinkAddress>
@@ -250,7 +250,7 @@ public class ConnectionProperties {
      * @relation dnses: Array<NetAddress>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var dnses: Array<NetAddress>
@@ -260,7 +260,7 @@ public class ConnectionProperties {
      * @relation routes: Array<RouteInfo>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var routes: Array<RouteInfo>
@@ -270,7 +270,7 @@ public class ConnectionProperties {
      * @relation mtu: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var mtu: UInt32
@@ -310,7 +310,7 @@ public class ConnectionProperties {
  * @relation export interface RouteInfo
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class RouteInfo {
@@ -320,7 +320,7 @@ public class RouteInfo {
      * @relation interfaceName: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var interfaceName: String
@@ -331,7 +331,7 @@ public class RouteInfo {
      * @relation destination: LinkAddress
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var destination: LinkAddress
@@ -342,7 +342,7 @@ public class RouteInfo {
      * @relation gateway: NetAddress
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var gateway: NetAddress
@@ -353,7 +353,7 @@ public class RouteInfo {
      * @relation hasGateway: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var hasGateway: Bool
@@ -364,7 +364,7 @@ public class RouteInfo {
      * @relation isDefaultRoute: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var isDefaultRoute: Bool
@@ -399,7 +399,7 @@ public class RouteInfo {
  * @relation export interface LinkAddress
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class LinkAddress {
@@ -409,7 +409,7 @@ public class LinkAddress {
      * @relation address: NetAddress
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var address: NetAddress
@@ -419,7 +419,7 @@ public class LinkAddress {
      * @relation prefixLength: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var prefixLength: Int32
@@ -447,7 +447,7 @@ public class LinkAddress {
  * @relation export interface NetAddress
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetAddress {
@@ -457,7 +457,7 @@ public class NetAddress {
      * @relation address: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var address: String
@@ -467,7 +467,7 @@ public class NetAddress {
      * @relation family?: number 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var family: UInt32
@@ -477,7 +477,7 @@ public class NetAddress {
      * @relation port?: number 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var port: UInt32
@@ -486,7 +486,7 @@ public class NetAddress {
      * NetAddress constructor
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public init(address: String, family!: UInt32 = 1, port!: UInt32 = 0) {
@@ -512,7 +512,7 @@ public class NetAddress {
  * @relation export interface HttpProxy 
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class HttpProxy {
@@ -521,7 +521,7 @@ public class HttpProxy {
      * @relation host: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var host: String 
@@ -530,7 +530,7 @@ public class HttpProxy {
      * @relation port: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var port: UInt32
@@ -539,7 +539,7 @@ public class HttpProxy {
      * @relation exclusionList: Array<string>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var exclusionList: Array<String> 
@@ -549,7 +549,7 @@ public class HttpProxy {
      * @relation username?: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var username: String
@@ -559,7 +559,7 @@ public class HttpProxy {
      * @relation password?: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var password: String
@@ -568,7 +568,7 @@ public class HttpProxy {
      * HttpProxy constructor
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public init(host: String,  port: UInt32, exclusionList: Array<String>,
@@ -605,7 +605,7 @@ public class HttpProxy {
  * @relation export enum NetCap
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public enum NetCap {
@@ -615,7 +615,7 @@ public enum NetCap {
      * @relation NET_CAPABILITY_MMS = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetCapabilityMms
@@ -626,7 +626,7 @@ public enum NetCap {
          * @relation NET_CAPABILITY_NOT_METERED = 11
          */
         @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetCapabilityNotMetered
@@ -637,7 +637,7 @@ public enum NetCap {
          * @relation NET_CAPABILITY_INTERNET = 12
          */
         @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetCapabilityInternet
@@ -648,7 +648,7 @@ public enum NetCap {
          * @relation NET_CAPABILITY_NOT_VPN = 15
          */
         @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetCapabilityNotVpn
@@ -659,7 +659,7 @@ public enum NetCap {
          * @relation NET_CAPABILITY_VALIDATED = 16
          */
         @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetCapabilityValidated
@@ -697,7 +697,7 @@ public enum NetCap {
  * @relation export enum NetBearType
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public enum NetBearType {
@@ -707,7 +707,7 @@ public enum NetBearType {
      * @relation BEARER_CELLULAR = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     BearerCellular
@@ -718,7 +718,7 @@ public enum NetBearType {
          * @relation BEARER_WIFI = 1
          */
         @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     BearerWifi
@@ -729,7 +729,7 @@ public enum NetBearType {
          * @relation BEARER_ETHERNET = 3
          */
         @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     BearerEthernet
@@ -762,7 +762,7 @@ public enum NetBearType {
  */
 @Derive[Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public enum NetConnectionEvent {
@@ -770,7 +770,7 @@ public enum NetConnectionEvent {
      * netAvailable
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetAvailable
@@ -779,7 +779,7 @@ public enum NetConnectionEvent {
      * netBlockStatusChange
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetBlockStatusChange
@@ -788,7 +788,7 @@ public enum NetConnectionEvent {
      * netCapabilitiesChange
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetCapabilitiesChange
@@ -797,7 +797,7 @@ public enum NetConnectionEvent {
      * netConnectionPropertiesChange
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetConnectionPropertiesChange
@@ -806,7 +806,7 @@ public enum NetConnectionEvent {
      * netLost
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetLost
@@ -815,7 +815,7 @@ public enum NetConnectionEvent {
      * netUnavailable
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetUnavailable
