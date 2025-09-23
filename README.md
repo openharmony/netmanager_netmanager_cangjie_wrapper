@@ -17,6 +17,8 @@ As shown in the architecture diagram:
 - Cangjie network management FFI interface definition: Responsible for defining the C Language interoperability Cangjie interface, which is used to realize the Cangjie network management capabilities.
 - Basic Network Management: Responsible for providing the basic functions of network management, and providing the package C Language interface to Cangjie for interoperability.
 - Network Protocal Stacks: Responsible for providing the basic functions of network protocal stacks, and providing the package C Language interface to Cangjie for interoperability.
+- cangjie_ark_interop: Responsible for providing Cangjie APILevel class definitions, which are used to annotate APIs, as well as providing the definition of BusinessException class that is thrown to users.
+- hiviewdfx_cangjie_wrapper: Responsible for providing logging interfaces, which are used to print logs at key points in the execution path.
 
 ## Directory Structure
 
@@ -29,12 +31,11 @@ foundation/communication/netmanager_cangjie_wrapper
 │   └── NetworkKit
 └── ohos                    # Cangjie Network Management code
 │   └── net
-│       └── connection      # The interface for network connection
+│       ├── connection      # The interface for network connection
 │       └── http            # The interface for HttpRequest
 └── test                    # Cangjie test cases
-    └── APILevel22
-        └── connection      # connection test cases
-        └── http            # http test cases
+    ├── connection          # connection test cases
+    └── http                # http test cases
 ```
 
 ## Usage
