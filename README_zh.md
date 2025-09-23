@@ -32,16 +32,19 @@ foundation/communication/netmanager_cangjie_wrapper
 │       └── connection      # 网络连接管理相关接口
 │       └── http            # 数据请求相关接口
 └── test                    # 测试代码
+    └── APILevel22
+        └── connection      # connection测试用例
+        └── http            # http测试用例
 ```
 
 ## 使用说明
 
-如架构图所示，网络管理仓颉接口提供了以下功能，开发者可以根据使用诉求，综合使用一类或多类接口：
+如架构图所示，网络管理仓颉接口提供了以下功能：
 
 - 网络连接管理。
 - 数据请求。
 
-与ArkTS相比，暂不支持以下功能：
+与ArkTS提供的API能力相比，暂不支持以下功能：
 
 - 以太网连接管理。
 - MDNS管理。
@@ -58,8 +61,8 @@ foundation/communication/netmanager_cangjie_wrapper
 - 三方VPN能力。
 
 网络管理相关API请参见：
-1. [ohos.net.connection](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/NetworkKit/cj-apis-net-connection.md)
-2. [ohos.net.http](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/NetworkKit/cj-apis-net-http.md)
+1. [网络连接管理](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/NetworkKit/cj-apis-net-connection.md)
+2. [数据请求](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/NetworkKit/cj-apis-net-http.md)
 
 相关指导请参见[网络管理开发指南](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/network)
 
