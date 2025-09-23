@@ -34,7 +34,7 @@ let CONNECTION_LOG = HilogChannel(0, 0xD0015B0, "CJ-net-Connection")
  * @relation createNetConnection(netSpecifier?: NetSpecifier, timeout?: number): NetConnection
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public func createNetConnection(netSpecifier!: ?NetSpecifier = None, timeout!: UInt32 = 0): NetConnection {
@@ -63,7 +63,7 @@ public func createNetConnection(netSpecifier!: ?NetSpecifier = None, timeout!: U
  * @relation getDefaultNet(): Promise<NetHandle>
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -93,7 +93,7 @@ public func getDefaultNet(): NetHandle {
  * @relation getDefaultHttpProxy(): Promise<HttpProxy>
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public func getDefaultHttpProxy(): HttpProxy {
@@ -121,7 +121,7 @@ public func getDefaultHttpProxy(): HttpProxy {
  * @relation function getAppNetSync(): NetHandle
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public func getAppNet(): NetHandle {
@@ -151,7 +151,7 @@ public func getAppNet(): NetHandle {
  * @relation setAppNet(netHandle: NetHandle): Promise<void>
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.INTERNET",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -177,7 +177,7 @@ public func setAppNet(netHandle: NetHandle): Unit {
  * @relation getAllNets(): Promise<Array<NetHandle>>
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -210,7 +210,7 @@ public func getAllNets(): Array<NetHandle> {
  * @relation getConnectionProperties(netHandle: NetHandle): Promise<ConnectionProperties>
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -247,7 +247,7 @@ public func getConnectionProperties(netHandle: NetHandle): ConnectionProperties 
  * @relation getNetCapabilities(netHandle: NetHandle, callback: AsyncCallback<NetCapabilities>): void
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -280,7 +280,7 @@ public func getNetCapabilities(netHandle: NetHandle): NetCapabilities {
  * @relation isDefaultNetMetered(): Promise<boolean>
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -307,7 +307,7 @@ public func isDefaultNetMetered(): Bool {
  * @relation hasDefaultNet(): Promise<boolean>
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -336,7 +336,7 @@ public func hasDefaultNet(): Bool {
  * @relation reportNetConnected(netHandle: NetHandle): Promise<void>
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -363,7 +363,7 @@ public func reportNetConnected(netHandle: NetHandle): Unit {
  * @relation reportNetDisconnected(netHandle: NetHandle): Promise<void>
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -390,7 +390,7 @@ public func reportNetDisconnected(netHandle: NetHandle): Unit {
  * @relation getAddressesByName(host: string): Promise<Array<NetAddress>>
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.INTERNET",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -404,7 +404,7 @@ public func getAddressesByName(host: String): Array<NetAddress> {
  * @relation export interface NetConnection
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetConnection <: RemoteDataLite {
@@ -430,7 +430,7 @@ public class NetConnection <: RemoteDataLite {
      * @relation register(callback: AsyncCallback<void>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.GET_NETWORK_INFO",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
@@ -453,7 +453,7 @@ public class NetConnection <: RemoteDataLite {
      * @relation unregister(callback: AsyncCallback<void>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func unregister(): Unit {
@@ -473,7 +473,7 @@ public class NetConnection <: RemoteDataLite {
      * @relation on(type: 'netAvailable', callback: Callback<NetHandle>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetHandle>): Unit {
@@ -498,7 +498,7 @@ public class NetConnection <: RemoteDataLite {
      * @relation on(type: 'netBlockStatusChange', callback: Callback<NetBlockStatusInfo>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetBlockStatusInfo>): Unit {
@@ -523,7 +523,7 @@ public class NetConnection <: RemoteDataLite {
      * @relation on(type: 'netCapabilitiesChange', callback: Callback<NetCapabilityInfo>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetCapabilityInfo>): Unit {
@@ -549,7 +549,7 @@ public class NetConnection <: RemoteDataLite {
      * @relation on(type: 'netConnectionPropertiesChange', callback: Callback<NetConnectionPropertyInfo>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetConnectionPropertyInfo>): Unit {
@@ -577,7 +577,7 @@ public class NetConnection <: RemoteDataLite {
      * @relation on(type: 'netUnavailable', callback: Callback<void>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func on(event: NetConnectionEvent, callback: Callback0Argument): Unit {
@@ -600,7 +600,7 @@ public class NetConnection <: RemoteDataLite {
  * @relation export interface NetHandle
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetHandle {
@@ -610,7 +610,7 @@ public class NetHandle {
      * @relation netId: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var netId: Int32
@@ -635,7 +635,7 @@ public class NetHandle {
      * @relation getAddressesByName(host: string): Promise<Array<NetAddress>>
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.INTERNET",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
@@ -677,7 +677,7 @@ public class NetHandle {
      * @relation getAddressByName(host: string): Promise<NetAddress>
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.INTERNET",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
@@ -697,7 +697,7 @@ public class NetHandle {
  * @relation export interface NetConnectionPropertyInfo
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetConnectionPropertyInfo {
@@ -706,7 +706,7 @@ public class NetConnectionPropertyInfo {
      * @relation netHandle: NetHandle
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var netHandle: NetHandle
@@ -716,7 +716,7 @@ public class NetConnectionPropertyInfo {
      * @relation connectionProperties: ConnectionProperties
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var connectionProperties: ConnectionProperties
@@ -732,7 +732,7 @@ public class NetConnectionPropertyInfo {
  * @relation export interface NetBlockStatusInfo
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetBlockStatusInfo {
@@ -741,7 +741,7 @@ public class NetBlockStatusInfo {
      * @relation netHandle: NetHandle
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var netHandle: NetHandle
@@ -751,7 +751,7 @@ public class NetBlockStatusInfo {
      * @relation blocked: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var blocked: Bool
