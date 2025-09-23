@@ -17,6 +17,8 @@
 - 仓颉网络管理FFI接口定义：定义C语言互操作仓颉接口，用于实现仓颉网络管理能力。
 - 网络管理基础：提供基础网络连接管理能力，封装C语言接口提供给仓颉进行互操作。
 - 网络协议栈：提供基础的网络协议栈，封装C语言接口提供给仓颉进行互操作。
+- cangjie_ark_interop：负责提供仓颉注解类定义，用于对API进行标注，以及提供抛向用户的BusinessException异常类定义。
+- hiviewdfx_cangjie_wrapper：负责提供日志接口，用于在关键路径处打印日志。
 
 ## 目录
 
@@ -29,12 +31,11 @@ foundation/communication/netmanager_cangjie_wrapper
 │   └── NetworkKit
 └── ohos                    # 仓颉网络管理接口实现
 │   └── net
-│       └── connection      # 网络连接管理相关接口
+│       ├── connection      # 网络连接管理相关接口
 │       └── http            # 数据请求相关接口
 └── test                    # 测试代码
-    └── APILevel22
-        └── connection      # connection测试用例
-        └── http            # http测试用例
+    ├── connection          # connection测试用例
+    └── http                # http测试用例
 ```
 
 ## 使用说明
