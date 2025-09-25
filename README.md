@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The netmanager_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony based on the capabilities of the net management Subsystem. As a mandatory component for device networking, the network management subsystem implements unified connection management, traffic management, policy management, network sharing of different types of networks, and provides network protocol stack capabilities. An application can call APIs to obtain connection information of a data network, query and subscribe to connection status, network traffic data, and network policy, share the network, and transfer data using a network protocol stack. The netmanager_cangjie_wrapper includes network connection management and services related to data requests. The network management cangjie interface currently under development only supports standard devices.
+As a mandatory component for device networking, the network management subsystem implements unified connection management, traffic management, policy management, network sharing of different types of networks, and provides network protocol stack capabilities. An application can call APIs to obtain connection information of a data network, query and subscribe to connection status, network traffic data, and network policy, share the network, and transfer data using a network protocol stack. The netmanager_cangjie_wrapper includes network connection management and services related to data requests. The network management cangjie interface currently under development only supports standard devices.
 
 ## System Architecture
 
@@ -12,11 +12,21 @@ The netmanager_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony base
 
 As shown in the architecture diagram:
 
+Interface:
+
 - Network Connection Management: Provides network management capabilities.
 - Data Request: Provides HTTP data request capabilities.
+
+Framework:
+
+- Network Connection Management Wrapper: Provides Implementation encapsulation of Cangjie Network Connection Management, providing Network Connection Management capabilities.
+- Data Request Wrapper: Provides Implementation encapsulation of Cangjie Data Request, providing Data Request capabilities.
 - Cangjie network management FFI interface definition: Responsible for defining the C Language interoperability Cangjie interface, which is used to realize the Cangjie network management capabilities.
-- Basic Network Management: Responsible for providing the basic functions of network management, and providing the package C Language interface to Cangjie for interoperability.
-- Network Protocal Stacks: Responsible for providing the basic functions of network protocal stacks, and providing the package C Language interface to Cangjie for interoperability.
+
+- Explanation of Dependencies in the Architecture Diagram:
+
+- NetManager: Responsible for providing the basic functions of network management, and providing the package C Language interface to Cangjie for interoperability.
+- Network Stack Component: Responsible for providing the basic functions of network protocal stacks, and providing the package C Language interface to Cangjie for interoperability.
 - cangjie_ark_interop: Responsible for providing Cangjie APILevel class definitions, which are used to annotate APIs, as well as providing the definition of BusinessException class that is thrown to users.
 - hiviewdfx_cangjie_wrapper: Responsible for providing logging interfaces, which are used to print logs at key points in the execution path.
 
@@ -45,6 +55,14 @@ The netmanager_cangjie_wrapper provides the following capabilities:
 - Network Connection Management.
 - Data Request.
 
+For netmanager APIs, please refer to:
+1. [Network Connection Management](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/NetworkKit/cj-apis-net-connection.md)
+2. [Data Request](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/NetworkKit/cj-apis-net-http.md)
+
+For relevation guidance, please refer to [Network Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/network)
+
+## Constraints
+
 Compared to ArkTS, the following features are currently not supported:
 
 - Ethernet Connection Management.
@@ -61,19 +79,13 @@ Compared to ArkTS, the following features are currently not supported:
 - Extensible Authentication.
 - Enhanced VPN Management.
 
-For netmanager APIs, please refer to:
-1. [Network Connection Management](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/NetworkKit/cj-apis-net-connection.md)
-2. [Data Request](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/NetworkKit/cj-apis-net-http.md)
-
-For relevation guidance, please refer to [Network Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/network)
-
 ## Code Contribution
 
 Developers are welcome to contribute code, documentation, etc. For specific contribution processes and methods, please refer to [Code Contribution](https://gitcode.com/openharmony/docs/blob/master/en/contribute/code-contribution.md).
 
 ## Repositories Involved
 
-[ark_compiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
+[arkcompiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
 
 [communication_netmanager_base](https://gitcode.com/openharmony/communication_netmanager_base)
 
