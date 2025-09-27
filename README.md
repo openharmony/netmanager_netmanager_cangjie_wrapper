@@ -21,7 +21,6 @@ Framework:
 
 - Network Connection Management Wrapper: Provides Implementation encapsulation of Cangjie Network Connection Management, providing Network Connection Management capabilities.
 - Data Request Wrapper: Provides Implementation encapsulation of Cangjie Data Request, providing Data Request capabilities.
-- Cangjie network management FFI interface definition: Responsible for defining the C Language interoperability Cangjie interface, which is used to realize the Cangjie network management capabilities.
 
 - Explanation of Dependencies in the Architecture Diagram:
 
