@@ -49,8 +49,8 @@ foundation/communication/netmanager_cangjie_wrapper
 
 当前网络管理仓颉封装提供了以下功能：
 
-- 网络连接管理。
-- 网络协议栈（HTTP）。
+- 网络连接管理，包括获取默认激活的数据网络、获取所有激活数据网络列表、开启关闭飞行模式、获取网络能力信息等功能。
+- 网络协议栈，提供HTTP数据请求能力，应用可以通过HTTP发起一个数据请求，支持常见的GET、POST、OPTIONS、HEAD、PUT、DELETE、TRACE、CONNECT方法。
 
 网络管理相关API请参见：
 1. [网络连接管理API参考](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/NetworkKit/cj-apis-net-connection.md)
