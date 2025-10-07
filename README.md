@@ -1,4 +1,4 @@
-# netmanager_cangjie_wrapper
+# netmanager_cangjie_wrapper(beta feature)
 
 ## Introduction
 
