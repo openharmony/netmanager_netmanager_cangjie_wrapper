@@ -276,7 +276,7 @@ public enum HttpData {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     /**
-     * The returned type is ArrayBuffer.
+     * The returned type is byte array.
      */
     ArrayData(Array<Byte>)
     | ...
@@ -390,7 +390,7 @@ public class HttpRequestOptions {
 
     /**
      * Additional data of the request.
-     * extraData can be a string or an Object (API 6) or an ArrayBuffer(API 8).
+     * extraData can be a string or byte array.
      */
     @!APILevel[
         22,
@@ -599,7 +599,7 @@ public class HttpRequestOptions {
 ]
 public class HttpResponse {
     /**
-     * result can be a string (API 6) or an ArrayBuffer(API 8). Object is deprecated from API 8.
+     * result can be a string or byte array.
      */
     @!APILevel[
         22,
