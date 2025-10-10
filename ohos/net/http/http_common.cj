@@ -24,7 +24,7 @@ import std.collection.*
 import std.deriving.Derive
 
 /**
- * http request event type.
+ * HTTP request event type.
  */
 @Derive[Equatable, Hashable]
 @!APILevel[
@@ -177,15 +177,15 @@ public enum RequestMethod {
 ]
 public enum HttpProtocol {
     /**
-    * Protocol http1.1
-    */
+     * Protocol HTTP/1.1.
+     */
     @!APILevel[
         22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Http1_1
     /**
-     * Protocol http2
+     * Protocol HTTP/2.
      */
     | @!APILevel[
         22,
@@ -193,7 +193,7 @@ public enum HttpProtocol {
     ]
     Http2
     /**
-     * Protocol http3 for https only.
+     * Protocol HTTP/3.
      */
     | @!APILevel[
         22,
@@ -213,7 +213,7 @@ public enum HttpProtocol {
 }
 
 /**
-  * Indicates the type of the returned data.
+  * Indicates the type of the HTTP data.
   */
 @!APILevel[
     22,
@@ -221,7 +221,7 @@ public enum HttpProtocol {
 ]
 public enum HttpDataType {
     /**
-     * The returned type is string.
+     * String type.
      */
     @!APILevel[
         22,
@@ -229,7 +229,7 @@ public enum HttpDataType {
     ]
     StringValue
     /**
-     * The returned type is ArrayBuffer.
+     * ArrayBuffer type.
      */
     | @!APILevel[
         22,
@@ -256,15 +256,15 @@ public enum HttpDataType {
 }
 
 /**
-  * Indicates the type of http data.
-  */
+ * Indicates the form of http data.
+ */
 @!APILevel[
     22,
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum HttpData {
     /**
-     * The returned type is string.
+     * String form.
      */
     @!APILevel[
         22,
@@ -276,7 +276,7 @@ public enum HttpData {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     /**
-     * The returned type is byte array.
+     * Byte array form.
      */
     ArrayData(Array<Byte>)
     | ...
@@ -303,23 +303,29 @@ public enum HttpData {
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum UsingProxy {
+    /**
+     * not use HttpProxy
+     */
     @!APILevel[
         22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
-    /*not use HttpProxy*/
     NotUse
+    /**
+     * use default HttpProxy
+     */
     | @!APILevel[
         22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
-    /*use default HttpProxy*/
     UseDefault
+    /**
+     * use HttpProxy
+     */
     | @!APILevel[
         22,
         syscap: "SystemCapability.Communication.NetStack"
     ]
-    /*use HttpProxy*/
     UseSpecified(HttpProxy)
     | ...
 }
