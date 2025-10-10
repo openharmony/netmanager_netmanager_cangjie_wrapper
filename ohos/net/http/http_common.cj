@@ -879,7 +879,8 @@ public class DataSendProgressInfo {
 
 /**
  * The clientCert field of the client certificate, which includes 4 attributes:
- * client certificate (cert), client certificate type (certType), certificate private key (key), and passphrase (keyPassword).
+ * client certificate (cert), client certificate type (certType), certificate private key (key), and passphrase
+ * (keyPassword).
  */
 @!APILevel[
     22,
