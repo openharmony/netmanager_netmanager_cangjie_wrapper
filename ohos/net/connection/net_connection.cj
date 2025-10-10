@@ -583,7 +583,8 @@ public class NetConnection <: RemoteDataLite {
 ]
 public class NetHandle {
     /**
-     * Network ID, a value of 0 means that there is no default network, and the other values must be greater than or equal to 100.
+     * Network ID, a value of 0 means that there is no default network, and the other values must be greater than or
+     * equal to 100.
      */
     @!APILevel[
         22,

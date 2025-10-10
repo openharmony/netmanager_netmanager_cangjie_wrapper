@@ -40,7 +40,8 @@ public class NetSpecifier {
     ]
     public var netCapabilities: NetCapabilities
     /**
-     * Network identifier, the identifier for Wi Fi networks is "wifi", and the identifier for cellular networks is "simId1" (corresponding to SIM card 1).
+     * Network identifier, the identifier for Wi Fi networks is "wifi", and the identifier for cellular networks is
+     * "simId1" (corresponding to SIM card 1).
      */
     @!APILevel[
         22,
