@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.net.http
 
 import ohos.labels.*
@@ -79,7 +81,6 @@ public enum HttpRequestEvent {
 
 /**
  * Defines an HTTP request method.
- * @relation export enum RequestMethod
  */
 @!APILevel[
     since: "22",
@@ -88,7 +89,6 @@ public enum HttpRequestEvent {
 public enum RequestMethod {
     /**
      * OPTIONS method.
-     * @relation OPTIONS = "OPTIONS"
      */
     @!APILevel[
         since: "22",
@@ -97,7 +97,6 @@ public enum RequestMethod {
     Options
     /**
      * GET method.
-     * @relation GET = "GET"
      */
     | @!APILevel[
         since: "22",
@@ -106,7 +105,6 @@ public enum RequestMethod {
     Get
     /**
      * HEAD method.
-     * @relation HEAD = "HEAD"
      */
     | @!APILevel[
         since: "22",
@@ -115,7 +113,6 @@ public enum RequestMethod {
     Head
     /**
      * POST method.
-     * @relation POST = "POST"
      */
     | @!APILevel[
         since: "22",
@@ -124,7 +121,6 @@ public enum RequestMethod {
     Post
     /**
      * PUT method.
-     * @relation PUT = "PUT"
      */
     | @!APILevel[
         since: "22",
@@ -133,7 +129,6 @@ public enum RequestMethod {
     Put
     /**
      * DELETE method.
-     * @relation DELETE = "DELETE"
      */
     | @!APILevel[
         since: "22",
@@ -142,7 +137,6 @@ public enum RequestMethod {
     Delete
     /**
      * TRACE method.
-     * @relation TRACE = "TRACE"
      */
     | @!APILevel[
         since: "22",
@@ -151,7 +145,6 @@ public enum RequestMethod {
     Trace
     /**
      * CONNECT method.
-     * @relation CONNECT = "CONNECT"
      */
     | @!APILevel[
         since: "22",
@@ -177,7 +170,6 @@ public enum RequestMethod {
 
 /**
   * Supported protocols.
-  * @relation export enum HttpProtocol
   */
 @!APILevel[
     since: "22",
@@ -186,7 +178,6 @@ public enum RequestMethod {
 public enum HttpProtocol {
     /**
     * Protocol http1.1
-    * @relation HTTP1_1
     */
     @!APILevel[
         since: "22",
@@ -195,7 +186,6 @@ public enum HttpProtocol {
     Http1_1
     /**
      * Protocol http2
-     * @relation HTTP2
      */
     | @!APILevel[
         since: "22",
@@ -204,7 +194,6 @@ public enum HttpProtocol {
     Http2
     /**
      * Protocol http3 for https only.
-     * @relation HTTP3
      */
     | @!APILevel[
         since: "22",
@@ -225,7 +214,6 @@ public enum HttpProtocol {
 
 /**
   * Indicates the type of the returned data.
-  * @relation export enum HttpDataType
   */
 @!APILevel[
     since: "22",
@@ -234,7 +222,6 @@ public enum HttpProtocol {
 public enum HttpDataType {
     /**
      * The returned type is string.
-     * @relation STRING
      */
     @!APILevel[
         since: "22",
@@ -243,7 +230,6 @@ public enum HttpDataType {
     StringValue
     /**
      * The returned type is ArrayBuffer.
-     * @relation ARRAY_BUFFER
      */
     | @!APILevel[
         since: "22",
@@ -290,7 +276,7 @@ public enum HttpData {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     /**
-     * The returned type is ArrayBuffer.
+     * The returned type is byte array.
      */
     ArrayData(Array<Byte>)
     | ...
@@ -339,7 +325,6 @@ public enum UsingProxy {
 }
 /**
  * Enum for certificate types
- * @relation export enum CertType
  */
 @!APILevel[
     since: "22",
@@ -348,7 +333,6 @@ public enum UsingProxy {
 public enum CertType {
     /**
      * PEM format certificate
-     * @relation PEM
      */
     @!APILevel[
         since: "22",
@@ -357,7 +341,6 @@ public enum CertType {
     Pem
     /**
      * DER format certificate
-     * @relation DER
      */
     | @!APILevel[
         since: "22",
@@ -366,7 +349,6 @@ public enum CertType {
     Der
     /**
      * P12 format certificate
-     * @relation P12
      */
     | @!APILevel[
         since: "22",
@@ -391,7 +373,6 @@ public enum CertType {
 
 /**
  * Specifies the type and value range of the optional parameters in the HTTP request.
- * @relation export interface HttpRequestOptions
  */
 @!APILevel[
     since: "22",
@@ -400,7 +381,6 @@ public enum CertType {
 public class HttpRequestOptions {
     /**
      * Request method,default is GET.
-     * @relation method?: RequestMethod
      */
     @!APILevel[
         since: "22",
@@ -410,8 +390,7 @@ public class HttpRequestOptions {
 
     /**
      * Additional data of the request.
-     * extraData can be a string or an Object (API 6) or an ArrayBuffer(API 8).
-     * @relation extraData?: string | Object | ArrayBuffer
+     * extraData can be a string or byte array.
      */
     @!APILevel[
         since: "22",
@@ -421,7 +400,6 @@ public class HttpRequestOptions {
 
     /**
      * Data type to be returned. If this parameter is set, the system preferentially returns the specified type.
-     * @relation expectDataType?: HttpDataType
      */
     @!APILevel[
         since: "22",
@@ -431,7 +409,6 @@ public class HttpRequestOptions {
 
     /**
      * default is true
-     * @relation usingCache?: boolean
      */
     @!APILevel[
         since: "22",
@@ -441,7 +418,6 @@ public class HttpRequestOptions {
 
     /**
      * [1, 1000], default is 1.
-     * @relation priority?: number
      */
     @!APILevel[
         since: "22",
@@ -451,7 +427,6 @@ public class HttpRequestOptions {
 
     /**
      * HTTP request header. default is 'content-type': 'application/json'
-     * @relation header?: Object
      */
     @!APILevel[
         since: "22",
@@ -461,7 +436,6 @@ public class HttpRequestOptions {
 
     /**
      * Read timeout period. The default value is 60,000, in ms.
-     * @relation readTimeout?: number
      */
     @!APILevel[
         since: "22",
@@ -471,7 +445,6 @@ public class HttpRequestOptions {
 
     /**
      * Connection timeout interval. The default value is 60,000, in ms.
-     * @relation connectTimeout?: number
      */
     @!APILevel[
         since: "22",
@@ -481,7 +454,6 @@ public class HttpRequestOptions {
 
     /**
      * default is automatically specified by the system.
-     * @relation usingProtocol?: HttpProtocol
      */
     @!APILevel[
         since: "22",
@@ -492,7 +464,6 @@ public class HttpRequestOptions {
     /**
      * If this parameter is set as type of boolean, the system will use default proxy or not use proxy.
      * If this parameter is set as type of HttpProxy, the system will use the specified HttpProxy.
-     * @relation usingProxy?: boolean | HttpProxy
      */
     @!APILevel[
         since: "22",
@@ -502,7 +473,6 @@ public class HttpRequestOptions {
 
     /**
      * If this parameter is set, the system will use ca path specified by user, or else use preset ca by the system.
-     * @relation caPath?: string
      */
     @!APILevel[
         since: "22",
@@ -514,7 +484,6 @@ public class HttpRequestOptions {
      * Used to set to uploading or downloading the start bytes. The default value is 0.
      * HTTP standard (RFC 7233 section 3.1) allows servers to ignore range requests.
      * For HTTP PUT uploads this option should not be used, since it may conflict with other options.
-     * @relation resumeFrom?: number
      */
     @!APILevel[
         since: "22",
@@ -526,7 +495,6 @@ public class HttpRequestOptions {
      * Used to set to uploading or downloading the end bytes. Translate to the end if not set.
      * HTTP standard (RFC 7233 section 3.1) allows servers to ignore range requests.
      * For HTTP PUT uploads this option should not be used, since it may conflict with other options.
-     * @relation resumeTo?: number
      */
     @!APILevel[
         since: "22",
@@ -536,7 +504,6 @@ public class HttpRequestOptions {
 
     /**
      * Support the application to pass in client certificates, allowing the server to verify the client's identity.
-     * @relation clientCert?: ClientCert
      */
     @!APILevel[
         since: "22",
@@ -548,7 +515,6 @@ public class HttpRequestOptions {
      * If this parameter is set, incoming DNS resolution server URL for the DoH server to use for name resolving.
      * The parameter must be URL-encoded in the following format: "https://host:port/path".
      * It MUST specify an HTTPS URL.
-     * @relation dnsOverHttps?: string
      */
     @!APILevel[
         since: "22",
@@ -560,7 +526,6 @@ public class HttpRequestOptions {
      * If this parameter is set, use the specified DNS server for DNS resolution.
      * Multiple DNS resolution servers can be set up, with a maximum of 3 servers.
      * Only take the first three if there are more than three.
-     * @relation dnsServers?: Array<string>
      */
     @!APILevel[
         since: "22",
@@ -571,7 +536,6 @@ public class HttpRequestOptions {
     /**
      * The maximum limit of the response body. The default value is 5 * 1024 * 1024, in Byte.
      * The maximum value is 100 * 1024 *1024, in Byte.
-     * @relation maxLimit?: number
      */
     @!APILevel[
         since: "22",
@@ -583,7 +547,6 @@ public class HttpRequestOptions {
      * The data fields which is supported by the HTTP protocol to post
      * forms and by the SMTP and IMAP protocols to provide
      * the email data to send/upload.
-     * @relation multiFormDataList?: Array<MultiFormData>
      */
     @!APILevel[
         since: "22",
@@ -629,7 +592,6 @@ public class HttpRequestOptions {
 
 /**
  * Defines the response to an HTTP request.
- * @relation export interface HttpResponse 
  */
 @!APILevel[
     since: "22",
@@ -637,8 +599,7 @@ public class HttpRequestOptions {
 ]
 public class HttpResponse {
     /**
-     * result can be a string (API 6) or an ArrayBuffer(API 8). Object is deprecated from API 8.
-     * @relation result: string | Object | ArrayBuffer
+     * result can be a string or byte array.
      */
     @!APILevel[
         since: "22",
@@ -649,7 +610,6 @@ public class HttpResponse {
      * If the resultType is string, you can get result directly.
      * If the resultType is Object, you can get result such as this: result['key'].
      * If the resultType is ArrayBuffer, you can use ArrayBuffer to create the binary objects.
-     * @relation resultType: HttpDataType
      */
     @!APILevel[
         since: "22",
@@ -658,7 +618,6 @@ public class HttpResponse {
     public var resultType: HttpDataType
     /**
      * Server status code.
-     * @relation responseCode: ResponseCode | number
      */
     @!APILevel[
         since: "22",
@@ -667,7 +626,6 @@ public class HttpResponse {
     public var responseCode: UInt32
     /**
      * All headers in the response from the server.
-     * @relation header: Object
      */
     @!APILevel[
         since: "22",
@@ -676,7 +634,6 @@ public class HttpResponse {
     public var header: HashMap<String, String>
     /**
      * Cookies returned by the server.
-     * @relation cookies: string
      */
     @!APILevel[
         since: "22",
@@ -686,7 +643,6 @@ public class HttpResponse {
 
     /**
      * The time taken of various stages of HTTP request.
-     * @relation performanceTiming: PerformanceTiming
      */
     @!APILevel[
         since: "22",
@@ -713,7 +669,6 @@ public class HttpResponse {
 
 /**
  * Counting the time taken of various stages of HTTP request.
- * @relation export interface PerformanceTiming
  */
 @!APILevel[
     since: "22",
@@ -722,7 +677,6 @@ public class HttpResponse {
 public class PerformanceTiming {
     /**
      * Time taken from startup to DNS resolution completion, in milliseconds.
-     * @relation dnsTiming: number
      */
     @!APILevel[
         since: "22",
@@ -732,7 +686,6 @@ public class PerformanceTiming {
 
     /**
      * Time taken from startup to TCP connection completion, in milliseconds.
-     * @relation tcpTiming: number
      */
     @!APILevel[
         since: "22",
@@ -742,7 +695,6 @@ public class PerformanceTiming {
 
     /**
      * Time taken from startup to TLS connection completion, in milliseconds.
-     * @relation tlsTiming: number
      */
     @!APILevel[
         since: "22",
@@ -752,7 +704,6 @@ public class PerformanceTiming {
 
     /**
      * Time taken from startup to start sending the first byte, in milliseconds.
-     * @relation firstSendTiming: number
      */
     @!APILevel[
         since: "22",
@@ -762,7 +713,6 @@ public class PerformanceTiming {
 
     /**
      * Time taken from startup to receiving the first byte, in milliseconds.
-     * @relation firstReceiveTiming: number
      */
     @!APILevel[
         since: "22",
@@ -772,7 +722,6 @@ public class PerformanceTiming {
 
     /**
      * Time taken from startup to the completion of the request, in milliseconds.
-     * @relation totalFinishTiming: number
      */
     @!APILevel[
         since: "22",
@@ -782,7 +731,6 @@ public class PerformanceTiming {
 
     /**
      * Time taken from startup to completion of all redirection steps, in milliseconds.
-     * @relation redirectTiming: number
      */
     @!APILevel[
         since: "22",
@@ -792,7 +740,6 @@ public class PerformanceTiming {
 
     /**
      * Time taken from HTTP request to header completion, in milliseconds.
-     * @relation responseHeaderTiming: number
      */
     @!APILevel[
         since: "22",
@@ -802,7 +749,6 @@ public class PerformanceTiming {
 
     /**
      * Time taken from HTTP Request to body completion, in milliseconds.
-     * @relation responseBodyTiming: number
      */
     @!APILevel[
         since: "22",
@@ -812,7 +758,6 @@ public class PerformanceTiming {
 
     /**
      * Time taken from HTTP Request to callback to the application, in milliseconds.
-     * @relation totalTiming: number
      */
     @!APILevel[
         since: "22",
@@ -855,7 +800,6 @@ public class PerformanceTiming {
 
 /**
  * This interface is used to obtain the progress information of file upload or download.
- * @relation export interface DataReceiveProgressInfo
  */
 @!APILevel[
     since: "22",
@@ -864,7 +808,6 @@ public class PerformanceTiming {
 public class DataReceiveProgressInfo {
     /**
      * Number of data bytes received.
-     * @relation receiveSize: number
      */
     @!APILevel[
         since: "22",
@@ -874,7 +817,6 @@ public class DataReceiveProgressInfo {
 
     /**
      * Total number of bytes to receive.
-     * @relation totalSize: number
      */
     @!APILevel[
         since: "22",
@@ -898,7 +840,6 @@ public class DataReceiveProgressInfo {
 
 /**
  * This interface is used to monitor the progress of sending data.
- * @relation export interface DataSendProgressInfo
  */
 @!APILevel[
     since: "22",
@@ -907,7 +848,6 @@ public class DataReceiveProgressInfo {
 public class DataSendProgressInfo {
     /**
      * Used to specify the data size to be sent.
-     * @relation sendSize: number
      */
     @!APILevel[
         since: "22",
@@ -917,7 +857,6 @@ public class DataSendProgressInfo {
 
     /**
      * Total number of bytes to receive.
-     * @relation totalSize: number
      */
     @!APILevel[
         since: "22",
@@ -941,7 +880,6 @@ public class DataSendProgressInfo {
 /**
  * The clientCert field of the client certificate, which includes 4 attributes:
  * client certificate (cert), client certificate type (certType), certificate private key (key), and passphrase (keyPassword).
- * @relation export interface ClientCert
  */
 @!APILevel[
     since: "22",
@@ -950,7 +888,6 @@ public class DataSendProgressInfo {
 public class ClientCert {
     /**
      * The path to the client certificate file.
-     * @relation certPath: string
      */
     @!APILevel[
         since: "22",
@@ -960,7 +897,6 @@ public class ClientCert {
 
     /**
      * The path of the client certificate private key file.
-     * @relation keyPath: string
      */
     @!APILevel[
         since: "22",
@@ -970,7 +906,6 @@ public class ClientCert {
 
     /**
      * The type of the client certificate.
-     * @relation certType?: CertType
      */
     @!APILevel[
         since: "22",
@@ -980,7 +915,6 @@ public class ClientCert {
 
     /**
      * Password required to use the client certificate private key.
-     * @relation keyPassword?: string
      */
     @!APILevel[
         since: "22",
@@ -1021,7 +955,6 @@ public class ClientCert {
 
 /**
  * Represents the properties of a form object.
- * @relation export interface MultiFormData
  */
 @!APILevel[
     since: "22",
@@ -1030,7 +963,6 @@ public class ClientCert {
 public class MultiFormData {
     /**
      * MIME name for the data field.
-     * @relation name: string
      */
     @!APILevel[
         since: "22",
@@ -1040,7 +972,6 @@ public class MultiFormData {
 
     /**
      * Content type of the data field.
-     * @relation contentType: string
      */
     @!APILevel[
         since: "22",
@@ -1050,7 +981,6 @@ public class MultiFormData {
 
     /**
      * Remote file name for the data field.
-     * @relation remoteFileName?: string
      */
     @!APILevel[
         since: "22",
@@ -1060,7 +990,6 @@ public class MultiFormData {
 
     /**
      * This parameter sets a mime part's body content from memory data.
-     * @relation data?: string | Object | ArrayBuffer
      */
     @!APILevel[
         since: "22",
@@ -1073,7 +1002,6 @@ public class MultiFormData {
      * This is an alternative to curl_mime_data for setting data to a mime part.
      * If data is empty, filePath must be set.
      * If data has a value, filePath does not take effect.
-     * @relation filePath?: string
      */
     @!APILevel[
         since: "22",

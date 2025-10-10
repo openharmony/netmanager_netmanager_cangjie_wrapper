@@ -1,7 +1,7 @@
 {
     "name": "@ohos/netmanager_cangjie_wrapper",
     "description": "The netmanager_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony based on the capabilities of the net management Subsystem.",
-    "version": "6.0",
+    "version": "6.1",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -35,7 +35,7 @@
                 "//foundation/communication/netmanager_cangjie_wrapper/ohos/net/connection:ohos.net.connection",
                 "//foundation/communication/netmanager_cangjie_wrapper/ohos/net/http:ohos.net.http",
                 "//foundation/communication/netmanager_cangjie_wrapper/ohos/net:ohos.net",
-                "//foundation/communication/netmanager_cangjie_wrapper/kit/NetworkKit:NetworkKit"
+                "//foundation/communication/netmanager_cangjie_wrapper/kit/NetworkKit:kit.NetworkKit"
             ],
             "inner_kits": [],
             "test": []

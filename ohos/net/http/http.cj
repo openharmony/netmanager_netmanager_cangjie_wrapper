@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.net.http
 
 import ohos.business_exception.*
@@ -27,7 +29,6 @@ const MAX_CACHE_SIZE: UInt32 = 10 * 1024 * 1024
 /**
  * Creates an HTTP request task.
  * @returns { HttpRequest } the HttpRequest of the createHttp.
- * @relation createHttp(): HttpRequest
  */
 @!APILevel[
     since: "22",
@@ -42,7 +43,6 @@ public func createHttp(): HttpRequest {
  * Creates a default {@code HttpResponseCache} object to store the responses of HTTP access requests.
  * @param { UInt32 } cacheSize - the size of cache(max value is 10MB), default is 10*1024*1024(10MB).
  * @returns { HttpResponseCache } the HttpResponseCache of the createHttpResponseCache.
- * @relation createHttpResponseCache(cacheSize?: number): HttpResponseCache
  */
 @!APILevel[
     since: "22",
@@ -62,7 +62,6 @@ public func createHttpResponseCache(cacheSize!: UInt32 = MAX_CACHE_SIZE): HttpRe
 /**
  * Defines an HTTP request task. Before invoking APIs provided by HttpRequest,
  * you must call createHttp() to create an HttpRequestTask object.
- * @relation export interface HttpRequest
  */
 @!APILevel[
     since: "22",
@@ -112,7 +111,6 @@ public class HttpRequest {
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
-     * @relation request(url: string, options: HttpRequestOptions, callback: AsyncCallback<HttpResponse>): void
      */
     @!APILevel[
         since: "22",
@@ -193,7 +191,6 @@ public class HttpRequest {
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
-     * @relation request(url: string, callback: AsyncCallback<HttpResponse>): void
      */
     @!APILevel[
         since: "22",
@@ -239,7 +236,6 @@ public class HttpRequest {
 
     /**
      * Destroys an HTTP request.
-     * @relation destroy(): void
      */
     @!APILevel[
         since: "22",
@@ -290,7 +286,6 @@ public class HttpRequest {
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
-     * @relation requestInStream(url: string, options: HttpRequestOptions, callback: AsyncCallback<number>): void
      */
     @!APILevel[
         since: "22",
@@ -373,7 +368,6 @@ public class HttpRequest {
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
-     * @relation requestInStream(url: string, callback: AsyncCallback<number>): void
      */
     @!APILevel[
         since: "22",
@@ -535,7 +529,6 @@ public class HttpRequest {
      * Registers an observer for HTTP Response Header events.
      * @param { (HashMap<String, String>) -> Unit } callback - the callback used to return the result.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: "headersReceive", callback: Callback<Object>): void
      */
     @!APILevel[
         since: "22",
@@ -560,7 +553,6 @@ public class HttpRequest {
      * Registers a one-time observer for HTTP Response Header events.
      * @param { (HashMap<String, String>) -> Unit } callback - the callback used to return the result.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation once(type: "headersReceive", callback: Callback<Object>): void
      */
     @!APILevel[
         since: "22",
@@ -587,7 +579,6 @@ public class HttpRequest {
      * Registers an observer for receiving HTTP Response data events continuously.
      * @param { callback: (Array<Byte>) -> Unit } callback - the callback used to return the result.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: "dataReceive", callback: Callback<ArrayBuffer>): void
      */
     @!APILevel[
         since: "22",
@@ -613,7 +604,6 @@ public class HttpRequest {
      * Registers an observer for receiving HTTP Response data ends events.
      * @param { () -> Unit } callback - the callback used to return the result.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: "dataEnd", callback: Callback<void>): void
      */
     @!APILevel[
         since: "22",
@@ -633,7 +623,6 @@ public class HttpRequest {
      * Registers an observer for progress of receiving HTTP Response data events.
      * @param { (DataReceiveProgressInfo) -> Unit } callback - the callback used to return the result.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: 'dataReceiveProgress', callback: Callback<DataReceiveProgressInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -655,7 +644,6 @@ public class HttpRequest {
      * Registers an observer for progress of sendSize HTTP Response data events.
      * @param { (DataSendProgressInfo) -> Unit } callback - the callback of on.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: 'dataSendProgress', callback: Callback<DataSendProgressInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -676,7 +664,6 @@ public class HttpRequest {
     /**
      * Unregisters the observer for HttpRequest.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation off(type: "headersReceive", callback?: Callback<Object>): void
      */
     @!APILevel[
         since: "22",
@@ -697,7 +684,6 @@ public class HttpRequest {
 
 /**
  * Defines an object that stores the response to an HTTP request.
- * @relation export interface HttpResponseCache
  */
 @!APILevel[
     since: "22",
@@ -708,7 +694,6 @@ public class HttpResponseCache {
     /**
      * Writes data in the cache to the file system so that all the cached data can be accessed in the next HTTP request.
      * @returns { Unit } The promise returned by the flush.
-     * @relation flush(callback: AsyncCallback<void>): void
      */
     @!APILevel[
         since: "22",
@@ -727,7 +712,6 @@ public class HttpResponseCache {
     /**
      * Disables a cache and deletes the data in it.
      * @returns { Unit } The promise returned by the delete.
-     * @relation delete(): Promise<void>
      */
     @!APILevel[
         since: "22",
