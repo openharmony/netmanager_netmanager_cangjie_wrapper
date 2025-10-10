@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.net.connection
 
 import ohos.ffi.*
@@ -31,7 +33,6 @@ let CONNECTION_LOG = HilogChannel(0, 0xD0015B0, "CJ-net-Connection")
  * @param { UInt32 } timeout - The time in milliseconds to attempt looking for a suitable network before
  * {@link NetConnection#netUnavailable} is called.
  * @returns { NetConnection } the NetConnection of the NetSpecifier.
- * @relation createNetConnection(netSpecifier?: NetSpecifier, timeout?: number): NetConnection
  */
 @!APILevel[
     since: "22",
@@ -60,7 +61,6 @@ public func createNetConnection(netSpecifier!: ?NetSpecifier = None, timeout!: U
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation getDefaultNet(): Promise<NetHandle>
  */
 @!APILevel[
     since: "22",
@@ -90,7 +90,6 @@ public func getDefaultNet(): NetHandle {
  * @returns { HttpProxy } the promise returned by the function.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation getDefaultHttpProxy(): Promise<HttpProxy>
  */
 @!APILevel[
     since: "22",
@@ -118,7 +117,6 @@ public func getDefaultHttpProxy(): HttpProxy {
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation function getAppNetSync(): NetHandle
  */
 @!APILevel[
     since: "22",
@@ -148,7 +146,6 @@ public func getAppNet(): NetHandle {
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation setAppNet(netHandle: NetHandle): Promise<void>
  */
 @!APILevel[
     since: "22",
@@ -174,7 +171,6 @@ public func setAppNet(netHandle: NetHandle): Unit {
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation getAllNets(): Promise<Array<NetHandle>>
  */
 @!APILevel[
     since: "22",
@@ -207,7 +203,6 @@ public func getAllNets(): Array<NetHandle> {
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation getConnectionProperties(netHandle: NetHandle): Promise<ConnectionProperties>
  */
 @!APILevel[
     since: "22",
@@ -244,7 +239,6 @@ public func getConnectionProperties(netHandle: NetHandle): ConnectionProperties 
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation getNetCapabilities(netHandle: NetHandle, callback: AsyncCallback<NetCapabilities>): void
  */
 @!APILevel[
     since: "22",
@@ -277,7 +271,6 @@ public func getNetCapabilities(netHandle: NetHandle): NetCapabilities {
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation isDefaultNetMetered(): Promise<boolean>
  */
 @!APILevel[
     since: "22",
@@ -304,7 +297,6 @@ public func isDefaultNetMetered(): Bool {
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation hasDefaultNet(): Promise<boolean>
  */
 @!APILevel[
     since: "22",
@@ -333,7 +325,6 @@ public func hasDefaultNet(): Bool {
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation reportNetConnected(netHandle: NetHandle): Promise<void>
  */
 @!APILevel[
     since: "22",
@@ -360,7 +351,6 @@ public func reportNetConnected(netHandle: NetHandle): Unit {
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation reportNetDisconnected(netHandle: NetHandle): Promise<void>
  */
 @!APILevel[
     since: "22",
@@ -387,7 +377,6 @@ public func reportNetDisconnected(netHandle: NetHandle): Unit {
  * @throws { BusinessException } 2100001 - Invalid parameter value.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
  * @throws { BusinessException } 2100003 - System internal error.
- * @relation getAddressesByName(host: string): Promise<Array<NetAddress>>
  */
 @!APILevel[
     since: "22",
@@ -400,8 +389,6 @@ public func getAddressesByName(host: String): Array<NetAddress> {
 
 /**
  * Represents the network connection handle.
- * 
- * @relation export interface NetConnection
  */
 @!APILevel[
     since: "22",
@@ -427,7 +414,6 @@ public class NetConnection <: RemoteDataLite {
      * @throws { BusinessException } 2100003 - System internal error.
      * @throws { BusinessException } 2101008 - The callback already exists.
      * @throws { BusinessException } 2101022 - The number of requests exceeded the maximum allowed.
-     * @relation register(callback: AsyncCallback<void>): void
      */
     @!APILevel[
         since: "22",
@@ -450,7 +436,6 @@ public class NetConnection <: RemoteDataLite {
      * @throws { BusinessException } 2100002 - Failed to connect to the service.
      * @throws { BusinessException } 2100003 - System internal error.
      * @throws { BusinessException } 2101007 - The callback does not exist.
-     * @relation unregister(callback: AsyncCallback<void>): void
      */
     @!APILevel[
         since: "22",
@@ -470,7 +455,6 @@ public class NetConnection <: RemoteDataLite {
      * Registers a listener for netAvailable events.
      * Registers a listener for netLost events.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: 'netAvailable', callback: Callback<NetHandle>): void
      */
     @!APILevel[
         since: "22",
@@ -495,7 +479,6 @@ public class NetConnection <: RemoteDataLite {
     /**
      * Registers a listener for netBlockStatusChange events.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: 'netBlockStatusChange', callback: Callback<NetBlockStatusInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -520,7 +503,6 @@ public class NetConnection <: RemoteDataLite {
     /**
      * Registers a listener for **netCapabilitiesChange** events.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: 'netCapabilitiesChange', callback: Callback<NetCapabilityInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -546,7 +528,6 @@ public class NetConnection <: RemoteDataLite {
     /**
      * Registers a listener for netConnectionPropertiesChange events.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: 'netConnectionPropertiesChange', callback: Callback<NetConnectionPropertyInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -574,7 +555,6 @@ public class NetConnection <: RemoteDataLite {
     /**
      * Registers a listener for netUnavailable events.
      * @throws { IllegalArgumentException } The parameter check failed.
-     * @relation on(type: 'netUnavailable', callback: Callback<void>): void
      */
     @!APILevel[
         since: "22",
@@ -596,8 +576,6 @@ public class NetConnection <: RemoteDataLite {
 
 /**
  * Defines the handle of the data network.
- * 
- * @relation export interface NetHandle
  */
 @!APILevel[
     since: "22",
@@ -606,8 +584,6 @@ public class NetConnection <: RemoteDataLite {
 public class NetHandle {
     /**
      * Network ID, a value of 0 means that there is no default network, and the other values must be greater than or equal to 100.
-     *
-     * @relation netId: number
      */
     @!APILevel[
         since: "22",
@@ -632,7 +608,6 @@ public class NetHandle {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
      * @throws { BusinessException } 2100003 - System internal error.
-     * @relation getAddressesByName(host: string): Promise<Array<NetAddress>>
      */
     @!APILevel[
         since: "22",
@@ -674,7 +649,6 @@ public class NetHandle {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
      * @throws { BusinessException } 2100003 - System internal error.
-     * @relation getAddressByName(host: string): Promise<NetAddress>
      */
     @!APILevel[
         since: "22",
@@ -694,7 +668,6 @@ public class NetHandle {
 
 /**
  * Get information about network connections.
- * @relation export interface NetConnectionPropertyInfo
  */
 @!APILevel[
     since: "22",
@@ -703,7 +676,6 @@ public class NetHandle {
 public class NetConnectionPropertyInfo {
     /**
      * Defines the handle of the data network.
-     * @relation netHandle: NetHandle
      */
     @!APILevel[
         since: "22",
@@ -713,7 +685,6 @@ public class NetConnectionPropertyInfo {
 
     /**
      * Defines the network connection properties.
-     * @relation connectionProperties: ConnectionProperties
      */
     @!APILevel[
         since: "22",
@@ -729,7 +700,6 @@ public class NetConnectionPropertyInfo {
 
 /**
  * Get network status information.
- * @relation export interface NetBlockStatusInfo
  */
 @!APILevel[
     since: "22",
@@ -738,7 +708,6 @@ public class NetConnectionPropertyInfo {
 public class NetBlockStatusInfo {
     /**
      * Defines the handle of the data network.
-     * @relation netHandle: NetHandle
      */
     @!APILevel[
         since: "22",
@@ -748,7 +717,6 @@ public class NetBlockStatusInfo {
 
     /**
      * Check whether the current state is blocked.
-     * @relation blocked: boolean
      */
     @!APILevel[
         since: "22",

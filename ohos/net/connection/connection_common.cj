@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.net.connection
 
 import ohos.labels.*
@@ -23,8 +25,6 @@ import std.deriving.Derive
 
 /**
  * Provides an instance that bear data network capabilities.
- * 
- * @relation export interface NetSpecifier
  */
 @!APILevel[
     since: "22",
@@ -33,8 +33,6 @@ import std.deriving.Derive
 public class NetSpecifier {
     /**
      * The transmission capacity and support of the network's global proxy storage data network.
-     *
-     * @relation netCapabilities: NetCapabilities
      */
     @!APILevel[
         since: "22",
@@ -43,8 +41,6 @@ public class NetSpecifier {
     public var netCapabilities: NetCapabilities
     /**
      * Network identifier, the identifier for Wi Fi networks is "wifi", and the identifier for cellular networks is "simId1" (corresponding to SIM card 1).
-     *
-     * @relation bearerPrivateIdentifier?: string
      */
     @!APILevel[
         since: "22",
@@ -67,8 +63,6 @@ public class NetSpecifier {
 
 /**
  * Receive information about changes in network capabilities.
- *
- * @relation export interface NetCapabilityInfo
  */
 @!APILevel[
     since: "22",
@@ -77,8 +71,6 @@ public class NetSpecifier {
 public class NetCapabilityInfo {
     /**
      * Defines the handle of the data network.
-     *
-     * @relation netHandle: NetHandle
      */
     @!APILevel[
         since: "22",
@@ -87,8 +79,6 @@ public class NetCapabilityInfo {
     public var netHandle: NetHandle
     /**
      * Defines the network capability set.
-     *
-     * @relation netCap: NetCapabilities
      */
     @!APILevel[
         since: "22",
@@ -115,8 +105,6 @@ public class NetCapabilityInfo {
 
 /**
  * Defines the network capability set.
- *
- * @relation export interface NetCapabilities
  */
 @!APILevel[
     since: "22",
@@ -125,8 +113,6 @@ public class NetCapabilityInfo {
 public class NetCapabilities {
     /**
      * Network type.
-     *
-     * @relation bearerTypes: Array<NetBearType>
      */
     @!APILevel[
         since: "22",
@@ -135,8 +121,6 @@ public class NetCapabilities {
     public var bearerTypes: Array<NetBearType>
     /**
      * Uplink (device-to-network) bandwidth.
-     *
-     * @relation linkUpBandwidthKbps?: number
      */
     @!APILevel[
         since: "22",
@@ -145,8 +129,6 @@ public class NetCapabilities {
     public var linkUpBandwidthKbps: UInt32 
     /**
      * Downstream (network-to-device) bandwidth.
-     *
-     * @relation linkDownBandwidthKbps?: number
      */
     @!APILevel[
         since: "22",
@@ -155,8 +137,6 @@ public class NetCapabilities {
     public var linkDownBandwidthKbps: UInt32 
     /**
      * Network-specific capabilities.
-     *
-     * @relation networkCap?: Array<NetCap>
      */
     @!APILevel[
         since: "22",
@@ -206,8 +186,6 @@ public class NetCapabilities {
 
 /**
  * Defines the network connection properties.
- *
- * @relation export interface ConnectionProperties
  */
 @!APILevel[
     since: "22",
@@ -216,8 +194,6 @@ public class NetCapabilities {
 public class ConnectionProperties {
     /**
      * Network card name.
-     *
-     * @relation interfaceName: string
      */
     @!APILevel[
         since: "22",
@@ -226,8 +202,6 @@ public class ConnectionProperties {
     public var interfaceName: String
     /**
      * Domain. The default value is "".
-     *
-     * @relation domains: string
      */
     @!APILevel[
         since: "22",
@@ -236,8 +210,6 @@ public class ConnectionProperties {
     public var domains: String
     /**
      * Link information.
-     *
-     * @relation linkAddresses: Array<LinkAddress>
      */
     @!APILevel[
         since: "22",
@@ -246,8 +218,6 @@ public class ConnectionProperties {
     public var linkAddresses: Array<LinkAddress>
     /**
      * Network address, refer to [NetAddress].
-     *
-     * @relation dnses: Array<NetAddress>
      */
     @!APILevel[
         since: "22",
@@ -256,8 +226,6 @@ public class ConnectionProperties {
     public var dnses: Array<NetAddress>
     /**
      * Routing information.
-     *
-     * @relation routes: Array<RouteInfo>
      */
     @!APILevel[
         since: "22",
@@ -266,8 +234,6 @@ public class ConnectionProperties {
     public var routes: Array<RouteInfo>
     /**
      * Maximum transmission unit.
-     *
-     * @relation mtu: number
      */
     @!APILevel[
         since: "22",
@@ -306,8 +272,6 @@ public class ConnectionProperties {
 
 /**
  * Defines network route information.
- *
- * @relation export interface RouteInfo
  */
 @!APILevel[
     since: "22",
@@ -316,8 +280,6 @@ public class ConnectionProperties {
 public class RouteInfo {
     /**
      * Network card name.
-     *
-     * @relation interfaceName: string
      */
     @!APILevel[
         since: "22",
@@ -327,8 +289,6 @@ public class RouteInfo {
 
     /**
      * Destination Address
-     *
-     * @relation destination: LinkAddress
      */
     @!APILevel[
         since: "22",
@@ -338,8 +298,6 @@ public class RouteInfo {
 
     /**
      * Gateway address.
-     *
-     * @relation gateway: NetAddress
      */
     @!APILevel[
         since: "22",
@@ -349,8 +307,6 @@ public class RouteInfo {
 
     /**
      * Whether a gateway is present.
-     *
-     * @relation hasGateway: boolean
      */
     @!APILevel[
         since: "22",
@@ -360,8 +316,6 @@ public class RouteInfo {
 
     /**
      * Whether the route is the default route.
-     *
-     * @relation isDefaultRoute: boolean
      */
     @!APILevel[
         since: "22",
@@ -395,8 +349,6 @@ public class RouteInfo {
 
 /**
  * Defines network link information.
- *
- * @relation export interface LinkAddress
  */
 @!APILevel[
     since: "22",
@@ -405,8 +357,6 @@ public class RouteInfo {
 public class LinkAddress {
     /**
      * Link address.
-     *
-     * @relation address: NetAddress
      */
     @!APILevel[
         since: "22",
@@ -415,8 +365,6 @@ public class LinkAddress {
     public var address: NetAddress
     /**
      * The length of the link address prefix.
-     *
-     * @relation prefixLength: number
      */
     @!APILevel[
         since: "22",
@@ -443,8 +391,6 @@ public class LinkAddress {
 
 /**
  * Defines a network address.
- *
- * @relation export interface NetAddress
  */
 @!APILevel[
     since: "22",
@@ -453,8 +399,6 @@ public class LinkAddress {
 public class NetAddress {
     /**
      * Network address.
-     *
-     * @relation address: string
      */
     @!APILevel[
         since: "22",
@@ -463,8 +407,6 @@ public class NetAddress {
     public var address: String
     /**
      * Address family identifier. The value is 1 for IPv4 and 2 for IPv6. The default value is 1.
-     *
-     * @relation family?: number 
      */
     @!APILevel[
         since: "22",
@@ -473,8 +415,6 @@ public class NetAddress {
     public var family: UInt32
     /**
      * Port number. The value ranges from 0 to 65535.
-     *
-     * @relation port?: number 
      */
     @!APILevel[
         since: "22",
@@ -508,8 +448,6 @@ public class NetAddress {
 
 /**
  * Network Global Proxy Configuration Information.
- *
- * @relation export interface HttpProxy 
  */
 @!APILevel[
     since: "22",
@@ -518,7 +456,6 @@ public class NetAddress {
 public class HttpProxy {
     /**
      * Proxy server host name.
-     * @relation host: string
      */
     @!APILevel[
         since: "22",
@@ -527,7 +464,6 @@ public class HttpProxy {
     public var host: String 
     /**
      * Host port.
-     * @relation port: number
      */
     @!APILevel[
         since: "22",
@@ -536,7 +472,6 @@ public class HttpProxy {
     public var port: UInt32
     /**
      * Do not use a blocking list for proxy servers.
-     * @relation exclusionList: Array<string>
      */
     @!APILevel[
         since: "22",
@@ -546,7 +481,6 @@ public class HttpProxy {
 
     /**
      * Http proxy username.
-     * @relation username?: string
      */
     @!APILevel[
         since: "22",
@@ -556,7 +490,6 @@ public class HttpProxy {
 
     /**
      * Http proxy password.
-     * @relation password?: string
      */
     @!APILevel[
         since: "22",
@@ -601,8 +534,6 @@ public class HttpProxy {
 
 /**
  * Defines the network capability.
- *
- * @relation export enum NetCap
  */
 @!APILevel[
     since: "22",
@@ -611,8 +542,6 @@ public class HttpProxy {
 public enum NetCap {
     /**
      * Indicates that the network can access the carrier's MMSC to send and receive multimedia messages.
-     *
-     * @relation NET_CAPABILITY_MMS = 0
      */
     @!APILevel[
         since: "22",
@@ -622,8 +551,6 @@ public enum NetCap {
     |
         /**
          * Indicates that the network traffic is not metered.
-         *
-         * @relation NET_CAPABILITY_NOT_METERED = 11
          */
         @!APILevel[
         since: "22",
@@ -633,8 +560,6 @@ public enum NetCap {
     |
         /**
          * Indicates that the network can access the Internet.
-         *
-         * @relation NET_CAPABILITY_INTERNET = 12
          */
         @!APILevel[
         since: "22",
@@ -644,8 +569,6 @@ public enum NetCap {
     |
         /**
          * Indicates that the network does not use a VPN.
-         *
-         * @relation NET_CAPABILITY_NOT_VPN = 15
          */
         @!APILevel[
         since: "22",
@@ -655,8 +578,6 @@ public enum NetCap {
     |
         /**
          * Indicates that the network is available.
-         *
-         * @relation NET_CAPABILITY_VALIDATED = 16
          */
         @!APILevel[
         since: "22",
@@ -693,8 +614,6 @@ public enum NetCap {
 
 /**
  * Enumerates network types.
- *
- * @relation export enum NetBearType
  */
 @!APILevel[
     since: "22",
@@ -703,8 +622,6 @@ public enum NetCap {
 public enum NetBearType {
     /**
      * Indicates that the network is based on a cellular network.
-     *
-     * @relation BEARER_CELLULAR = 0
      */
     @!APILevel[
         since: "22",
@@ -714,8 +631,6 @@ public enum NetBearType {
     |
         /**
          * Indicates that the network is based on a Wi-Fi network.
-         *
-         * @relation BEARER_WIFI = 1
          */
         @!APILevel[
         since: "22",
@@ -725,8 +640,6 @@ public enum NetBearType {
     |
         /**
          * Indicates that the network is an Ethernet network.
-         *
-         * @relation BEARER_ETHERNET = 3
          */
         @!APILevel[
         since: "22",

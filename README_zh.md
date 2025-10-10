@@ -1,4 +1,4 @@
-# 网络管理仓颉封装
+# 网络管理仓颉封装（beta特性）
 
 ## 简介
 
@@ -7,8 +7,6 @@
 ## 系统架构
 
 ![网络管理仓颉架构图](figures/netmanager_cangjie_wrapper_architecture.png)
-
-如架构图所示：
 
 接口层：
 
@@ -22,7 +20,7 @@
 
 架构图中的依赖部件引入说明：
 
-- Net Manager：提供基础网络连接管理能力，包括网络状态监控、网络连接优先级管理、网络故障检测与恢复等核心功能。
+- Net Manager：提供基础网络连接管理能力，包括WiFi/蜂窝/Ethernet等多网络连接优先级管理、网络质量评估、订阅默认/指定网络连接状态变化、查询网络连接信息、DNS解析等功能等核心功能。
 - Net Stack：提供基础的网络协议栈能力。
 - cangjie_ark_interop：负责提供仓颉注解类定义，用于对API进行标注，以及提供抛向用户的BusinessException异常类定义。
 - hiviewdfx_cangjie_wrapper：负责提供日志接口，用于在关键路径处打印日志。
@@ -49,8 +47,8 @@ foundation/communication/netmanager_cangjie_wrapper
 
 当前网络管理仓颉封装提供了以下功能：
 
-- 网络连接管理，包括获取默认激活的数据网络、获取所有激活数据网络列表、开启关闭飞行模式、获取网络能力信息等功能。
-- 网络协议栈，提供HTTP数据请求能力，应用可以通过HTTP发起一个数据请求，支持常见的GET、POST、OPTIONS、HEAD、PUT、DELETE、TRACE、CONNECT方法。
+- 网络连接管理，包括获取默认激活的数据网络、获取所有激活数据网络列表、开启关闭飞行模式、获取网络能力信息等功能，典型应用场景包括：接收指定网络的状态变化通知、获取所有注册的网络、查询默认网络或者指定网络的连接信息、使用默认网络解析域名，获取所有IP。
+- 网络协议栈，提供HTTP数据请求能力，应用通过HTTP发起一个数据请求，支持常见的GET、POST、OPTIONS、HEAD、PUT、DELETE、TRACE、CONNECT方法。当前提供了2种HTTP请求方式，若请求发送或接收的数据量较少，可使用HttpRequest.request，若是大文件的上传或者下载，且关注数据发送和接收进度，可使用HTTP请求流式传输HttpRequest.requestInstream。
 
 网络管理相关API请参见：
 1. [网络连接管理API参考](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/NetworkKit/cj-apis-net-connection.md)
