@@ -79,7 +79,7 @@ public class HttpRequest {
      * @permission ohos.permission.INTERNET
      * @param { String } url - URL for initiating an HTTP request.
      * @param { HttpRequestOptions } options - Optional parameters {@link HttpRequestOptions}.
-     * @param { HttpResponse } callback - the callback of request.
+     * @param { AsyncCallback<HttpResponse> } callback - The callback of request.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 201 - Permission denied.
      * @throws { BusinessException } 2300001 - Unsupported protocol.
@@ -158,8 +158,7 @@ public class HttpRequest {
      * Initiates an HTTP request to a given URL.
      * @permission ohos.permission.INTERNET
      * @param { String } url - URL for initiating an HTTP request.
-     * @param { HttpRequestOptions } options - Optional parameters {@link HttpRequestOptions}.
-     * @param { HttpResponse } callback - the callback of request.
+     * @param { AsyncCallback<HttpResponse> } callback - The callback of request.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 201 - Permission denied.
      * @throws { BusinessException } 2300001 - Unsupported protocol.
@@ -255,6 +254,7 @@ public class HttpRequest {
      * @permission ohos.permission.INTERNET
      * @param { String } url - URL for initiating an HTTP request.
      * @param { HttpRequestOptions } options - Optional parameters {@link HttpRequestOptions}.
+     * @param { AsyncCallback<UInt32> } callback - The callback of request.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 201 - Permission denied.
      * @throws { BusinessException } 2300001 - Unsupported protocol.
@@ -467,7 +467,7 @@ public class HttpRequest {
                 case HttpRequestEvent.DataEnd => CJ_OnDataEnd(id, callbackId)
                 case HttpRequestEvent.DataReceiveProgress => CJ_OnDataReceiveProgress(id, callbackId)
                 case HttpRequestEvent.DataSendProgress => CJ_OnDataSendProgress(id, callbackId)
-                case _ => throw IllegalArgumentException("The parameter check failed.")
+                case _ => throw BusinessException(2100001, "Invalid parameter value.")
             }
         }
     }
@@ -528,7 +528,7 @@ public class HttpRequest {
     /**
      * Registers an observer for HTTP Response Header events.
      * @param { (HashMap<String, String>) -> Unit } callback - the callback used to return the result.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         22,
@@ -538,7 +538,7 @@ public class HttpRequest {
         HTTP_LOG.info("HttpRequest register onHeadersReceive start")
         if (event != HttpRequestEvent.HeadersReceive) {
             HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.HeadersReceive")
-            throw IllegalArgumentException("The parameter check failed.")
+            throw BusinessException(2100001, "Invalid parameter value.")
         }
         commonSubscribe1Arg(event, callback) {
             cArrString: CArrString =>
@@ -552,7 +552,7 @@ public class HttpRequest {
     /**
      * Registers a one-time observer for HTTP Response Header events.
      * @param { (HashMap<String, String>) -> Unit } callback - the callback used to return the result.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         22,
@@ -562,7 +562,7 @@ public class HttpRequest {
         HTTP_LOG.info("HttpRequest register onceHeadersReceive start")
         if (event != HttpRequestEvent.HeadersReceive) {
             HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.HeadersReceive")
-            throw IllegalArgumentException("The parameter check failed.")
+            throw BusinessException(2100001, "Invalid parameter value.")
         }
         let wrapper = {
             cArrString: CArrString =>
@@ -578,7 +578,7 @@ public class HttpRequest {
     /**
      * Registers an observer for receiving HTTP Response data events continuously.
      * @param { callback: (Array<Byte>) -> Unit } callback - the callback used to return the result.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         22,
@@ -588,7 +588,7 @@ public class HttpRequest {
         HTTP_LOG.info("HttpRequest register onDataReceive start")
         if (event != HttpRequestEvent.DataReceive) {
             HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.DataReceive")
-            throw IllegalArgumentException("The parameter check failed.")
+            throw BusinessException(2100001, "Invalid parameter value.")
         }
         commonSubscribe1Arg(event, callback) {
             cstr: CArrUI8 => unsafe {
@@ -603,7 +603,7 @@ public class HttpRequest {
     /**
      * Registers an observer for receiving HTTP Response data ends events.
      * @param { () -> Unit } callback - the callback used to return the result.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         22,
@@ -613,7 +613,7 @@ public class HttpRequest {
         HTTP_LOG.info("HttpRequest register onDataEnd start")
         if (event != HttpRequestEvent.DataEnd) {
             HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.DataEnd")
-            throw IllegalArgumentException("The parameter check failed.")
+            throw BusinessException(2100001, "Invalid parameter value.")
         }
         commonSubscribe0Arg(event, callback)
         HTTP_LOG.info("HttpRequest register onDataEnd end")
@@ -622,7 +622,7 @@ public class HttpRequest {
     /**
      * Registers an observer for progress of receiving HTTP Response data events.
      * @param { (DataReceiveProgressInfo) -> Unit } callback - the callback used to return the result.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         22,
@@ -632,7 +632,7 @@ public class HttpRequest {
         HTTP_LOG.info("HttpRequest register onDataReceiveProgress start")
         if (event != HttpRequestEvent.DataReceiveProgress) {
             HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.DataReceiveProgress")
-            throw IllegalArgumentException("The parameter check failed.")
+            throw BusinessException(2100001, "Invalid parameter value.")
         }
         commonSubscribe1Arg(event, callback) {
             info: CDataReceiveProgressInfo => DataReceiveProgressInfo(info)
@@ -643,7 +643,7 @@ public class HttpRequest {
     /**
      * Registers an observer for progress of sendSize HTTP Response data events.
      * @param { (DataSendProgressInfo) -> Unit } callback - the callback of on.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         22,
@@ -653,7 +653,7 @@ public class HttpRequest {
         HTTP_LOG.info("HttpRequest register onDataSendProgress start")
         if (event != HttpRequestEvent.DataSendProgress) {
             HTTP_LOG.error("Invalid event, valid event is HttpRequestEvent.DataSendProgress")
-            throw IllegalArgumentException("The parameter check failed.")
+            throw BusinessException(2100001, "Invalid parameter value.")
         }
         commonSubscribe1Arg(event, callback) {
             info: CDataSendProgressInfo => DataSendProgressInfo(info)
