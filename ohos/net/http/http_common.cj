@@ -22,6 +22,7 @@ import ohos.ffi.*
 import ohos.net.connection.HttpProxy
 import std.collection.*
 import std.deriving.Derive
+import ohos.business_exception.BusinessException
 
 /**
  * HTTP request event type.
@@ -163,7 +164,7 @@ public enum RequestMethod {
             case Delete => "DELETE"
             case Trace => "TRACE"
             case Connect => "CONNECT"
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 }
@@ -207,7 +208,7 @@ public enum HttpProtocol {
             case Http1_1 => 0
             case Http2 => 1
             case Http3 => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 }
@@ -242,7 +243,7 @@ public enum HttpDataType {
         match (this) {
             case StringValue => 0
             case ArrayBuffer => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 
@@ -285,7 +286,7 @@ public enum HttpData {
         match (this) {
             case StringData(str) => unsafe { str.rawData() }
             case ArrayData(arr) => arr
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 
@@ -372,7 +373,7 @@ public enum CertType {
             case Pem => "PEM"
             case Der => "DER"
             case P12 => "P12"
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 }
@@ -663,7 +664,7 @@ public class HttpResponse {
             this.result = match (resultType) {
                 case StringValue => StringData(CString(resp.result.head).toString())
                 case ArrayBuffer => ArrayData(cArr2cjArr<UInt8, UInt8>(resp.result.size, resp.result.head, {i => i}))
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(2100001, "Invalid parameter value.")
             }
             this.header = cArrString2Map(resp.header)
             this.cookies = resp.cookies.toString()
