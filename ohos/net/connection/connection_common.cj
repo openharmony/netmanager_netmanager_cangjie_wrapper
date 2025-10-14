@@ -19,7 +19,7 @@ package ohos.net.connection
 
 import ohos.labels.*
 import ohos.ffi.*
-import ohos.business_exception.getUniversalErrorMsg
+import ohos.business_exception.{getUniversalErrorMsg, BusinessException}
 import std.collection.*
 import std.deriving.Derive
 
