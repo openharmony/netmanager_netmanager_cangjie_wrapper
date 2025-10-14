@@ -46,7 +46,7 @@ public func createNetConnection(netSpecifier!: ?NetSpecifier = None, timeout!: U
     }
     let id = unsafe { CJ_CreateNetConnection(specifier, timeout) }
     if (id < 0) {
-        throw Exception("create net connection failed")
+        throw BusinessException(2100003, "System internal error.")
     }
     CONNECTION_LOG.info("createNetConnection success")
     NetConnection(id)
@@ -407,7 +407,6 @@ public class NetConnection <: RemoteDataLite {
     /**
      * Receives status change notifications of a specified network.
      * @permission ohos.permission.GET_NETWORK_INFO
-     * @param { AsyncCallback<void> } callback - the callback of register.
      * @throws { BusinessException } 201 - Permission denied.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 2100002 - Failed to connect to the service.
@@ -454,7 +453,9 @@ public class NetConnection <: RemoteDataLite {
     /**
      * Registers a listener for netAvailable events.
      * Registers a listener for netLost events.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @param { NetConnectionEvent } event - Indicates the event type to listen for.
+     * @param { Callback1Argument<NetHandle> } callback - Indicates the callback function to register.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
@@ -471,14 +472,16 @@ public class NetConnection <: RemoteDataLite {
             match (event) {
                 case NetConnectionEvent.NetAvailable => CJ_OnNetAvailable(getID(), registerCall.getID())
                 case NetConnectionEvent.NetLost => CJ_OnNetLost(getID(), registerCall.getID())
-                case _ => throw IllegalArgumentException("The parameter check failed.")
+                case _ => throw BusinessException(2100001, "Invalid parameter value.")
             }
         }
     }
 
     /**
      * Registers a listener for netBlockStatusChange events.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @param { NetConnectionEvent } event - Indicates the event type to listen for.
+     * @param { Callback1Argument<NetBlockStatusInfo> } callback - Indicates the callback function to register.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
@@ -487,7 +490,7 @@ public class NetConnection <: RemoteDataLite {
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetBlockStatusInfo>): Unit {
         CONNECTION_LOG.info("onNetBlockStatusChange start register")
         if (event != NetConnectionEvent.NetBlockStatusChange) {
-            throw IllegalArgumentException("The parameter check failed.")
+            throw BusinessException(2100001, "Invalid parameter value.")
         }
         let wrapper = {
             netId: Int32, block: Bool =>
@@ -502,7 +505,9 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Registers a listener for **netCapabilitiesChange** events.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @param { NetConnectionEvent } event - Indicates the event type to listen for.
+     * @param { Callback1Argument<NetCapabilityInfo> } callback - Indicates the callback function to register.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
@@ -511,7 +516,7 @@ public class NetConnection <: RemoteDataLite {
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetCapabilityInfo>): Unit {
         CONNECTION_LOG.info("onNetCapabilitiesChange start register")
         if (event != NetConnectionEvent.NetCapabilitiesChange) {
-            throw IllegalArgumentException("The parameter check failed.")
+            throw BusinessException(2100001, "Invalid parameter value.")
         }
         let wrapper = {
             info: CNetCapabilityInfo =>
@@ -527,7 +532,9 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Registers a listener for netConnectionPropertiesChange events.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @param { NetConnectionEvent } event - Indicates the event type to listen for.
+     * @param { Callback1Argument<NetConnectionPropertyInfo> } callback - Indicates the callback function to register.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
@@ -536,7 +543,7 @@ public class NetConnection <: RemoteDataLite {
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetConnectionPropertyInfo>): Unit {
         CONNECTION_LOG.info("onNetConnectionPropertiesChange start register")
         if (event != NetConnectionEvent.NetConnectionPropertiesChange) {
-            throw IllegalArgumentException("The parameter check failed.")
+            throw BusinessException(2100001, "Invalid parameter value.")
         }
         let wrapper = {
             netId: Int32, props: CConnectionProperties =>
@@ -554,7 +561,9 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Registers a listener for netUnavailable events.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @param { NetConnectionEvent } event - Indicates the event type to listen for.
+     * @param { Callback0Argument } callback - Indicates the callback function to register.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
@@ -563,7 +572,7 @@ public class NetConnection <: RemoteDataLite {
     public func on(event: NetConnectionEvent, callback: Callback0Argument): Unit {
         CONNECTION_LOG.info("onNetUnavailable start register")
         if (event != NetConnectionEvent.NetUnavailable) {
-            throw IllegalArgumentException("The parameter check failed.")
+            throw BusinessException(2100001, "Invalid parameter value.")
         }
         let wrapper = { =>
             callback.invoke(None)
@@ -583,7 +592,8 @@ public class NetConnection <: RemoteDataLite {
 ]
 public class NetHandle {
     /**
-     * Network ID, a value of 0 means that there is no default network, and the other values must be greater than or equal to 100.
+     * Network ID, a value of 0 means that there is no default network, and the other values must be greater than or
+     * equal to 100.
      */
     @!APILevel[
         since: "22",

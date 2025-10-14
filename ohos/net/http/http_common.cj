@@ -22,9 +22,10 @@ import ohos.ffi.*
 import ohos.net.connection.HttpProxy
 import std.collection.*
 import std.deriving.Derive
+import ohos.business_exception.BusinessException
 
 /**
- * http request event type.
+ * HTTP request event type.
  */
 @Derive[Equatable, Hashable]
 @!APILevel[
@@ -163,7 +164,7 @@ public enum RequestMethod {
             case Delete => "DELETE"
             case Trace => "TRACE"
             case Connect => "CONNECT"
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 }
@@ -177,15 +178,15 @@ public enum RequestMethod {
 ]
 public enum HttpProtocol {
     /**
-    * Protocol http1.1
-    */
+     * Protocol HTTP/1.1.
+     */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Http1_1
     /**
-     * Protocol http2
+     * Protocol HTTP/2.
      */
     | @!APILevel[
         since: "22",
@@ -193,7 +194,7 @@ public enum HttpProtocol {
     ]
     Http2
     /**
-     * Protocol http3 for https only.
+     * Protocol HTTP/3.
      */
     | @!APILevel[
         since: "22",
@@ -207,13 +208,13 @@ public enum HttpProtocol {
             case Http1_1 => 0
             case Http2 => 1
             case Http3 => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 }
 
 /**
-  * Indicates the type of the returned data.
+  * Indicates the type of the HTTP data.
   */
 @!APILevel[
     since: "22",
@@ -221,7 +222,7 @@ public enum HttpProtocol {
 ]
 public enum HttpDataType {
     /**
-     * The returned type is string.
+     * String type.
      */
     @!APILevel[
         since: "22",
@@ -229,7 +230,7 @@ public enum HttpDataType {
     ]
     StringValue
     /**
-     * The returned type is ArrayBuffer.
+     * ArrayBuffer type.
      */
     | @!APILevel[
         since: "22",
@@ -242,7 +243,7 @@ public enum HttpDataType {
         match (this) {
             case StringValue => 0
             case ArrayBuffer => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 
@@ -256,15 +257,15 @@ public enum HttpDataType {
 }
 
 /**
-  * Indicates the type of http data.
-  */
+ * Indicates the form of http data.
+ */
 @!APILevel[
     since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum HttpData {
     /**
-     * The returned type is string.
+     * String form.
      */
     @!APILevel[
         since: "22",
@@ -276,7 +277,7 @@ public enum HttpData {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     /**
-     * The returned type is byte array.
+     * Byte array form.
      */
     ArrayData(Array<Byte>)
     | ...
@@ -285,7 +286,7 @@ public enum HttpData {
         match (this) {
             case StringData(str) => unsafe { str.rawData() }
             case ArrayData(arr) => arr
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 
@@ -303,23 +304,29 @@ public enum HttpData {
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum UsingProxy {
+    /**
+     * not use HttpProxy
+     */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
-    /*not use HttpProxy*/
     NotUse
+    /**
+     * use default HttpProxy
+     */
     | @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
-    /*use default HttpProxy*/
     UseDefault
+    /**
+     * use HttpProxy
+     */
     | @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
-    /*use HttpProxy*/
     UseSpecified(HttpProxy)
     | ...
 }
@@ -366,7 +373,7 @@ public enum CertType {
             case Pem => "PEM"
             case Der => "DER"
             case P12 => "P12"
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 }
@@ -657,7 +664,7 @@ public class HttpResponse {
             this.result = match (resultType) {
                 case StringValue => StringData(CString(resp.result.head).toString())
                 case ArrayBuffer => ArrayData(cArr2cjArr<UInt8, UInt8>(resp.result.size, resp.result.head, {i => i}))
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(2100001, "Invalid parameter value.")
             }
             this.header = cArrString2Map(resp.header)
             this.cookies = resp.cookies.toString()
@@ -879,7 +886,8 @@ public class DataSendProgressInfo {
 
 /**
  * The clientCert field of the client certificate, which includes 4 attributes:
- * client certificate (cert), client certificate type (certType), certificate private key (key), and passphrase (keyPassword).
+ * client certificate (cert), client certificate type (certType), certificate private key (key), and passphrase
+ * (keyPassword).
  */
 @!APILevel[
     since: "22",
