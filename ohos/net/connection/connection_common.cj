@@ -597,7 +597,7 @@ public enum NetCap {
             case NetCapabilityInternet => 12
             case NetCapabilityNotVpn => 15
             case NetCapabilityValidated => 16
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 
@@ -608,7 +608,7 @@ public enum NetCap {
             case 12 => NetCapabilityInternet
             case 15 => NetCapabilityNotVpn
             case 16 => NetCapabilityValidated
-            case _ => throw IllegalArgumentException("Unknown value ${val}")
+            case _ => throw BusinessException(2100003, "System internal error.")
         }
     }
 }
@@ -657,7 +657,7 @@ public enum NetBearType {
             case BearerCellular => 0
             case BearerWifi => 1
             case BearerEthernet => 3
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 
@@ -666,7 +666,7 @@ public enum NetBearType {
             case 0 => BearerCellular
             case 1 => BearerWifi
             case 3 => BearerEthernet
-            case _ => throw IllegalArgumentException("Unknown value ${val}")
+            case _ => throw BusinessException(2100003, "System internal error.")
         }
     }
 }

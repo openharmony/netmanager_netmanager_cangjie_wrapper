@@ -20,6 +20,7 @@ package ohos.net.http
 import ohos.ffi.*
 import ohos.net.connection.CHttpProxy
 import std.collection.*
+import ohos.business_exception.BusinessException
 
 foreign {
     func CJ_CreateHttpResponseCache(cacheSize: UInt32): Int32
@@ -187,7 +188,7 @@ func parseUsingProxy(usingProxy: UsingProxy): (Bool, CPointer<CHttpProxy>) {
                 }
 
                 (false, useProxy)
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
         }
     }
 }
