@@ -32,7 +32,7 @@ import ohos.business_exception.*
 public class Test_http {
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_request() {
         let request = createHttp()
         let option = HttpRequestOptions(
@@ -63,14 +63,14 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_destory() {
         let request = createHttp()
         request.destroy()
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_requestInStream_03() {
         let request = createHttp()
         let option = HttpRequestOptions(
@@ -101,7 +101,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_capath_resumefrom_resumeto_03(): Unit {
         Hilog.info(0, "", "before createhttp")
         let httpRequest = createHttp()
@@ -154,7 +154,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_netHttp_01() {
         let httpRequest = createHttp()
 
@@ -202,7 +202,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func testRequest1(): Unit {
         let client = createHttp()
         let response = Box<HttpResponse>(unsafe { zeroValue<HttpResponse>() })
@@ -228,7 +228,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func testRequest2(): Unit {
         let client = createHttp()
         let opt = HttpRequestOptions()
@@ -251,7 +251,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func testRequest3(): Unit {
         let client = createHttp()
         let opt = HttpRequestOptions(
@@ -306,7 +306,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func testRequest4(): Unit {
         let client = createHttp()
         let opt = HttpRequestOptions(
@@ -362,7 +362,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func testRequestInStream(): Unit {
         let client = createHttp()
 
@@ -400,7 +400,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func testCallback() {
         let client = createHttp()
 
@@ -446,7 +446,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func testCache(): Unit {
         let respCache = createHttpResponseCache()
         respCache.flush()
@@ -454,7 +454,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Request_InvalideUrl_Excption(): Unit {
         let url = "http://www.baidubaidu.com/"
         let request = createHttp()
@@ -475,7 +475,7 @@ public class Test_http {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func RequestInStream_InvalideUrl_Excption(): Unit {
         let url = "http://www.baidubaidu.com/"
         let request = createHttp()
