@@ -17,10 +17,10 @@
 
 package ohos.net.connection
 
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.cArr2cjArr
 import ohos.business_exception.{getUniversalErrorMsg, BusinessException}
-import std.collection.*
+import std.collection.HashMap
 import std.deriving.Derive
 
 /**
