@@ -110,6 +110,8 @@ public class HttpRequest {
      * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
+     * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
@@ -189,6 +191,8 @@ public class HttpRequest {
      * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
+     * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
@@ -285,6 +289,8 @@ public class HttpRequest {
      * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
+     * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
@@ -367,6 +373,8 @@ public class HttpRequest {
      * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
+     * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
