@@ -17,12 +17,13 @@
 
 package ohos.net.http
 
-import ohos.business_exception.*
-import ohos.callback_invoke.*
-import ohos.ffi.*
-import ohos.hilog.*
-import std.collection.*
-import ohos.labels.*
+import ohos.business_exception.{BusinessException, AsyncCallback}
+import ohos.callback_invoke.{CallbackObject, Callback0Argument, Callback1Argument}
+import ohos.ffi.{CArrString, CArrUI8, SUCCESS_CODE, Callback1Param, safeMalloc, Callback0Param,
+    cArr2cjArr}
+import ohos.hilog.HilogChannel
+import std.collection.{HashMap, ArrayList}
+import ohos.labels.APILevel
 
 let HTTP_LOG = HilogChannel(0, 0xD0015B0, "CJ-net-Http")
 const MAX_CACHE_SIZE: UInt32 = 10 * 1024 * 1024
@@ -110,6 +111,8 @@ public class HttpRequest {
      * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
+     * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
@@ -189,6 +192,8 @@ public class HttpRequest {
      * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
+     * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
@@ -285,6 +290,8 @@ public class HttpRequest {
      * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
+     * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
@@ -367,6 +374,8 @@ public class HttpRequest {
      * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
      * @throws { BusinessException } 2300078 - Remote file not found.
      * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
+     * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
