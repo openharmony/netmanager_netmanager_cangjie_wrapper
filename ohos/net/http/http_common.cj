@@ -29,7 +29,7 @@ import ohos.business_exception.BusinessException
  */
 @Derive[Equatable, Hashable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum HttpRequestEvent {
@@ -37,7 +37,7 @@ public enum HttpRequestEvent {
      * headersReceive
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     HeadersReceive
@@ -46,7 +46,7 @@ public enum HttpRequestEvent {
      * dataReceive
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     DataReceive
@@ -55,7 +55,7 @@ public enum HttpRequestEvent {
      * dataEnd
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     DataEnd
@@ -64,7 +64,7 @@ public enum HttpRequestEvent {
      * dataReceiveProgress
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     DataReceiveProgress
@@ -73,7 +73,7 @@ public enum HttpRequestEvent {
      * dataSendProgress
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     DataSendProgress
@@ -84,7 +84,7 @@ public enum HttpRequestEvent {
  * Defines an HTTP request method.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum RequestMethod {
@@ -92,7 +92,7 @@ public enum RequestMethod {
      * OPTIONS method.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Options
@@ -100,7 +100,7 @@ public enum RequestMethod {
      * GET method.
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Get
@@ -108,7 +108,7 @@ public enum RequestMethod {
      * HEAD method.
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Head
@@ -116,7 +116,7 @@ public enum RequestMethod {
      * POST method.
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Post
@@ -124,7 +124,7 @@ public enum RequestMethod {
      * PUT method.
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Put
@@ -132,7 +132,7 @@ public enum RequestMethod {
      * DELETE method.
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Delete
@@ -140,7 +140,7 @@ public enum RequestMethod {
      * TRACE method.
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Trace
@@ -148,7 +148,7 @@ public enum RequestMethod {
      * CONNECT method.
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Connect
@@ -173,7 +173,7 @@ public enum RequestMethod {
   * Supported protocols.
   */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum HttpProtocol {
@@ -181,7 +181,7 @@ public enum HttpProtocol {
      * Protocol HTTP/1.1.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Http1_1
@@ -189,7 +189,7 @@ public enum HttpProtocol {
      * Protocol HTTP/2.
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Http2
@@ -197,7 +197,7 @@ public enum HttpProtocol {
      * Protocol HTTP/3.
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Http3
@@ -217,7 +217,7 @@ public enum HttpProtocol {
   * Indicates the type of the HTTP data.
   */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum HttpDataType {
@@ -225,7 +225,7 @@ public enum HttpDataType {
      * String type.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     StringValue
@@ -233,7 +233,7 @@ public enum HttpDataType {
      * ArrayBuffer type.
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     ArrayBuffer
@@ -260,7 +260,7 @@ public enum HttpDataType {
  * Indicates the form of http data.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum HttpData {
@@ -268,12 +268,12 @@ public enum HttpData {
      * String form.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     StringData(String)
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     /**
@@ -300,7 +300,7 @@ public enum HttpData {
  * Enum for proxy using
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum UsingProxy {
@@ -308,7 +308,7 @@ public enum UsingProxy {
      * not use HttpProxy
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     NotUse
@@ -316,7 +316,7 @@ public enum UsingProxy {
      * use default HttpProxy
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     UseDefault
@@ -324,7 +324,7 @@ public enum UsingProxy {
      * use HttpProxy
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     UseSpecified(HttpProxy)
@@ -334,7 +334,7 @@ public enum UsingProxy {
  * Enum for certificate types
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum CertType {
@@ -342,7 +342,7 @@ public enum CertType {
      * PEM format certificate
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Pem
@@ -350,7 +350,7 @@ public enum CertType {
      * DER format certificate
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Der
@@ -358,14 +358,14 @@ public enum CertType {
      * P12 format certificate
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     P12
     | ...
 
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     func getValue(): String {
@@ -382,7 +382,7 @@ public enum CertType {
  * Specifies the type and value range of the optional parameters in the HTTP request.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class HttpRequestOptions {
@@ -390,7 +390,7 @@ public class HttpRequestOptions {
      * Request method,default is GET.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var method: RequestMethod
@@ -400,7 +400,7 @@ public class HttpRequestOptions {
      * extraData can be a string or byte array.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var extraData: HttpData
@@ -409,7 +409,7 @@ public class HttpRequestOptions {
      * Data type to be returned. If this parameter is set, the system preferentially returns the specified type.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var expectDataType: ?HttpDataType
@@ -418,7 +418,7 @@ public class HttpRequestOptions {
      * default is true
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var usingCache: Bool
@@ -427,7 +427,7 @@ public class HttpRequestOptions {
      * [1, 1000], default is 1.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var priority: UInt32
@@ -436,7 +436,7 @@ public class HttpRequestOptions {
      * HTTP request header. default is 'content-type': 'application/json'
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var header: HashMap<String, String>
@@ -445,7 +445,7 @@ public class HttpRequestOptions {
      * Read timeout period. The default value is 60,000, in ms.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var readTimeout: UInt32
@@ -454,7 +454,7 @@ public class HttpRequestOptions {
      * Connection timeout interval. The default value is 60,000, in ms.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var connectTimeout: UInt32
@@ -463,7 +463,7 @@ public class HttpRequestOptions {
      * default is automatically specified by the system.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var usingProtocol: ?HttpProtocol
@@ -473,7 +473,7 @@ public class HttpRequestOptions {
      * If this parameter is set as type of HttpProxy, the system will use the specified HttpProxy.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var usingProxy: UsingProxy
@@ -482,7 +482,7 @@ public class HttpRequestOptions {
      * If this parameter is set, the system will use ca path specified by user, or else use preset ca by the system.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var caPath: String
@@ -493,7 +493,7 @@ public class HttpRequestOptions {
      * For HTTP PUT uploads this option should not be used, since it may conflict with other options.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var resumeFrom: Int64
@@ -504,7 +504,7 @@ public class HttpRequestOptions {
      * For HTTP PUT uploads this option should not be used, since it may conflict with other options.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var resumeTo: Int64
@@ -513,7 +513,7 @@ public class HttpRequestOptions {
      * Support the application to pass in client certificates, allowing the server to verify the client's identity.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var clientCert: ClientCert
@@ -524,7 +524,7 @@ public class HttpRequestOptions {
      * It MUST specify an HTTPS URL.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var dnsOverHttps: String
@@ -535,7 +535,7 @@ public class HttpRequestOptions {
      * Only take the first three if there are more than three.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var dnsServers: Array<String>
@@ -545,7 +545,7 @@ public class HttpRequestOptions {
      * The maximum value is 100 * 1024 *1024, in Byte.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var maxLimit: UInt32
@@ -556,7 +556,7 @@ public class HttpRequestOptions {
      * the email data to send/upload.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var multiFormDataList: Array<MultiFormData>
@@ -565,7 +565,7 @@ public class HttpRequestOptions {
      * init the HttpRequestOptions
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public init(method!: RequestMethod = RequestMethod.Get, extraData!: HttpData = HttpData.StringData(""),
@@ -601,7 +601,7 @@ public class HttpRequestOptions {
  * Defines the response to an HTTP request.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class HttpResponse {
@@ -609,7 +609,7 @@ public class HttpResponse {
      * result can be a string or byte array.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var result: HttpData
@@ -619,7 +619,7 @@ public class HttpResponse {
      * If the resultType is ArrayBuffer, you can use ArrayBuffer to create the binary objects.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var resultType: HttpDataType
@@ -627,7 +627,7 @@ public class HttpResponse {
      * Server status code.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var responseCode: UInt32
@@ -635,7 +635,7 @@ public class HttpResponse {
      * All headers in the response from the server.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var header: HashMap<String, String>
@@ -643,7 +643,7 @@ public class HttpResponse {
      * Cookies returned by the server.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var cookies: String
@@ -652,7 +652,7 @@ public class HttpResponse {
      * The time taken of various stages of HTTP request.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var performanceTiming: PerformanceTiming
@@ -678,7 +678,7 @@ public class HttpResponse {
  * Counting the time taken of various stages of HTTP request.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class PerformanceTiming {
@@ -686,7 +686,7 @@ public class PerformanceTiming {
      * Time taken from startup to DNS resolution completion, in milliseconds.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var dnsTiming: Float64
@@ -695,7 +695,7 @@ public class PerformanceTiming {
      * Time taken from startup to TCP connection completion, in milliseconds.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var tcpTiming: Float64
@@ -704,7 +704,7 @@ public class PerformanceTiming {
      * Time taken from startup to TLS connection completion, in milliseconds.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var tlsTiming: Float64
@@ -713,7 +713,7 @@ public class PerformanceTiming {
      * Time taken from startup to start sending the first byte, in milliseconds.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var firstSendTiming: Float64
@@ -722,7 +722,7 @@ public class PerformanceTiming {
      * Time taken from startup to receiving the first byte, in milliseconds.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var firstReceiveTiming: Float64
@@ -731,7 +731,7 @@ public class PerformanceTiming {
      * Time taken from startup to the completion of the request, in milliseconds.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var totalFinishTiming: Float64
@@ -740,7 +740,7 @@ public class PerformanceTiming {
      * Time taken from startup to completion of all redirection steps, in milliseconds.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var redirectTiming: Float64
@@ -749,7 +749,7 @@ public class PerformanceTiming {
      * Time taken from HTTP request to header completion, in milliseconds.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var responseHeaderTiming: Float64
@@ -758,7 +758,7 @@ public class PerformanceTiming {
      * Time taken from HTTP Request to body completion, in milliseconds.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var responseBodyTiming: Float64
@@ -767,7 +767,7 @@ public class PerformanceTiming {
      * Time taken from HTTP Request to callback to the application, in milliseconds.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var totalTiming: Float64
@@ -809,7 +809,7 @@ public class PerformanceTiming {
  * This interface is used to obtain the progress information of file upload or download.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class DataReceiveProgressInfo {
@@ -817,7 +817,7 @@ public class DataReceiveProgressInfo {
      * Number of data bytes received.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var receiveSize: Int64
@@ -826,7 +826,7 @@ public class DataReceiveProgressInfo {
      * Total number of bytes to receive.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var totalSize: Int64
@@ -849,7 +849,7 @@ public class DataReceiveProgressInfo {
  * This interface is used to monitor the progress of sending data.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class DataSendProgressInfo {
@@ -857,7 +857,7 @@ public class DataSendProgressInfo {
      * Used to specify the data size to be sent.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var sendSize: Int64
@@ -866,7 +866,7 @@ public class DataSendProgressInfo {
      * Total number of bytes to receive.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var totalSize: Int64
@@ -890,7 +890,7 @@ public class DataSendProgressInfo {
  * (keyPassword).
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class ClientCert {
@@ -898,7 +898,7 @@ public class ClientCert {
      * The path to the client certificate file.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var certPath: String
@@ -907,7 +907,7 @@ public class ClientCert {
      * The path of the client certificate private key file.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var keyPath: String
@@ -916,7 +916,7 @@ public class ClientCert {
      * The type of the client certificate.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var certType: CertType
@@ -925,7 +925,7 @@ public class ClientCert {
      * Password required to use the client certificate private key.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var keyPassword: String
@@ -934,7 +934,7 @@ public class ClientCert {
      * init the ClientCert
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public init(certPath: String, keyPath: String, certType!: CertType = CertType.Pem, keyPassword!: String = "") {
@@ -965,7 +965,7 @@ public class ClientCert {
  * Represents the properties of a form object.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class MultiFormData {
@@ -973,7 +973,7 @@ public class MultiFormData {
      * MIME name for the data field.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var name: String
@@ -982,7 +982,7 @@ public class MultiFormData {
      * Content type of the data field.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var contentType: String
@@ -991,7 +991,7 @@ public class MultiFormData {
      * Remote file name for the data field.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var remoteFileName: String
@@ -1000,7 +1000,7 @@ public class MultiFormData {
      * This parameter sets a mime part's body content from memory data.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var data: HttpData
@@ -1012,7 +1012,7 @@ public class MultiFormData {
      * If data has a value, filePath does not take effect.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var filePath: String
@@ -1020,7 +1020,7 @@ public class MultiFormData {
      * init the MultiFormData
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public init(name: String, contentType: String,  remoteFileName!: String = "",
