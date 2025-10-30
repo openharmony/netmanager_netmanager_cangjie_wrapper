@@ -17,11 +17,12 @@
 
 package ohos.net.connection
 
-import ohos.ffi.*
-import ohos.hilog.*
+import ohos.ffi.{RemoteDataLite, RetDataCArrI32, SUCCESS_CODE, safeMalloc,
+    cArr2cjArr, releaseFFIData, Callback0Param, Callback1Param, Callback2Param}
+import ohos.hilog.HilogChannel
 import ohos.business_exception.BusinessException
-import ohos.callback_invoke.*
-import ohos.labels.*
+import ohos.callback_invoke.{Callback0Argument, Callback1Argument}
+import ohos.labels.{APILevel, PermissionValue}
 
 import std.deriving.Derive
 

@@ -17,9 +17,9 @@
 
 package ohos.net.http
 
-import ohos.ffi.*
+import ohos.ffi.{RetDataCString, CArrUI8, CArrString, safeMalloc, cjArr2CArr}
 import ohos.net.connection.CHttpProxy
-import std.collection.*
+import std.collection.HashMap
 import ohos.business_exception.BusinessException
 
 foreign {

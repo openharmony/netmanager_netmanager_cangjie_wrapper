@@ -17,10 +17,10 @@
 
 package ohos.net.http
 
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.{CArrUI8, CArrString, cjArr2CArr, cArr2cjArr, safeMalloc}
 import ohos.net.connection.HttpProxy
-import std.collection.*
+import std.collection.HashMap
 import std.deriving.Derive
 import ohos.business_exception.BusinessException
 
