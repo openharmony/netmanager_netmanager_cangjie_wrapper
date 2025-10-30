@@ -32,7 +32,7 @@ const MAX_CACHE_SIZE: UInt32 = 10 * 1024 * 1024
  * @returns { HttpRequest } the HttpRequest of the createHttp.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public func createHttp(): HttpRequest {
@@ -46,7 +46,7 @@ public func createHttp(): HttpRequest {
  * @returns { HttpResponseCache } the HttpResponseCache of the createHttpResponseCache.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public func createHttpResponseCache(cacheSize!: UInt32 = MAX_CACHE_SIZE): HttpResponseCache {
@@ -65,7 +65,7 @@ public func createHttpResponseCache(cacheSize!: UInt32 = MAX_CACHE_SIZE): HttpRe
  * you must call createHttp() to create an HttpRequestTask object.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class HttpRequest {
@@ -116,7 +116,7 @@ public class HttpRequest {
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.INTERNET",
         syscap: "SystemCapability.Communication.NetStack"
     ]
@@ -197,7 +197,7 @@ public class HttpRequest {
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.INTERNET",
         syscap: "SystemCapability.Communication.NetStack"
     ]
@@ -242,7 +242,7 @@ public class HttpRequest {
      * Destroys an HTTP request.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func destroy(): Unit {
@@ -295,7 +295,7 @@ public class HttpRequest {
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.INTERNET",
         syscap: "SystemCapability.Communication.NetStack"
     ]
@@ -379,7 +379,7 @@ public class HttpRequest {
      * @throws { BusinessException } 2300999 - Unknown Other Error.
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.INTERNET",
         syscap: "SystemCapability.Communication.NetStack"
     ]
@@ -540,7 +540,7 @@ public class HttpRequest {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<HashMap<String, String>>): Unit {
@@ -564,7 +564,7 @@ public class HttpRequest {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func once(event: HttpRequestEvent, callback: Callback1Argument<HashMap<String, String>>): Unit {
@@ -590,7 +590,7 @@ public class HttpRequest {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<Array<Byte>>): Unit {
@@ -615,7 +615,7 @@ public class HttpRequest {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func on(event: HttpRequestEvent, callback: Callback0Argument): Unit {
@@ -634,7 +634,7 @@ public class HttpRequest {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<DataReceiveProgressInfo>): Unit {
@@ -655,7 +655,7 @@ public class HttpRequest {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<DataSendProgressInfo>): Unit {
@@ -675,7 +675,7 @@ public class HttpRequest {
      * @throws { IllegalArgumentException } The parameter check failed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func off(event: HttpRequestEvent, callback!: ?CallbackObject = None): Unit {
@@ -695,7 +695,7 @@ public class HttpRequest {
  * Defines an object that stores the response to an HTTP request.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public class HttpResponseCache {
@@ -705,7 +705,7 @@ public class HttpResponseCache {
      * @returns { Unit } The promise returned by the flush.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func flush(): Unit {
@@ -723,7 +723,7 @@ public class HttpResponseCache {
      * @returns { Unit } The promise returned by the delete.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func delete(): Unit {

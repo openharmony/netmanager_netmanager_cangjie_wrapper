@@ -36,7 +36,7 @@ let CONNECTION_LOG = HilogChannel(0, 0xD0015B0, "CJ-net-Connection")
  * @returns { NetConnection } the NetConnection of the NetSpecifier.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public func createNetConnection(netSpecifier!: ?NetSpecifier = None, timeout!: UInt32 = 0): NetConnection {
@@ -64,7 +64,7 @@ public func createNetConnection(netSpecifier!: ?NetSpecifier = None, timeout!: U
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -93,7 +93,7 @@ public func getDefaultNet(): NetHandle {
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public func getDefaultHttpProxy(): HttpProxy {
@@ -120,7 +120,7 @@ public func getDefaultHttpProxy(): HttpProxy {
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public func getAppNet(): NetHandle {
@@ -149,7 +149,7 @@ public func getAppNet(): NetHandle {
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.INTERNET",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -174,7 +174,7 @@ public func setAppNet(netHandle: NetHandle): Unit {
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -206,7 +206,7 @@ public func getAllNets(): Array<NetHandle> {
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -242,7 +242,7 @@ public func getConnectionProperties(netHandle: NetHandle): ConnectionProperties 
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -274,7 +274,7 @@ public func getNetCapabilities(netHandle: NetHandle): NetCapabilities {
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -300,7 +300,7 @@ public func isDefaultNetMetered(): Bool {
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -328,7 +328,7 @@ public func hasDefaultNet(): Bool {
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -354,7 +354,7 @@ public func reportNetConnected(netHandle: NetHandle): Unit {
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -380,7 +380,7 @@ public func reportNetDisconnected(netHandle: NetHandle): Unit {
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     permission: "ohos.permission.INTERNET",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
@@ -392,7 +392,7 @@ public func getAddressesByName(host: String): Array<NetAddress> {
  * Represents the network connection handle.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetConnection <: RemoteDataLite {
@@ -416,7 +416,7 @@ public class NetConnection <: RemoteDataLite {
      * @throws { BusinessException } 2101022 - The number of requests exceeded the maximum allowed.
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.GET_NETWORK_INFO",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
@@ -438,7 +438,7 @@ public class NetConnection <: RemoteDataLite {
      * @throws { BusinessException } 2101007 - The callback does not exist.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func unregister(): Unit {
@@ -459,7 +459,7 @@ public class NetConnection <: RemoteDataLite {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetHandle>): Unit {
@@ -485,7 +485,7 @@ public class NetConnection <: RemoteDataLite {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetBlockStatusInfo>): Unit {
@@ -511,7 +511,7 @@ public class NetConnection <: RemoteDataLite {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetCapabilityInfo>): Unit {
@@ -538,7 +538,7 @@ public class NetConnection <: RemoteDataLite {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetConnectionPropertyInfo>): Unit {
@@ -567,7 +567,7 @@ public class NetConnection <: RemoteDataLite {
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public func on(event: NetConnectionEvent, callback: Callback0Argument): Unit {
@@ -588,7 +588,7 @@ public class NetConnection <: RemoteDataLite {
  * Defines the handle of the data network.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetHandle {
@@ -597,7 +597,7 @@ public class NetHandle {
      * equal to 100.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var netId: Int32
@@ -621,7 +621,7 @@ public class NetHandle {
      * @throws { BusinessException } 2100003 - System internal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.INTERNET",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
@@ -662,7 +662,7 @@ public class NetHandle {
      * @throws { BusinessException } 2100003 - System internal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.INTERNET",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
@@ -681,7 +681,7 @@ public class NetHandle {
  * Get information about network connections.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetConnectionPropertyInfo {
@@ -689,7 +689,7 @@ public class NetConnectionPropertyInfo {
      * Defines the handle of the data network.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var netHandle: NetHandle
@@ -698,7 +698,7 @@ public class NetConnectionPropertyInfo {
      * Defines the network connection properties.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var connectionProperties: ConnectionProperties
@@ -713,7 +713,7 @@ public class NetConnectionPropertyInfo {
  * Get network status information.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Communication.NetManager.Core"
 ]
 public class NetBlockStatusInfo {
@@ -721,7 +721,7 @@ public class NetBlockStatusInfo {
      * Defines the handle of the data network.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var netHandle: NetHandle
@@ -730,7 +730,7 @@ public class NetBlockStatusInfo {
      * Check whether the current state is blocked.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var blocked: Bool
