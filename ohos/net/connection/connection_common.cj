@@ -601,6 +601,9 @@ public enum NetCap {
         }
     }
 
+    /**
+     * @throws { BusinessException } 2100003 - System internal error.
+     */
     static func parse(val: Int32): NetCap {
         match (val) {
             case 0 => NetCapabilityMms
@@ -661,6 +664,9 @@ public enum NetBearType {
         }
     }
 
+    /**
+     * @throws { BusinessException } 2100003 - System internal error.
+     */
     static func parse(val: Int32): NetBearType {
         match (val) {
             case 0 => BearerCellular
