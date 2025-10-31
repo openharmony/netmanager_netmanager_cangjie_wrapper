@@ -30,10 +30,11 @@ let CONNECTION_LOG = HilogChannel(0, 0xD0015B0, "CJ-net-Connection")
 
 /**
  * Create a network connection with optional netSpecifier and timeout.
- * @param { NetSpecifier } netSpecifier - Indicates the network specifier. See {@link NetSpecifier}.
+ * @param { NetSpecifier } netSpecifier - Indicates the network specifier. See NetSpecifier.
  * @param { UInt32 } timeout - The time in milliseconds to attempt looking for a suitable network before
- * {@link NetConnection#netUnavailable} is called.
+ * NetConnection#netUnavailable is called.
  * @returns { NetConnection } the NetConnection of the NetSpecifier.
+ * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
@@ -55,7 +56,7 @@ public func createNetConnection(netSpecifier!: ?NetSpecifier = None, timeout!: U
 
 /**
  * Obtains the data network that is activated by default.
- * To call this method, you must have the {@code ohos.permission.GET_NETWORK_INFO} permission.
+ * To call this method, you must have the ohos.permission.GET_NETWORK_INFO permission.
  * @permission ohos.permission.GET_NETWORK_INFO
  * @returns { NetHandle } The promise returned by the function.
  * @throws { BusinessException } 201 - Permission denied.
@@ -81,11 +82,11 @@ public func getDefaultNet(): NetHandle {
 }
 
 /**
- * Obtains the default {@link HttpProxy} proxy settings.
+ * Obtains the default HttpProxy proxy settings.
  *
  * If a global proxy is set, the global proxy parameters are returned.
- * If the process is bound to a {@link NetHandle} using {@link setAppNet},
- * the {@link NetHandle} proxy settings are returned.
+ * If the process is bound to a NetHandle using setAppNet,
+ * the NetHandle proxy settings are returned.
  * In other cases, the proxy settings of default network are returned.
  *
  * @returns { HttpProxy } the promise returned by the function.
@@ -113,7 +114,7 @@ public func getDefaultHttpProxy(): HttpProxy {
 }
 
 /**
- * Obtains the {@link NetHandle} bound to a process using {@link setAppNet}.
+ * Obtains the NetHandle bound to a process using setAppNet.
  * @returns { NetHandle } the promise returned by the function.
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
@@ -136,12 +137,11 @@ public func getAppNet(): NetHandle {
 }
 
 /**
- * Binds a process to {@code NetHandle}.
- * <p>All the sockets created from the process will be bound to the {@code NetHandle},
- * and the resolution of all host names will be managed by the {@code NetHandle}.</p>
+ * Binds a process to NetHandle.
+ * All the sockets created from the process will be bound to the NetHandle,
+ * and the resolution of all host names will be managed by the NetHandle.
  * @permission ohos.permission.INTERNET
- * @param { NetHandle } netHandle - Indicates the handle. For details, see {@link NetHandle}.
- * @returns { Promise<void> } the promise returned by the function.
+ * @param { NetHandle } netHandle - Indicates the handle. For details, see NetHandle.
  * @throws { BusinessException } 201 - Permission denied.
  * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100001 - Invalid parameter value.
@@ -165,7 +165,7 @@ public func setAppNet(netHandle: NetHandle): Unit {
 
 /**
  * Obtains the list of data networks that are activated.
- * To invoke this method, you must have the {@code ohos.permission.GET_NETWORK_INFO} permission.
+ * To invoke this method, you must have the ohos.permission.GET_NETWORK_INFO permission.
  * @permission ohos.permission.GET_NETWORK_INFO
  * @returns { Array<NetHandle> } The promise returned by the function.
  * @throws { BusinessException } 201 - Permission denied.
@@ -195,7 +195,7 @@ public func getAllNets(): Array<NetHandle> {
 
 /**
  * Queries the connection properties of a network.
- * This method requires the {@code ohos.permission.GET_NETWORK_INFO} permission.
+ * This method requires the ohos.permission.GET_NETWORK_INFO permission.
  * @permission ohos.permission.GET_NETWORK_INFO
  * @param { NetHandle } netHandle - Indicates the network to be queried.
  * @returns { ConnectionProperties } The promise returned by the function.
@@ -230,10 +230,10 @@ public func getConnectionProperties(netHandle: NetHandle): ConnectionProperties 
 }
 
 /**
- * Obtains {@link NetCapabilities} of a {@link NetHandle} object.
- * To invoke this method, you must have the {@code ohos.permission.GET_NETWORK_INFO} permission.
+ * Obtains NetCapabilities of a NetHandle object.
+ * To invoke this method, you must have the ohos.permission.GET_NETWORK_INFO permission.
  * @permission ohos.permission.GET_NETWORK_INFO
- * @param { NetHandle } netHandle - Indicates the handle. See {@link NetHandle}.
+ * @param { NetHandle } netHandle - Indicates the handle. See NetHandle.
  * @returns { NetCapabilities>} The promise returned by the function.
  * @throws { BusinessException } 201 - Permission denied.
  * @throws { BusinessException } 401 - Parameter error.
