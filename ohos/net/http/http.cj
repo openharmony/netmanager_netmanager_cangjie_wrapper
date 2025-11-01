@@ -75,6 +75,117 @@ public class HttpRequest {
     // will be released when destroy called
     HttpRequest(private let id: Int64) {}
 
+    private unsafe func parseParam(url: String, options: ?HttpRequestOptions): (CString, CPointer<CHttpRequestOptions>) {
+        let c_url = LibC.mallocCString(url)
+        let optPtr = match (options) {
+            case Some(v) =>
+                let ptr = safeMalloc<CHttpRequestOptions>(1) {LibC.free(c_url)}
+                try {
+                    ptr.write(CHttpRequestOptions(v))
+                } catch (e: Exception) {
+                    LibC.free(c_url)
+                    LibC.free(ptr)
+                    throw e
+                }
+                ptr
+            case None => CPointer<CHttpRequestOptions>()
+        }
+        (c_url, optPtr)
+    }
+
+    private func freeOptions(ptr: CPointer<CHttpRequestOptions>): Unit {
+        if (ptr.isNotNull()) {
+            unsafe {
+                ptr.read().free()
+                LibC.free<CHttpRequestOptions>(ptr)
+            }
+        }
+    }
+
+    private let callBackMap = HashMap<HttpRequestEvent, ArrayList<CallbackObject>>()
+    private let registerMap = HashMap<HttpRequestEvent, Bool>(
+        [(HeadersReceive, false), (DataReceive, false), (DataEnd, false),
+        (DataReceiveProgress, false), (DataSendProgress, false)])
+
+    private func findCallbackObject(callbackType: HttpRequestEvent, callback: CallbackObject, remove!: Bool = false): Int64 {
+        let callbackList = callBackMap.get(callbackType) ?? return -1
+        for (idx in 0..callbackList.size) {
+            if (refEq(callback, callbackList[idx])) {
+                if (remove) {
+                    callbackList.remove(at: idx)
+                }
+                return idx
+            }
+        }
+        return -1
+    }
+
+    private func register(callbackType: HttpRequestEvent, callbackId: Int64) {
+        unsafe {
+            match (callbackType) {
+                case HttpRequestEvent.HeadersReceive => CJ_OnHeadersReceive(id, false, callbackId)
+                case HttpRequestEvent.DataReceive => CJ_OnDataReceive(id, callbackId)
+                case HttpRequestEvent.DataEnd => CJ_OnDataEnd(id, callbackId)
+                case HttpRequestEvent.DataReceiveProgress => CJ_OnDataReceiveProgress(id, callbackId)
+                case HttpRequestEvent.DataSendProgress => CJ_OnDataSendProgress(id, callbackId)
+                case _ => throw BusinessException(2100001, "Invalid parameter value.")
+            }
+        }
+    }
+
+    private func argWrapper0(callbackType: HttpRequestEvent): Int64  {
+        let wrapper = { =>
+            let callbackList = callBackMap.get(callbackType) ?? ArrayList<CallbackObject>()
+            for (caller in callbackList) {
+                (caller as Callback0Argument)?.invoke(None)
+            }
+        }
+        let registerCall = Callback0Param<Unit>(wrapper)
+        registerCall.getID()
+    }
+
+    private func argWrapper1<CT, T>(callbackType: HttpRequestEvent, ctor: (CT) -> T): Int64 where CT <: CType {
+        let wrapper = {
+            ctype: CT =>
+            let cjType = ctor(ctype)
+            let callbackList = callBackMap.get(callbackType) ?? ArrayList<CallbackObject>()
+            for (caller in callbackList) {
+                (caller as Callback1Argument<T>)?.invoke(None, cjType)
+            }
+        }
+        let registerCall = Callback1Param<CT, Unit>(wrapper)
+        registerCall.getID()
+    }
+
+    private func commonSubscribe0Arg(callbackType: HttpRequestEvent, callback: CallbackObject) {
+        if (!registerMap[callbackType]) {
+            register(callbackType, argWrapper0(callbackType))
+            registerMap[callbackType] = true
+        } else {
+            if (findCallbackObject(callbackType, callback) >= 0) {
+                HTTP_LOG.info("The callback is registered, no need to re-registered")
+                return
+            }
+        }
+        callBackMap.addIfAbsent(callbackType, ArrayList<CallbackObject>())
+        callBackMap[callbackType].add(callback)
+    }
+
+    private func commonSubscribe1Arg<CT, T>(callbackType: HttpRequestEvent, callback: CallbackObject,
+        ctor: (CT) -> T) where CT <: CType {
+        if (!registerMap[callbackType]) {
+            register(callbackType, argWrapper1<CT, T>(callbackType, ctor))
+            registerMap[callbackType] = true
+        } else {
+            if (findCallbackObject(callbackType, callback) >= 0) {
+                HTTP_LOG.info("The callback is registered, no need to re-registered")
+                return
+            }
+        }
+        callBackMap.addIfAbsent(callbackType, ArrayList<CallbackObject>())
+        callBackMap[callbackType].add(callback)
+    }
+
     /**
      * Initiates an HTTP request to a given URL.
      * @permission ohos.permission.INTERNET
@@ -236,22 +347,6 @@ public class HttpRequest {
             throw BusinessException(retCode, "HttpRequest request failed: ${errMsg}")
         }
         HTTP_LOG.info("HttpRequest request success")
-    }
-
-    /**
-     * Destroys an HTTP request.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
-    public func destroy(): Unit {
-        HTTP_LOG.info("HttpRequest destroy start")
-        if (!requested) {
-            requested = true
-        }
-        unsafe { CJ_DestroyRequest(id) }
-        HTTP_LOG.info("HttpRequest destroy success")
     }
 
     /**
@@ -423,115 +518,20 @@ public class HttpRequest {
         HTTP_LOG.info("HttpRequest requestInStream success")
     }
 
-    private unsafe func parseParam(url: String, options: ?HttpRequestOptions): (CString, CPointer<CHttpRequestOptions>) {
-        let c_url = LibC.mallocCString(url)
-        let optPtr = match (options) {
-            case Some(v) =>
-                let ptr = safeMalloc<CHttpRequestOptions>(1) {LibC.free(c_url)}
-                try {
-                    ptr.write(CHttpRequestOptions(v))
-                } catch (e: Exception) {
-                    LibC.free(c_url)
-                    LibC.free(ptr)
-                    throw e
-                }
-                ptr
-            case None => CPointer<CHttpRequestOptions>()
+    /**
+     * Destroys an HTTP request.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func destroy(): Unit {
+        HTTP_LOG.info("HttpRequest destroy start")
+        if (!requested) {
+            requested = true
         }
-        (c_url, optPtr)
-    }
-
-    private func freeOptions(ptr: CPointer<CHttpRequestOptions>): Unit {
-        if (ptr.isNotNull()) {
-            unsafe {
-                ptr.read().free()
-                LibC.free<CHttpRequestOptions>(ptr)
-            }
-        }
-    }
-
-    private let callBackMap = HashMap<HttpRequestEvent, ArrayList<CallbackObject>>()
-    private let registerMap = HashMap<HttpRequestEvent, Bool>(
-        [(HeadersReceive, false), (DataReceive, false), (DataEnd, false),
-        (DataReceiveProgress, false), (DataSendProgress, false)])
-
-    private func findCallbackObject(callbackType: HttpRequestEvent, callback: CallbackObject, remove!: Bool = false): Int64 {
-        let callbackList = callBackMap.get(callbackType) ?? return -1
-        for (idx in 0..callbackList.size) {
-            if (refEq(callback, callbackList[idx])) {
-                if (remove) {
-                    callbackList.remove(at: idx)
-                }
-                return idx
-            }
-        }
-        return -1
-    }
-
-    private func register(callbackType: HttpRequestEvent, callbackId: Int64) {
-        unsafe {
-            match (callbackType) {
-                case HttpRequestEvent.HeadersReceive => CJ_OnHeadersReceive(id, false, callbackId)
-                case HttpRequestEvent.DataReceive => CJ_OnDataReceive(id, callbackId)
-                case HttpRequestEvent.DataEnd => CJ_OnDataEnd(id, callbackId)
-                case HttpRequestEvent.DataReceiveProgress => CJ_OnDataReceiveProgress(id, callbackId)
-                case HttpRequestEvent.DataSendProgress => CJ_OnDataSendProgress(id, callbackId)
-                case _ => throw BusinessException(2100001, "Invalid parameter value.")
-            }
-        }
-    }
-
-    private func argWrapper0(callbackType: HttpRequestEvent): Int64  {
-        let wrapper = { =>
-            let callbackList = callBackMap.get(callbackType) ?? ArrayList<CallbackObject>()
-            for (caller in callbackList) {
-                (caller as Callback0Argument)?.invoke(None)
-            }
-        }
-        let registerCall = Callback0Param<Unit>(wrapper)
-        registerCall.getID()
-    }
-
-    private func argWrapper1<CT, T>(callbackType: HttpRequestEvent, ctor: (CT) -> T): Int64 where CT <: CType {
-        let wrapper = {
-            ctype: CT =>
-            let cjType = ctor(ctype)
-            let callbackList = callBackMap.get(callbackType) ?? ArrayList<CallbackObject>()
-            for (caller in callbackList) {
-                (caller as Callback1Argument<T>)?.invoke(None, cjType)
-            }
-        }
-        let registerCall = Callback1Param<CT, Unit>(wrapper)
-        registerCall.getID()
-    }
-
-    private func commonSubscribe0Arg(callbackType: HttpRequestEvent, callback: CallbackObject) {
-        if (!registerMap[callbackType]) {
-            register(callbackType, argWrapper0(callbackType))
-            registerMap[callbackType] = true
-        } else {
-            if (findCallbackObject(callbackType, callback) >= 0) {
-                HTTP_LOG.info("The callback is registered, no need to re-registered")
-                return
-            }
-        }
-        callBackMap.addIfAbsent(callbackType, ArrayList<CallbackObject>())
-        callBackMap[callbackType].add(callback)
-    }
-
-    private func commonSubscribe1Arg<CT, T>(callbackType: HttpRequestEvent, callback: CallbackObject,
-        ctor: (CT) -> T) where CT <: CType {
-        if (!registerMap[callbackType]) {
-            register(callbackType, argWrapper1<CT, T>(callbackType, ctor))
-            registerMap[callbackType] = true
-        } else {
-            if (findCallbackObject(callbackType, callback) >= 0) {
-                HTTP_LOG.info("The callback is registered, no need to re-registered")
-                return
-            }
-        }
-        callBackMap.addIfAbsent(callbackType, ArrayList<CallbackObject>())
-        callBackMap[callbackType].add(callback)
+        unsafe { CJ_DestroyRequest(id) }
+        HTTP_LOG.info("HttpRequest destroy success")
     }
 
     /**
