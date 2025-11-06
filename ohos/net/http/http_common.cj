@@ -540,7 +540,7 @@ public class HttpRequestOptions {
     internal var caData: ?String = Option<String>.None
 
     @!Hide
-    internal var sslType: SslType = SslType = SslType.Tls
+    internal var sslType: SslType = SslType.Tls
 
     @!Hide
     internal var clientEncCert: ?ClientCert = Option<ClientCert>.None
@@ -632,7 +632,7 @@ public class HttpRequestOptions {
     internal var serverAuthentication: ?ServerAuthentication = Option<ServerAuthentication>.None
 
     @!Hide
-    internal var addressFamily: ?AddressFamily = Option<AddressFamily>.None
+    internal var addressFamily: AddressFamily = AddressFamily.Default
 
     /**
      * init the HttpRequestOptions
