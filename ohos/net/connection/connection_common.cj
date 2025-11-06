@@ -17,7 +17,7 @@
 
 package ohos.net.connection
 
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 import ohos.ffi.cArr2cjArr
 import ohos.business_exception.{getUniversalErrorMsg, BusinessException}
 import std.collection.HashMap
@@ -113,14 +113,6 @@ public class NetCapabilityInfo {
 ]
 public class NetCapabilities {
     /**
-     * Network type.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Communication.NetManager.Core"
-    ]
-    public var bearerTypes: Array<NetBearType>
-    /**
      * Uplink (device-to-network) bandwidth.
      */
     @!APILevel[
@@ -144,7 +136,15 @@ public class NetCapabilities {
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var networkCap: Array<NetCap>
-    
+    /**
+     * Network type.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
+    public var bearerTypes: Array<NetBearType>
+
     /**
      * NetCapabilities constructor
      */
@@ -288,6 +288,9 @@ public class RouteInfo {
     ]
     public var interfaceName: String
 
+    @!Hide
+    internal var iface: String = ""
+
     /**
      * Destination Address
      */
@@ -323,7 +326,10 @@ public class RouteInfo {
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var isDefaultRoute: Bool
-    
+
+    @!Hide
+    internal var isExcludedRoute: Bool = false
+
     /**
      * RouteInfo constructor
      */
@@ -462,7 +468,8 @@ public class HttpProxy {
         since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
-    public var host: String 
+    public var host: String
+
     /**
      * Host port.
      */
@@ -471,14 +478,6 @@ public class HttpProxy {
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var port: UInt32
-    /**
-     * Do not use a blocking list for proxy servers.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Communication.NetManager.Core"
-    ]
-    public var exclusionList: Array<String> 
 
     /**
      * Http proxy username.
@@ -497,6 +496,15 @@ public class HttpProxy {
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var password: String
+
+    /**
+     * Do not use a blocking list for proxy servers.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
+    public var exclusionList: Array<String> 
 
     /**
      * HttpProxy constructor
@@ -550,41 +558,47 @@ public enum NetCap {
     ]
     NetCapabilityMms
     |
-        /**
-         * Indicates that the network traffic is not metered.
-         */
-        @!APILevel[
+    /**
+     * Indicates that the network traffic is not metered.
+     */
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetCapabilityNotMetered
     |
-        /**
-         * Indicates that the network can access the Internet.
-         */
-        @!APILevel[
+    /**
+     * Indicates that the network can access the Internet.
+     */
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetCapabilityInternet
     |
-        /**
-         * Indicates that the network does not use a VPN.
-         */
-        @!APILevel[
+    /**
+     * Indicates that the network does not use a VPN.
+     */
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetCapabilityNotVpn
     |
-        /**
-         * Indicates that the network is available.
-         */
-        @!APILevel[
+    /**
+     * Indicates that the network is available.
+     */
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     NetCapabilityValidated
+    |
+    @!Hide
+    NetCapabilityPortal
+    |
+    @!Hide
+    NetCapabilityCheckingConnectivity
     | ...
 
     /**
@@ -633,23 +647,29 @@ public enum NetBearType {
     ]
     BearerCellular
     |
-        /**
-         * Indicates that the network is based on a Wi-Fi network.
-         */
-        @!APILevel[
+    /**
+     * Indicates that the network is based on a Wi-Fi network.
+     */
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     BearerWifi
     |
-        /**
-         * Indicates that the network is an Ethernet network.
-         */
-        @!APILevel[
+    @!Hide
+    BearerBluetooth
+    |
+    /**
+     * Indicates that the network is an Ethernet network.
+     */
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     BearerEthernet
+    |
+    @!Hide
+    BearerVpn
     | ...
 
     /**

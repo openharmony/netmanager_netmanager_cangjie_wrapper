@@ -406,52 +406,6 @@ public class NetConnection <: RemoteDataLite {
     }
 
     /**
-     * Receives status change notifications of a specified network.
-     * @permission ohos.permission.GET_NETWORK_INFO
-     * @throws { BusinessException } 201 - Permission denied.
-     * @throws { BusinessException } 401 - Parameter error.
-     * @throws { BusinessException } 2100002 - Failed to connect to the service.
-     * @throws { BusinessException } 2100003 - System internal error.
-     * @throws { BusinessException } 2101008 - The callback already exists.
-     * @throws { BusinessException } 2101022 - The number of requests exceeded the maximum allowed.
-     */
-    @!APILevel[
-        since: "22",
-        permission: "ohos.permission.GET_NETWORK_INFO",
-        syscap: "SystemCapability.Communication.NetManager.Core"
-    ]
-    public func register(): Unit {
-        CONNECTION_LOG.info("register start")
-        let retCode = unsafe { CJ_NetConnectionRegister(getID()) }
-        if (retCode != SUCCESS_CODE) {
-            let errCode = getErrorCode(retCode)
-            throw BusinessException(errCode, "register failed: ${getErrorMsg(errCode)}")
-        }
-        CONNECTION_LOG.info("register success")
-    }
-
-    /**
-     * Cancels listening for network status changes.
-     * @throws { BusinessException } 401 - Parameter error.
-     * @throws { BusinessException } 2100002 - Failed to connect to the service.
-     * @throws { BusinessException } 2100003 - System internal error.
-     * @throws { BusinessException } 2101007 - The callback does not exist.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Communication.NetManager.Core"
-    ]
-    public func unregister(): Unit {
-        CONNECTION_LOG.info("unregister start")
-        let retCode = unsafe { CJ_NetConnectionUnRegister(getID()) }
-        if (retCode != SUCCESS_CODE) {
-            let errCode = getErrorCode(retCode)
-            throw BusinessException(errCode, "unregister failed: ${getErrorMsg(errCode)}")
-        }
-        CONNECTION_LOG.info("unregister success")
-    }
-
-    /**
      * Registers a listener for netAvailable events.
      * Registers a listener for netLost events.
      * @param { NetConnectionEvent } event - Indicates the event type to listen for.
@@ -581,6 +535,52 @@ public class NetConnection <: RemoteDataLite {
         let registerCall = Callback0Param<Unit>(wrapper)
         unsafe { CJ_OnNetUnavailable(getID(), registerCall.getID()) }
         CONNECTION_LOG.info("onNetUnavailable register success")
+    }
+
+    /**
+     * Receives status change notifications of a specified network.
+     * @permission ohos.permission.GET_NETWORK_INFO
+     * @throws { BusinessException } 201 - Permission denied.
+     * @throws { BusinessException } 401 - Parameter error.
+     * @throws { BusinessException } 2100002 - Failed to connect to the service.
+     * @throws { BusinessException } 2100003 - System internal error.
+     * @throws { BusinessException } 2101008 - The callback already exists.
+     * @throws { BusinessException } 2101022 - The number of requests exceeded the maximum allowed.
+     */
+    @!APILevel[
+        since: "22",
+        permission: "ohos.permission.GET_NETWORK_INFO",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
+    public func register(): Unit {
+        CONNECTION_LOG.info("register start")
+        let retCode = unsafe { CJ_NetConnectionRegister(getID()) }
+        if (retCode != SUCCESS_CODE) {
+            let errCode = getErrorCode(retCode)
+            throw BusinessException(errCode, "register failed: ${getErrorMsg(errCode)}")
+        }
+        CONNECTION_LOG.info("register success")
+    }
+
+    /**
+     * Cancels listening for network status changes.
+     * @throws { BusinessException } 401 - Parameter error.
+     * @throws { BusinessException } 2100002 - Failed to connect to the service.
+     * @throws { BusinessException } 2100003 - System internal error.
+     * @throws { BusinessException } 2101007 - The callback does not exist.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
+    public func unregister(): Unit {
+        CONNECTION_LOG.info("unregister start")
+        let retCode = unsafe { CJ_NetConnectionUnRegister(getID()) }
+        if (retCode != SUCCESS_CODE) {
+            let errCode = getErrorCode(retCode)
+            throw BusinessException(errCode, "unregister failed: ${getErrorMsg(errCode)}")
+        }
+        CONNECTION_LOG.info("unregister success")
     }
 }
 

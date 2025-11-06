@@ -17,12 +17,58 @@
 
 package ohos.net.http
 
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 import ohos.ffi.{CArrUI8, CArrString, cjArr2CArr, cArr2cjArr, safeMalloc}
 import ohos.net.connection.HttpProxy
 import std.collection.HashMap
 import std.deriving.Derive
 import ohos.business_exception.BusinessException
+
+@!Hide
+internal enum SslType {
+    @!Hide
+    Tls
+    |
+    @!Hide
+    Tlcp
+    | ...
+}
+
+@!Hide
+internal enum RemoteValidation {
+    @!Hide
+    System
+    |
+    @!Hide
+    Skip
+    | ...
+}
+
+@!Hide
+internal enum TlsOptions {
+    @!Hide
+    System
+    | ...
+}
+
+@!Hide
+internal enum AddressFamily {
+    @!Hide
+    Default
+    |
+    @!Hide
+    OnlyV4
+    |
+    @!Hide
+    OnlyV6
+    | ...
+}
+
+@!Hide
+internal class CertificatePinning {}
+
+@!Hide
+internal class ServerAuthentication {}
 
 /**
  * HTTP request event type.
@@ -229,6 +275,9 @@ public enum HttpDataType {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     StringValue
+    |
+    @!Hide
+    Object
     /**
      * ArrayBuffer type.
      */
@@ -487,6 +536,15 @@ public class HttpRequestOptions {
     ]
     public var caPath: String
 
+    @!Hide
+    internal var caData: ?String = Option<String>.None
+
+    @!Hide
+    internal var sslType: SslType = SslType = SslType.Tls
+
+    @!Hide
+    internal var clientEncCert: ?ClientCert = Option<ClientCert>.None
+
     /**
      * Used to set to uploading or downloading the start bytes. The default value is 0.
      * HTTP standard (RFC 7233 section 3.1) allows servers to ignore range requests.
@@ -560,6 +618,21 @@ public class HttpRequestOptions {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var multiFormDataList: Array<MultiFormData>
+
+    @!Hide
+    internal var certificatePinning: Array<CertificatePinning> = Array<CertificatePinning>()
+
+    @!Hide
+    internal var remoteValidation: ?RemoteValidation = Option<RemoteValidation>.None
+
+    @!Hide
+    internal var tlsOptions: ?TlsOptions = Option<TlsOptions>.None
+
+    @!Hide
+    internal var serverAuthentication: ?ServerAuthentication = Option<ServerAuthentication>.None
+
+    @!Hide
+    internal var addressFamily: ?AddressFamily = Option<AddressFamily>.None
 
     /**
      * init the HttpRequestOptions
@@ -904,15 +977,6 @@ public class ClientCert {
     public var certPath: String
 
     /**
-     * The path of the client certificate private key file.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
-    public var keyPath: String
-
-    /**
      * The type of the client certificate.
      */
     @!APILevel[
@@ -920,6 +984,15 @@ public class ClientCert {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var certType: CertType
+
+    /**
+     * The path of the client certificate private key file.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public var keyPath: String
 
     /**
      * Password required to use the client certificate private key.
