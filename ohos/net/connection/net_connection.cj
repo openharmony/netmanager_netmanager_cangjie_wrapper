@@ -109,7 +109,9 @@ public func getDefaultHttpProxy(): HttpProxy {
             throw BusinessException(errCode, "getDefaultHttpProxy failed: ${getErrorMsg(errCode)}")
         }
         CONNECTION_LOG.info("getDefaultHttpProxy success")
-        HttpProxy(cHttpProxy)
+        let proxy = HttpProxy(cHttpProxy)
+        cHttpProxy.free()
+        proxy
     }
 }
 
@@ -224,6 +226,7 @@ public func getConnectionProperties(netHandle: NetHandle): ConnectionProperties 
             throw BusinessException(errCode, "getConnectionProperties failed: ${getErrorMsg(errCode)}")
         }
         let props = ConnectionProperties(data)
+        data.free()
         CONNECTION_LOG.info("getConnectionProperties success")
         props
     }
@@ -260,6 +263,7 @@ public func getNetCapabilities(netHandle: NetHandle): NetCapabilities {
         }
         CONNECTION_LOG.info("getNetCapabilities success")
         let capabilities = NetCapabilities(cap)
+        cap.free()
         capabilities
     }
 }
@@ -477,6 +481,7 @@ public class NetConnection <: RemoteDataLite {
             info: CNetCapabilityInfo =>
             CONNECTION_LOG.info("onNetCapabilitiesChange callback called")
             let capabilitiesInfo = NetCapabilityInfo(info)
+            info.netCap.free()
             callback.invoke(None, capabilitiesInfo)
             CONNECTION_LOG.info("onNetCapabilitiesChange callback end")
         }
@@ -505,6 +510,7 @@ public class NetConnection <: RemoteDataLite {
             CONNECTION_LOG.info("onNetConnectionPropertiesChange callback called")
             let handle = NetHandle(netId)
             let connectionProprties = ConnectionProperties(props)
+            props.free()
             let info = NetConnectionPropertyInfo(handle, connectionProprties)
             callback.invoke(None, info)
             CONNECTION_LOG.info("onNetConnectionPropertiesChange callback end")
