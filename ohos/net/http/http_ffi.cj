@@ -139,13 +139,16 @@ struct CHttpRequestOptions {
                 this.multiFormDataList = mallocMultiFormOp(ops.multiFormDataList)
                 (this.usingDefaultProxy, this.usingProxy) = parseUsingProxy(ops.usingProxy)
             } catch (e: Exception) {
-                this.header.free()
-                LibC.free(this.dnsOverHttps)
-                this.dnsServers.free()
                 LibC.free(this.method)
-                LibC.free(this.caPath)
-                LibC.free<CClientCert>(this.clientCert)
                 LibC.free<UInt8>(this.extraData.head)
+                this.header.free()
+                LibC.free(this.caPath)
+                LibC.free(this.dnsOverHttps)
+                if (this.clientCert.isNotNull()) {
+                    this.clientCert.read().free()
+                }
+                LibC.free<CClientCert>(this.clientCert)
+                this.dnsServers.free()
                 this.multiFormDataList.free()
                 throw e
             }

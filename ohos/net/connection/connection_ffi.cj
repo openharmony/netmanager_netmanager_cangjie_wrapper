@@ -185,7 +185,12 @@ struct RetNetAddressArr {
     ) {}
 
     func free(): Unit {
-        unsafe { LibC.free<CNetAddress>(data) }
+        unsafe {
+            for (i in 0..size) {
+                data.read(i).free()
+            }
+            LibC.free<CNetAddress>(data)
+        }
     }
 }
 
@@ -259,6 +264,16 @@ struct CConnectionProperties {
             LibC.free(interfaceName)
             LibC.free(domains)
             LibC.free<CLinkAddress>(linkAddresses)
+            if (dnses.isNotNull()) {
+                for (i in 0..dnsSize) {
+                    dnses.read(i).free()
+                }
+            }
+            if (routes.isNotNull()) {
+                for (i in 0..routeSize) {
+                    routes.read(i).free()
+                }
+            }
             LibC.free<CNetAddress>(dnses)
             LibC.free<CRouteInfo>(routes)
         }

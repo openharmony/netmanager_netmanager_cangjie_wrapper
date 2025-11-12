@@ -742,7 +742,6 @@ public class HttpResponse {
             this.header = cArrString2Map(resp.header)
             this.cookies = resp.cookies.toString()
             this.performanceTiming = PerformanceTiming(resp.performanceTiming)
-            resp.free()
         }
     }
 }

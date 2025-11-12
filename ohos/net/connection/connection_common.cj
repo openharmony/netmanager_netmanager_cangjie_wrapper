@@ -170,18 +170,13 @@ public class NetCapabilities {
         let nc = cNetCapabilities.networkCap
         this.linkUpBandwidthKbps = cNetCapabilities.linkUpBandwidthKbps
         this.linkDownBandwidthKbps = cNetCapabilities.linkDownBandwidthKbps
-        try {
-            this.bearerTypes = Array<NetBearType>(
-                bearedTypeSize,
-                {
-                    i => NetBearType.parse(unsafe { bt.read(i) })
-                }
-            )
-            this.networkCap = Array<NetCap>(networkCapSize, {i => NetCap.parse(unsafe { nc.read(i) })})
-            
-        } finally {
-            cNetCapabilities.free()
-        }
+        this.bearerTypes = Array<NetBearType>(
+            bearedTypeSize,
+            {
+                i => NetBearType.parse(unsafe { bt.read(i) })
+            }
+        )
+        this.networkCap = Array<NetCap>(networkCapSize, {i => NetCap.parse(unsafe { nc.read(i) })})
     }
 }
 
@@ -266,7 +261,6 @@ public class ConnectionProperties {
                 {addr => LinkAddress(addr)})
             this.dnses = cArr2cjArr<CNetAddress, NetAddress>(cProp.dnsSize, cProp.dnses, {dns => NetAddress(dns)})
             this.routes = cArr2cjArr<CRouteInfo, RouteInfo>(cProp.routeSize, cProp.routes, {route => RouteInfo(route)})
-            cProp.free()
         }
     }
 }
@@ -350,7 +344,6 @@ public class RouteInfo {
         this.gateway = NetAddress(cRoute.gateway)
         this.hasGateway = cRoute.hasGateway
         this.isDefaultRoute = cRoute.isDefaultRoute
-        cRoute.free()
     }
 }
 
@@ -449,7 +442,6 @@ public class NetAddress {
         this.address = cAddress.address.toString()
         this.family = cAddress.family
         this.port = UInt32(cAddress.port)
-        cAddress.free()
     }
 }
 
@@ -537,7 +529,6 @@ public class HttpProxy {
         }
         this.username = ""
         this.password = ""
-        chttpProxy.free()
     }
 }
 
