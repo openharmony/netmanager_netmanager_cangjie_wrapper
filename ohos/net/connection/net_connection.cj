@@ -627,6 +627,9 @@ public class NetHandle {
     ]
     public func getAddressesByName(host: String): Array<NetAddress> {
         CONNECTION_LOG.info("NetHandle getAddressesByName start")
+        if (host.isEmpty() || host.startsWith("\0")) {
+            throw BusinessException(2100001, "NetHandle getAddressesByName failed: ${getErrorMsg(2100001)}")
+        }
         let cHost = unsafe { LibC.mallocCString(host) }
         let ret: RetNetAddressArr = unsafe { CJ_GetAddressesByName(netId, cHost) }
         unsafe { LibC.free(cHost) }
