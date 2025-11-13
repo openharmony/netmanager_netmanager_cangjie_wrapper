@@ -159,6 +159,10 @@ struct CLinkAddress {
         let address: CNetAddress,
         let prefixLength: Int32
     ) {}
+
+    func free(): Unit {
+        unsafe { address.free() }
+    }
 }
 
 @C
@@ -172,7 +176,11 @@ struct CRouteInfo {
     ) {}
 
     func free(): Unit {
-        unsafe { LibC.free(interfaceName) }
+        unsafe {
+            LibC.free(interfaceName)
+            destination.free()
+            gateway.free()
+        }
     }
 }
 
@@ -245,6 +253,10 @@ struct CNetCapabilityInfo {
         let netHandle: Int32,
         let netCap: CNetCapabilities
     ) {}
+
+    func free(): Unit {
+        unsafe { netCap.free() }
+    }
 }
 
 @C
@@ -263,6 +275,11 @@ struct CConnectionProperties {
         unsafe {
             LibC.free(interfaceName)
             LibC.free(domains)
+            if (linkAddresses.isNotNull()) {
+                for (i in 0..linkAddressSize) {
+                    linkAddresses.read(i).free()
+                }
+            }
             LibC.free<CLinkAddress>(linkAddresses)
             if (dnses.isNotNull()) {
                 for (i in 0..dnsSize) {
