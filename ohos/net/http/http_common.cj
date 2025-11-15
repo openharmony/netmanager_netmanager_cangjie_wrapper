@@ -80,7 +80,7 @@ internal class ServerAuthentication {}
 ]
 public enum HttpRequestEvent {
     /**
-     * headersReceive
+     * HeadersReceive enum value.
      */
     @!APILevel[
         since: "22",
@@ -89,7 +89,7 @@ public enum HttpRequestEvent {
     HeadersReceive
     |
     /**
-     * dataReceive
+     * DataReceive enum value.
      */
     @!APILevel[
         since: "22",
@@ -98,7 +98,7 @@ public enum HttpRequestEvent {
     DataReceive
     |
     /**
-     * dataEnd
+     * DataEnd enum value.
      */
     @!APILevel[
         since: "22",
@@ -107,7 +107,7 @@ public enum HttpRequestEvent {
     DataEnd
     |
     /**
-     * dataReceiveProgress
+     * DataReceiveProgress enum value.
      */
     @!APILevel[
         since: "22",
@@ -116,7 +116,7 @@ public enum HttpRequestEvent {
     DataReceiveProgress
     |
     /**
-     * dataSendProgress
+     * DataSendProgress enum value.
      */
     @!APILevel[
         since: "22",
@@ -142,58 +142,65 @@ public enum RequestMethod {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Options
+    |
     /**
      * GET method.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Get
+    |
     /**
      * HEAD method.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Head
+    |
     /**
      * POST method.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Post
+    |
     /**
      * PUT method.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Put
+    |
     /**
      * DELETE method.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Delete
+    |
     /**
      * TRACE method.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Trace
+    |
     /**
      * CONNECT method.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
@@ -216,33 +223,37 @@ public enum RequestMethod {
 }
 
 /**
-  * Supported protocols.
-  */
+ * Supported protocols.
+ */
 @!APILevel[
     since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum HttpProtocol {
     /**
-     * Protocol HTTP/1.1.
+     * Protocol http1.1
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Http1_1
+    |
     /**
-     * Protocol HTTP/2.
+     * Protocol http2
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Http2
+    |
     /**
-     * Protocol HTTP/3.
+     * Protocol http3 for https only.
+     * Cause error if using http only or not supporting http3 on this device.
+     * Fallback to http2 or http1.1 if needed.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
@@ -260,15 +271,15 @@ public enum HttpProtocol {
 }
 
 /**
-  * Indicates the type of the HTTP data.
-  */
+ * Indicates the type of the HTTP data.
+ */
 @!APILevel[
     since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
 public enum HttpDataType {
     /**
-     * String type.
+     * The returned type is string.
      */
     @!APILevel[
         since: "22",
@@ -278,10 +289,11 @@ public enum HttpDataType {
     |
     @!Hide
     Object
+    |
     /**
-     * ArrayBuffer type.
+     * The returned type is ArrayBuffer.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
@@ -321,13 +333,14 @@ public enum HttpData {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     StringData(String)
-    | @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
+    |
     /**
      * Byte array form.
      */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetStack"
+    ] 
     ArrayData(Array<Byte>)
     | ...
 
@@ -361,21 +374,23 @@ public enum UsingProxy {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     NotUse
+    |
     /**
      * use default HttpProxy
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     UseDefault
+    |
     /**
      * use HttpProxy
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
-    ]
+    ] 
     UseSpecified(HttpProxy)
     | ...
 }
@@ -395,18 +410,20 @@ public enum CertType {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Pem
+    |
     /**
      * DER format certificate
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     Der
+    |
     /**
      * P12 format certificate
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.Communication.NetStack"
     ]
@@ -518,8 +535,9 @@ public class HttpRequestOptions {
     public var usingProtocol: ?HttpProtocol
 
     /**
-     * If this parameter is set as type of boolean, the system will use default proxy or not use proxy.
-     * If this parameter is set as type of HttpProxy, the system will use the specified HttpProxy.
+     * If this parameter is set as NotUse, the system will not use proxy.
+     * If this parameter is set as UseDefault, the system will use default proxy.
+     * If this parameter is set as UseSpecified, the system will use the specified HttpProxy.
      */
     @!APILevel[
         since: "22",
@@ -635,7 +653,30 @@ public class HttpRequestOptions {
     internal var addressFamily: AddressFamily = AddressFamily.Default
 
     /**
-     * init the HttpRequestOptions
+     * HttpRequestOptions constructor
+     *
+     * @param { RequestMethod } [method] - Indicates the request method,default is GET.
+     * @param { HttpData } [extraData] - Indicates the additional data of the request.
+     * @param { HttpDataType } [expectDataType] - Indicates the data type to be returned.
+     * @param { Bool } [usingCache] - Indicates the default is true.
+     * @param { UInt32 } [priority] - Indicates the [1, 1000], default is 1.
+     * @param { HashMap<String, String> } [header] - Indicates the HTTP request header. default is 'content-type': 'application/json'.
+     * @param { UInt32 } [readTimeout] - Indicates the read timeout period. The default value is 60,000, in ms.
+     * @param { UInt32 } [connectTimeout] - Indicates the connection timeout interval. The default value is 60,000, in ms.
+     * @param { HttpProtocol } [usingProtocol] - Indicates the default is automatically specified by the system.
+     * @param { UsingProxy } [usingProxy] - Indicates this parameter is set as UseDefault, the system will use default proxy.
+     * @param { String } [caPath] - Indicates the system will use ca path specified by user, or else use preset ca by the system.
+     * @param { Int64 } [resumeFrom] - Indicates the used to set to uploading or downloading the start bytes. The default value is 0.
+     * @param { Int64 } [resumeTo] - Indicates the used to set to uploading or downloading the end bytes.
+     * @param { ClientCert } [clientCert] - Indicates the support the application to pass in client certificates, allowing the server to verify the client's identity.
+     * @param { String } [dnsOverHttps] - Indicates the incoming DNS resolution server URL for the DoH server to use for name resolving.
+     * @param { Array<String> } [dnsServers] - Indicates use the specified DNS server for DNS resolution. 
+     *                                         Multiple DNS resolution servers can be set up, with a maximum of 3 servers.
+     *                                         Only take the first three if there are more than three.
+     * @param { UInt32 } [maxLimit] - Indicates the maximum limit of the response body. The default value is 5 * 1024 * 1024, in Byte.
+     *                                the maximum value is 100 * 1024 *1024, in Byte.
+     * @param { Array<MultiFormData> } [multiFormDataList] - Indicates the data fields which is supported by the HTTP protocol to post
+     *                                the maximum value is 100 * 1024 *1024, in Byte.
      */
     @!APILevel[
         since: "22",
@@ -680,6 +721,7 @@ public class HttpRequestOptions {
 public class HttpResponse {
     /**
      * result can be a string or byte array.
+     * If expectDataType is set, the system preferentially returns this parameter.
      */
     @!APILevel[
         since: "22",
@@ -688,7 +730,6 @@ public class HttpResponse {
     public var result: HttpData
     /**
      * If the resultType is string, you can get result directly.
-     * If the resultType is Object, you can get result such as this: result['key'].
      * If the resultType is ArrayBuffer, you can use ArrayBuffer to create the binary objects.
      */
     @!APILevel[
@@ -1004,7 +1045,12 @@ public class ClientCert {
     public var keyPassword: String
 
     /**
-     * init the ClientCert
+     * ClientCert constructor
+     *
+     * @param { String } certPath - Indicates the path to the client certificate file.
+     * @param { String } keyPath - Indicates the path of the client certificate private key file.
+     * @param { CertType } [certType] - Indicates the type of the client certificate.
+     * @param { String } [keyPassword] - Indicates the password required to use the client certificate private key.
      */
     @!APILevel[
         since: "22",
@@ -1090,7 +1136,13 @@ public class MultiFormData {
     ]
     public var filePath: String
     /**
-     * init the MultiFormData
+     * MultiFormData constructor
+     *
+     * @param { String } name - MIME name for the data field.
+     * @param { String } contentType - Content type of the data field.
+     * @param { String } [remoteFileName] - Remote file name for the data field.
+     * @param { HttpData } [data] - This parameter sets a mime part's body content from memory data.
+     * @param { String } [filePath] - Indicates the parameter sets a mime part's body content from the file's contents.
      */
     @!APILevel[
         since: "22",

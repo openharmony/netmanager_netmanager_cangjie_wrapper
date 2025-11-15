@@ -51,6 +51,10 @@ public class NetSpecifier {
 
     /**
      * NetSpecifier constructor
+     *
+     * @param { NetCapabilities } netCapabilities - indicates the transmission capacity and support of the network's global proxy storage data network.
+     * @param { String } [bearerPrivateIdentifier] - indicates network identifier, the identifier for Wi Fi networks is "wifi", and the identifier for cellular networks is
+     *                                               "simId1" (corresponding to SIM card 1).
      */
     @!APILevel[
         since: "22",
@@ -147,6 +151,11 @@ public class NetCapabilities {
 
     /**
      * NetCapabilities constructor
+     *
+     * @param { Array<NetBearType> } bearerTypes - indicates the network type.
+     * @param { UInt32 } [linkUpBandwidthKbps] - indicates the uplink (device-to-network) bandwidth.
+     * @param { UInt32 } [linkDownBandwidthKbps] - indicates the downstream (network-to-device) bandwidth.
+     * @param { Array<NetCap> } [networkCap] - indicates the network-specific capabilities.
      */
     @!APILevel[
         since: "22",
@@ -431,6 +440,10 @@ public class NetAddress {
    
     /**
      * NetAddress constructor
+     *
+     * @param { String } address - indicates the network address.
+     * @param { UInt32 } [family] - indicates the Address family identifier. The value is 1 for IPv4 and 2 for IPv6. The default value is 1.
+     * @param { UInt32 } [port] - indicates the port number. The value ranges from 0 to 65535.
      */
     @!APILevel[
         since: "22",
@@ -508,6 +521,12 @@ public class HttpProxy {
 
     /**
      * HttpProxy constructor
+     *
+     * @param { String } host - indicates the proxy server host name.
+     * @param { UInt32 } port - indicates the host port.
+     * @param { Array<String> } exclusionList - indicates the do not use a blocking list for proxy servers.
+     * @param { String } [username] - indicates the http proxy username.
+     * @param { String } [password] - indicates the http proxy password.
      */
     @!APILevel[
         since: "22",
@@ -707,7 +726,7 @@ public enum NetBearType {
 ]
 public enum NetConnectionEvent {
     /**
-     * netAvailable
+     * NetAvailable enum value.
      */
     @!APILevel[
         since: "22",
@@ -716,7 +735,7 @@ public enum NetConnectionEvent {
     NetAvailable
     |
     /**
-     * netBlockStatusChange
+     * NetBlockStatusChange enum value.
      */
     @!APILevel[
         since: "22",
@@ -725,7 +744,7 @@ public enum NetConnectionEvent {
     NetBlockStatusChange
     |
     /**
-     * netCapabilitiesChange
+     * NetCapabilitiesChange enum value.
      */
     @!APILevel[
         since: "22",
@@ -734,7 +753,7 @@ public enum NetConnectionEvent {
     NetCapabilitiesChange
     |
     /**
-     * netConnectionPropertiesChange
+     * NetConnectionPropertiesChange enum value.
      */
     @!APILevel[
         since: "22",
@@ -743,7 +762,7 @@ public enum NetConnectionEvent {
     NetConnectionPropertiesChange
     |
     /**
-     * netLost
+     * NetLost enum value.
      */
     @!APILevel[
         since: "22",
@@ -752,7 +771,7 @@ public enum NetConnectionEvent {
     NetLost
     |
     /**
-     * netUnavailable
+     * NetUnavailable enum value.
      */
     @!APILevel[
         since: "22",
