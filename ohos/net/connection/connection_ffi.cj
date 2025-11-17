@@ -18,6 +18,7 @@
 package ohos.net.connection
 
 import ohos.ffi.{cjArr2CArr, RetDataCArrI32, cArr2cjArr}
+import ohos.business_exception.BusinessException
 
 foreign {
     func CJ_CreateNetConnection(netSpecifier: CNetSpecifier, timeout: UInt32): Int64
@@ -87,7 +88,7 @@ struct CNetSpecifier {
             unsafe { LibC.mallocCString(netSpecifier.bearerPrivateIdentifier) }
         } catch (e: Exception) {
             netCapabilities.free()
-            throw e
+            throw BusinessException(2100003, getErrorMsg(2100003))
         }
         this.hasSpecifier = true
     }
@@ -124,7 +125,7 @@ protected struct CHttpProxy {
                     {str => LibC.mallocCString(str)}) {cstr => LibC.free(cstr)}
             } catch (e: Exception) {
                 LibC.free(host)
-                throw e
+                throw BusinessException(2100003, getErrorMsg(2100003))
             }
         }
     }
@@ -225,7 +226,7 @@ struct CNetCapabilities {
                 this.networkCap = cjArr2CArr<NetCap, Int32>(networkCapArr, {enums => enums.getValue()})
             } catch (e: Exception) {
                 LibC.free<Int32>(bearerTypes)
-                throw e
+                throw BusinessException(2100003, getErrorMsg(2100003))
             }
         }
     }
