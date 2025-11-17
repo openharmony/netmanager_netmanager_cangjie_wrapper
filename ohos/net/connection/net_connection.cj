@@ -30,11 +30,10 @@ let CONNECTION_LOG = HilogChannel(0, 0xD0015B0, "CJ-net-Connection")
 
 /**
  * Create a network connection with optional netSpecifier and timeout.
- * @param { NetSpecifier } netSpecifier - Indicates the network specifier. See NetSpecifier.
- * @param { UInt32 } timeout - The time in milliseconds to attempt looking for a suitable network before
- * NetConnection#netUnavailable is called.
+ * @param { ?NetSpecifier } [netSpecifier] - Indicates the network specifier. See NetSpecifier.
+ * @param { UInt32 } [timeout] - The time in milliseconds to attempt looking for a suitable network before
+ * netUnavailable is called.
  * @returns { NetConnection } the NetConnection of the NetSpecifier.
- * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
@@ -56,18 +55,17 @@ public func createNetConnection(netSpecifier!: ?NetSpecifier = None, timeout!: U
 
 /**
  * Obtains the data network that is activated by default.
- * To call this method, you must have the ohos.permission.GET_NETWORK_INFO permission.
- * @permission ohos.permission.GET_NETWORK_INFO
- * @returns { NetHandle } The promise returned by the function.
+ * @returns { NetHandle } Handle of the default active data network.
  * @throws { BusinessException } 201 - Permission denied.
- * @throws { BusinessException } 401 - Parameter error.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func getDefaultNet(): NetHandle {
     CONNECTION_LOG.info("getDefaultNet start")
@@ -83,19 +81,19 @@ public func getDefaultNet(): NetHandle {
 
 /**
  * Obtains the default HttpProxy proxy settings.
- *
  * If a global proxy is set, the global proxy parameters are returned.
  * If the process is bound to a NetHandle using setAppNet,
  * the NetHandle proxy settings are returned.
  * In other cases, the proxy settings of default network are returned.
- *
- * @returns { HttpProxy } the promise returned by the function.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @returns { HttpProxy } Proxy settings of http.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func getDefaultHttpProxy(): HttpProxy {
     CONNECTION_LOG.info("getDefaultHttpProxy start")
@@ -117,14 +115,15 @@ public func getDefaultHttpProxy(): HttpProxy {
 
 /**
  * Obtains the NetHandle bound to a process using setAppNet.
- * @returns { NetHandle } the promise returned by the function.
- * @throws { BusinessException } 401 - Parameter error.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @returns { NetHandle } Returns the NetHandle bound to a process using setAppNet.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func getAppNet(): NetHandle {
     CONNECTION_LOG.info("getAppNet start")
@@ -142,18 +141,18 @@ public func getAppNet(): NetHandle {
  * Binds a process to NetHandle.
  * All the sockets created from the process will be bound to the NetHandle,
  * and the resolution of all host names will be managed by the NetHandle.
- * @permission ohos.permission.INTERNET
  * @param { NetHandle } netHandle - Indicates the handle. For details, see NetHandle.
  * @throws { BusinessException } 201 - Permission denied.
- * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100001 - Invalid parameter value.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
     permission: "ohos.permission.INTERNET",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func setAppNet(netHandle: NetHandle): Unit {
     CONNECTION_LOG.info("setAppNet start")
@@ -167,18 +166,17 @@ public func setAppNet(netHandle: NetHandle): Unit {
 
 /**
  * Obtains the list of data networks that are activated.
- * To invoke this method, you must have the ohos.permission.GET_NETWORK_INFO permission.
- * @permission ohos.permission.GET_NETWORK_INFO
- * @returns { Array<NetHandle> } The promise returned by the function.
+ * @returns { Array<NetHandle> } Returns data networks that are activated.
  * @throws { BusinessException } 201 - Permission denied.
- * @throws { BusinessException } 401 - Parameter error.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func getAllNets(): Array<NetHandle> {
     CONNECTION_LOG.info("getAllNets start")
@@ -197,20 +195,19 @@ public func getAllNets(): Array<NetHandle> {
 
 /**
  * Queries the connection properties of a network.
- * This method requires the ohos.permission.GET_NETWORK_INFO permission.
- * @permission ohos.permission.GET_NETWORK_INFO
  * @param { NetHandle } netHandle - Indicates the network to be queried.
- * @returns { ConnectionProperties } The promise returned by the function.
+ * @returns { ConnectionProperties } Returns the connection properties of a network.
  * @throws { BusinessException } 201 - Permission denied.
- * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100001 - Invalid parameter value.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func getConnectionProperties(netHandle: NetHandle): ConnectionProperties {
     CONNECTION_LOG.info("getConnectionProperties start")
@@ -234,20 +231,19 @@ public func getConnectionProperties(netHandle: NetHandle): ConnectionProperties 
 
 /**
  * Obtains NetCapabilities of a NetHandle object.
- * To invoke this method, you must have the ohos.permission.GET_NETWORK_INFO permission.
- * @permission ohos.permission.GET_NETWORK_INFO
  * @param { NetHandle } netHandle - Indicates the handle. See NetHandle.
- * @returns { NetCapabilities>} The promise returned by the function.
+ * @returns { NetCapabilities } Returns the connection capabilities of a network.
  * @throws { BusinessException } 201 - Permission denied.
- * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100001 - Invalid parameter value.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func getNetCapabilities(netHandle: NetHandle): NetCapabilities {
     CONNECTION_LOG.info("getNetCapabilities start")
@@ -270,17 +266,17 @@ public func getNetCapabilities(netHandle: NetHandle): NetCapabilities {
 
 /**
  * Checks whether data traffic usage on the current network is metered.
- * @permission ohos.permission.GET_NETWORK_INFO
  * @returns { Bool } Returns true if the current network is metered, else returns false.
  * @throws { BusinessException } 201 - Permission denied.
- * @throws { BusinessException } 401 - Parameter error.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func isDefaultNetMetered(): Bool {
     CONNECTION_LOG.info("isDefaultNetMetered start")
@@ -296,17 +292,17 @@ public func isDefaultNetMetered(): Bool {
 
 /**
  * Checks whether the default data network is activated.
- * @permission ohos.permission.GET_NETWORK_INFO
  * @returns { Bool } Returns true if the default data network is activated, else returns false.
  * @throws { BusinessException } 201 - Permission denied.
- * @throws { BusinessException } 401 - Parameter error.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func hasDefaultNet(): Bool {
     CONNECTION_LOG.info("hasDefaultNet start")
@@ -322,19 +318,18 @@ public func hasDefaultNet(): Bool {
 
 /**
  * Reports the network state is connected.
- * @permission ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
  * @param { NetHandle } netHandle - Indicates the network whose state is to be reported.
- * @returns { Unit } The promise returned by the function.
  * @throws { BusinessException } 201 - Permission denied.
- * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100001 - Invalid parameter value.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func reportNetConnected(netHandle: NetHandle): Unit {
     CONNECTION_LOG.info("reportNetConnected start")
@@ -348,19 +343,18 @@ public func reportNetConnected(netHandle: NetHandle): Unit {
 
 /**
  * Reports the network state is disconnected.
- * @permission ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
  * @param { NetHandle } netHandle - Indicates the network whose state is to be reported.
- * @returns { Unit } The promise returned by the function.
  * @throws { BusinessException } 201 - Permission denied.
- * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100001 - Invalid parameter value.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
     permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func reportNetDisconnected(netHandle: NetHandle): Unit {
     CONNECTION_LOG.info("reportNetDisconnected start")
@@ -374,19 +368,19 @@ public func reportNetDisconnected(netHandle: NetHandle): Unit {
 
 /**
  * Resolves the host name to obtain all IP addresses based on the default data network.
- * @permission ohos.permission.INTERNET
  * @param { String } host - Indicates the host name or the domain.
- * @returns { Array<NetAddress> } The promise returned by the function.
+ * @returns { Array<NetAddress> } IP addresses of network.
  * @throws { BusinessException } 201 - Permission denied.
- * @throws { BusinessException } 401 - Parameter error.
  * @throws { BusinessException } 2100001 - Invalid parameter value.
- * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+ * @throws { BusinessException } 2100002 - Failed to connect to the service.
  * @throws { BusinessException } 2100003 - System internal error.
  */
 @!APILevel[
     since: "22",
     permission: "ohos.permission.INTERNET",
-    syscap: "SystemCapability.Communication.NetManager.Core"
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
 ]
 public func getAddressesByName(host: String): Array<NetAddress> {
     getDefaultNet().getAddressesByName(host)
@@ -412,13 +406,14 @@ public class NetConnection <: RemoteDataLite {
     /**
      * Registers a listener for netAvailable events.
      * Registers a listener for netLost events.
-     * @param { NetConnectionEvent } event - Indicates the event type to listen for.
-     * @param { Callback1Argument<NetHandle> } callback - Indicates the callback function to register.
+     * @param { NetConnectionEvent } event - Indicates Event type.
+     * @param { Callback1Argument<NetHandle> } callback - the callback used to return the result.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetManager.Core"
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetHandle>): Unit {
         let wrapper = {
@@ -438,13 +433,14 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Registers a listener for netBlockStatusChange events.
-     * @param { NetConnectionEvent } event - Indicates the event type to listen for.
-     * @param { Callback1Argument<NetBlockStatusInfo> } callback - Indicates the callback function to register.
+     * @param { NetConnectionEvent } event - Indicates Event type.
+     * @param { Callback1Argument<NetBlockStatusInfo> } callback - the callback used to return the result.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetManager.Core"
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetBlockStatusInfo>): Unit {
         CONNECTION_LOG.info("onNetBlockStatusChange start register")
@@ -463,14 +459,15 @@ public class NetConnection <: RemoteDataLite {
     }
 
     /**
-     * Registers a listener for **netCapabilitiesChange** events.
-     * @param { NetConnectionEvent } event - Indicates the event type to listen for.
-     * @param { Callback1Argument<NetCapabilityInfo> } callback - Indicates the callback function to register.
+     * Registers a listener for netCapabilitiesChange events.
+     * @param { NetConnectionEvent } event - Indicates Event type.
+     * @param { Callback1Argument<NetCapabilityInfo> } callback - the callback used to return the result.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetManager.Core"
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetCapabilityInfo>): Unit {
         CONNECTION_LOG.info("onNetCapabilitiesChange start register")
@@ -492,13 +489,14 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Registers a listener for netConnectionPropertiesChange events.
-     * @param { NetConnectionEvent } event - Indicates the event type to listen for.
-     * @param { Callback1Argument<NetConnectionPropertyInfo> } callback - Indicates the callback function to register.
+     * @param { NetConnectionEvent } event - Indicates Event type.
+     * @param { Callback1Argument<NetConnectionPropertyInfo> } callback - the callback used to return the result.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetManager.Core"
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true
     ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetConnectionPropertyInfo>): Unit {
         CONNECTION_LOG.info("onNetConnectionPropertiesChange start register")
@@ -522,13 +520,14 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Registers a listener for netUnavailable events.
-     * @param { NetConnectionEvent } event - Indicates the event type to listen for.
-     * @param { Callback0Argument } callback - Indicates the callback function to register.
+     * @param { NetConnectionEvent } event - Indicates Event type.
+     * @param { Callback0Argument } callback - the callback used to return the result.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetManager.Core"
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true
     ]
     public func on(event: NetConnectionEvent, callback: Callback0Argument): Unit {
         CONNECTION_LOG.info("onNetUnavailable start register")
@@ -545,9 +544,7 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Receives status change notifications of a specified network.
-     * @permission ohos.permission.GET_NETWORK_INFO
      * @throws { BusinessException } 201 - Permission denied.
-     * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 2100002 - Failed to connect to the service.
      * @throws { BusinessException } 2100003 - System internal error.
      * @throws { BusinessException } 2101008 - The callback already exists.
@@ -556,7 +553,9 @@ public class NetConnection <: RemoteDataLite {
     @!APILevel[
         since: "22",
         permission: "ohos.permission.GET_NETWORK_INFO",
-        syscap: "SystemCapability.Communication.NetManager.Core"
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func register(): Unit {
         CONNECTION_LOG.info("register start")
@@ -570,14 +569,15 @@ public class NetConnection <: RemoteDataLite {
 
     /**
      * Cancels listening for network status changes.
-     * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 2100002 - Failed to connect to the service.
      * @throws { BusinessException } 2100003 - System internal error.
      * @throws { BusinessException } 2101007 - The callback does not exist.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetManager.Core"
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func unregister(): Unit {
         CONNECTION_LOG.info("unregister start")
@@ -617,19 +617,19 @@ public class NetHandle {
 
     /**
      * Resolves a host name to obtain all IP addresses based on the specified NetHandle.
-     * @permission ohos.permission.INTERNET
      * @param { String } host - Indicates the host name or the domain.
-     * @returns { Array<NetAddress> } The promise returned by the function.
+     * @returns { Array<NetAddress> } IP addresses of network.
      * @throws { BusinessException } 201 - Permission denied.
-     * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
-     * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+     * @throws { BusinessException } 2100002 - Failed to connect to the service.
      * @throws { BusinessException } 2100003 - System internal error.
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.INTERNET",
-        syscap: "SystemCapability.Communication.NetManager.Core"
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getAddressesByName(host: String): Array<NetAddress> {
         CONNECTION_LOG.info("NetHandle getAddressesByName start")
@@ -661,19 +661,19 @@ public class NetHandle {
 
     /**
      * Resolves a host name to obtain the first IP address based on the specified NetHandle.
-     * @permission ohos.permission.INTERNET
      * @param { String } host - Indicates the host name or the domain.
-     * @returns { NetAddress } The promise returned by the function.
+     * @returns { NetAddress } IP addresses of network.
      * @throws { BusinessException } 201 - Permission denied.
-     * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
-     * @throws { BusinessException } 2100002 - Operation failed. Cannot connect to service.
+     * @throws { BusinessException } 2100002 - Failed to connect to the service.
      * @throws { BusinessException } 2100003 - System internal error.
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.INTERNET",
-        syscap: "SystemCapability.Communication.NetManager.Core"
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getAddressByName(host: String): NetAddress {
         let arr = getAddressesByName(host)

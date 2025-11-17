@@ -41,8 +41,8 @@ public func createHttp(): HttpRequest {
 }
 
 /**
- * Creates a default {@code HttpResponseCache} object to store the responses of HTTP access requests.
- * @param { UInt32 } cacheSize - the size of cache(max value is 10MB), default is 10*1024*1024(10MB).
+ * Creates a default HttpResponseCache object to store the responses of HTTP access requests.
+ * @param { UInt32 } [cacheSize] - the size of cache(max value is 10MB), default is 10*1024*1024(10MB).
  * @returns { HttpResponseCache } the HttpResponseCache of the createHttpResponseCache.
  */
 @!APILevel[
@@ -188,48 +188,47 @@ public class HttpRequest {
 
     /**
      * Initiates an HTTP request to a given URL.
-     * @permission ohos.permission.INTERNET
      * @param { String } url - URL for initiating an HTTP request.
-     * @param { HttpRequestOptions } options - Optional parameters {@link HttpRequestOptions}.
-     * @param { AsyncCallback<HttpResponse> } callback - The callback of request.
-     * @throws { BusinessException } 401 - Parameter error.
+     * @param { HttpRequestOptions } options - Optional parameters HttpRequestOptions.
+     * @param { AsyncCallback<HttpResponse> } callback - the callback of request.
      * @throws { BusinessException } 201 - Permission denied.
      * @throws { BusinessException } 2300001 - Unsupported protocol.
-     * @throws { BusinessException } 2300003 - URL using bad/illegal format or missing URL.
-     * @throws { BusinessException } 2300005 - Couldn't resolve proxy name.
-     * @throws { BusinessException } 2300006 - Couldn't resolve host name.
-     * @throws { BusinessException } 2300007 - Couldn't connect to server.
-     * @throws { BusinessException } 2300008 - Weird server reply.
-     * @throws { BusinessException } 2300009 - Access denied to remote resource.
+     * @throws { BusinessException } 2300003 - Invalid URL format or missing URL.
+     * @throws { BusinessException } 2300005 - Failed to resolve the proxy name.
+     * @throws { BusinessException } 2300006 - Failed to resolve the host name.
+     * @throws { BusinessException } 2300007 - Failed to connect to the server.
+     * @throws { BusinessException } 2300008 - Invalid server response.
+     * @throws { BusinessException } 2300009 - Access to the remote resource denied.
      * @throws { BusinessException } 2300016 - Error in the HTTP2 framing layer.
      * @throws { BusinessException } 2300018 - Transferred a partial file.
-     * @throws { BusinessException } 2300023 - Failed writing received data to disk/application.
+     * @throws { BusinessException } 2300023 - Failed to write the received data to the disk or application.
      * @throws { BusinessException } 2300025 - Upload failed.
-     * @throws { BusinessException } 2300026 - Failed to open/read local data from file/application.
+     * @throws { BusinessException } 2300026 - Failed to open or read local data from the file or application.
      * @throws { BusinessException } 2300027 - Out of memory.
-     * @throws { BusinessException } 2300028 - Timeout was reached.
-     * @throws { BusinessException } 2300047 - Number of redirects hit maximum amount.
-     * @throws { BusinessException } 2300052 - Server returned nothing (no headers, no data).
-     * @throws { BusinessException } 2300055 - Failed sending data to the peer.
-     * @throws { BusinessException } 2300056 - Failure when receiving data from the peer.
-     * @throws { BusinessException } 2300058 - Problem with the local SSL certificate.
-     * @throws { BusinessException } 2300059 - Couldn't use specified SSL cipher.
-     * @throws { BusinessException } 2300060 - SSL peer certificate or SSH remote key was not OK.
-     * @throws { BusinessException } 2300061 - Unrecognized or bad HTTP Content or Transfer-Encoding.
+     * @throws { BusinessException } 2300028 - Operation timeout.
+     * @throws { BusinessException } 2300047 - The number of redirections reaches the maximum allowed.
+     * @throws { BusinessException } 2300052 - The server returned nothing (no header or data).
+     * @throws { BusinessException } 2300055 - Failed to send data to the peer.
+     * @throws { BusinessException } 2300056 - Failed to receive data from the peer.
+     * @throws { BusinessException } 2300058 - Local SSL certificate error.
+     * @throws { BusinessException } 2300059 - The specified SSL cipher cannot be used.
+     * @throws { BusinessException } 2300060 - Invalid SSL peer certificate or SSH remote key.
+     * @throws { BusinessException } 2300061 - Invalid HTTP encoding format.
      * @throws { BusinessException } 2300063 - Maximum file size exceeded.
-     * @throws { BusinessException } 2300070 - Disk full or allocation exceeded.
+     * @throws { BusinessException } 2300070 - Remote disk full.
      * @throws { BusinessException } 2300073 - Remote file already exists.
-     * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
+     * @throws { BusinessException } 2300077 - The SSL CA certificate does not exist or is inaccessible.
      * @throws { BusinessException } 2300078 - Remote file not found.
-     * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300094 - Authentication error.
      * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
      * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
-     * @throws { BusinessException } 2300999 - Unknown Other Error.
+     * @throws { BusinessException } 2300999 - Internal error.
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.INTERNET",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func request(url: String, options: HttpRequestOptions, callback: AsyncCallback<HttpResponse>): Unit {
         if (requested) {
@@ -270,47 +269,46 @@ public class HttpRequest {
 
     /**
      * Initiates an HTTP request to a given URL.
-     * @permission ohos.permission.INTERNET
      * @param { String } url - URL for initiating an HTTP request.
-     * @param { AsyncCallback<HttpResponse> } callback - The callback of request.
-     * @throws { BusinessException } 401 - Parameter error.
+     * @param { AsyncCallback<HttpResponse> } callback - the callback of request.
      * @throws { BusinessException } 201 - Permission denied.
      * @throws { BusinessException } 2300001 - Unsupported protocol.
-     * @throws { BusinessException } 2300003 - URL using bad/illegal format or missing URL.
-     * @throws { BusinessException } 2300005 - Couldn't resolve proxy name.
-     * @throws { BusinessException } 2300006 - Couldn't resolve host name.
-     * @throws { BusinessException } 2300007 - Couldn't connect to server.
-     * @throws { BusinessException } 2300008 - Weird server reply.
-     * @throws { BusinessException } 2300009 - Access denied to remote resource.
+     * @throws { BusinessException } 2300003 - Invalid URL format or missing URL.
+     * @throws { BusinessException } 2300005 - Failed to resolve the proxy name.
+     * @throws { BusinessException } 2300006 - Failed to resolve the host name.
+     * @throws { BusinessException } 2300007 - Failed to connect to the server.
+     * @throws { BusinessException } 2300008 - Invalid server response.
+     * @throws { BusinessException } 2300009 - Access to the remote resource denied.
      * @throws { BusinessException } 2300016 - Error in the HTTP2 framing layer.
      * @throws { BusinessException } 2300018 - Transferred a partial file.
-     * @throws { BusinessException } 2300023 - Failed writing received data to disk/application.
+     * @throws { BusinessException } 2300023 - Failed to write the received data to the disk or application.
      * @throws { BusinessException } 2300025 - Upload failed.
-     * @throws { BusinessException } 2300026 - Failed to open/read local data from file/application.
+     * @throws { BusinessException } 2300026 - Failed to open or read local data from the file or application.
      * @throws { BusinessException } 2300027 - Out of memory.
-     * @throws { BusinessException } 2300028 - Timeout was reached.
-     * @throws { BusinessException } 2300047 - Number of redirects hit maximum amount.
-     * @throws { BusinessException } 2300052 - Server returned nothing (no headers, no data).
-     * @throws { BusinessException } 2300055 - Failed sending data to the peer.
-     * @throws { BusinessException } 2300056 - Failure when receiving data from the peer.
-     * @throws { BusinessException } 2300058 - Problem with the local SSL certificate.
-     * @throws { BusinessException } 2300059 - Couldn't use specified SSL cipher.
-     * @throws { BusinessException } 2300060 - SSL peer certificate or SSH remote key was not OK.
-     * @throws { BusinessException } 2300061 - Unrecognized or bad HTTP Content or Transfer-Encoding.
+     * @throws { BusinessException } 2300028 - Operation timeout.
+     * @throws { BusinessException } 2300047 - The number of redirections reaches the maximum allowed.
+     * @throws { BusinessException } 2300052 - The server returned nothing (no header or data).
+     * @throws { BusinessException } 2300055 - Failed to send data to the peer.
+     * @throws { BusinessException } 2300056 - Failed to receive data from the peer.
+     * @throws { BusinessException } 2300058 - Local SSL certificate error.
+     * @throws { BusinessException } 2300059 - The specified SSL cipher cannot be used.
+     * @throws { BusinessException } 2300060 - Invalid SSL peer certificate or SSH remote key.
+     * @throws { BusinessException } 2300061 - Invalid HTTP encoding format.
      * @throws { BusinessException } 2300063 - Maximum file size exceeded.
-     * @throws { BusinessException } 2300070 - Disk full or allocation exceeded.
+     * @throws { BusinessException } 2300070 - Remote disk full.
      * @throws { BusinessException } 2300073 - Remote file already exists.
-     * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
+     * @throws { BusinessException } 2300077 - The SSL CA certificate does not exist or is inaccessible.
      * @throws { BusinessException } 2300078 - Remote file not found.
-     * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300094 - Authentication error.
      * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
      * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
-     * @throws { BusinessException } 2300999 - Unknown Other Error.
+     * @throws { BusinessException } 2300999 - Internal error.
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.INTERNET",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func request(url: String, callback: AsyncCallback<HttpResponse>): Unit {
         if (requested) {
@@ -351,48 +349,47 @@ public class HttpRequest {
 
     /**
      * Initiates an HTTP request to a given URL, applicable to scenarios where http response supports streaming.
-     * @permission ohos.permission.INTERNET
      * @param { String } url - URL for initiating an HTTP request.
-     * @param { HttpRequestOptions } options - Optional parameters {@link HttpRequestOptions}.
-     * @param { AsyncCallback<UInt32> } callback - The callback of request.
-     * @throws { BusinessException } 401 - Parameter error.
+     * @param { HttpRequestOptions } options - Optional parameters HttpRequestOptions.
+     * @param { AsyncCallback<UInt32> } callback - the callback of requestInStream.
      * @throws { BusinessException } 201 - Permission denied.
      * @throws { BusinessException } 2300001 - Unsupported protocol.
-     * @throws { BusinessException } 2300003 - URL using bad/illegal format or missing URL.
-     * @throws { BusinessException } 2300005 - Couldn't resolve proxy name.
-     * @throws { BusinessException } 2300006 - Couldn't resolve host name.
-     * @throws { BusinessException } 2300007 - Couldn't connect to server.
-     * @throws { BusinessException } 2300008 - Weird server reply.
-     * @throws { BusinessException } 2300009 - Access denied to remote resource.
+     * @throws { BusinessException } 2300003 - Invalid URL format or missing URL.
+     * @throws { BusinessException } 2300005 - Failed to resolve the proxy name.
+     * @throws { BusinessException } 2300006 - Failed to resolve the host name.
+     * @throws { BusinessException } 2300007 - Failed to connect to the server.
+     * @throws { BusinessException } 2300008 - Invalid server response.
+     * @throws { BusinessException } 2300009 - Access to the remote resource denied.
      * @throws { BusinessException } 2300016 - Error in the HTTP2 framing layer.
      * @throws { BusinessException } 2300018 - Transferred a partial file.
-     * @throws { BusinessException } 2300023 - Failed writing received data to disk/application.
+     * @throws { BusinessException } 2300023 - Failed to write the received data to the disk or application.
      * @throws { BusinessException } 2300025 - Upload failed.
-     * @throws { BusinessException } 2300026 - Failed to open/read local data from file/application.
+     * @throws { BusinessException } 2300026 - Failed to open or read local data from the file or application.
      * @throws { BusinessException } 2300027 - Out of memory.
-     * @throws { BusinessException } 2300028 - Timeout was reached.
-     * @throws { BusinessException } 2300047 - Number of redirects hit maximum amount.
-     * @throws { BusinessException } 2300052 - Server returned nothing (no headers, no data).
-     * @throws { BusinessException } 2300055 - Failed sending data to the peer.
-     * @throws { BusinessException } 2300056 - Failure when receiving data from the peer.
-     * @throws { BusinessException } 2300058 - Problem with the local SSL certificate.
-     * @throws { BusinessException } 2300059 - Couldn't use specified SSL cipher.
-     * @throws { BusinessException } 2300060 - SSL peer certificate or SSH remote key was not OK.
-     * @throws { BusinessException } 2300061 - Unrecognized or bad HTTP Content or Transfer-Encoding.
+     * @throws { BusinessException } 2300028 - Operation timeout.
+     * @throws { BusinessException } 2300047 - The number of redirections reaches the maximum allowed.
+     * @throws { BusinessException } 2300052 - The server returned nothing (no header or data).
+     * @throws { BusinessException } 2300055 - Failed to send data to the peer.
+     * @throws { BusinessException } 2300056 - Failed to receive data from the peer.
+     * @throws { BusinessException } 2300058 - Local SSL certificate error.
+     * @throws { BusinessException } 2300059 - The specified SSL cipher cannot be used.
+     * @throws { BusinessException } 2300060 - Invalid SSL peer certificate or SSH remote key.
+     * @throws { BusinessException } 2300061 - Invalid HTTP encoding format.
      * @throws { BusinessException } 2300063 - Maximum file size exceeded.
-     * @throws { BusinessException } 2300070 - Disk full or allocation exceeded.
+     * @throws { BusinessException } 2300070 - Remote disk full.
      * @throws { BusinessException } 2300073 - Remote file already exists.
-     * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
+     * @throws { BusinessException } 2300077 - The SSL CA certificate does not exist or is inaccessible.
      * @throws { BusinessException } 2300078 - Remote file not found.
-     * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300094 - Authentication error.
      * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
      * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
-     * @throws { BusinessException } 2300999 - Unknown Other Error.
+     * @throws { BusinessException } 2300999 - Internal error.
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.INTERNET",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func requestInStream(url: String, options: HttpRequestOptions, callback: AsyncCallback<UInt32>): Unit {
         if (requested) {
@@ -436,47 +433,47 @@ public class HttpRequest {
 
     /**
      * Initiates an HTTP request to a given URL, applicable to scenarios where http response supports streaming.
-     * @permission ohos.permission.INTERNET
      * @param { String } url - URL for initiating an HTTP request.
-     * @param { HttpRequestOptions } options - Optional parameters {@link HttpRequestOptions}.
-     * @throws { BusinessException } 401 - Parameter error.
+     * @param { AsyncCallback<UInt32> } callback - Returns the callback of requestInStream ResponseCode,
+     *     should use on_headersReceive and on_dataReceive to get http response.
      * @throws { BusinessException } 201 - Permission denied.
      * @throws { BusinessException } 2300001 - Unsupported protocol.
-     * @throws { BusinessException } 2300003 - URL using bad/illegal format or missing URL.
-     * @throws { BusinessException } 2300005 - Couldn't resolve proxy name.
-     * @throws { BusinessException } 2300006 - Couldn't resolve host name.
-     * @throws { BusinessException } 2300007 - Couldn't connect to server.
-     * @throws { BusinessException } 2300008 - Weird server reply.
-     * @throws { BusinessException } 2300009 - Access denied to remote resource.
+     * @throws { BusinessException } 2300003 - Invalid URL format or missing URL.
+     * @throws { BusinessException } 2300005 - Failed to resolve the proxy name.
+     * @throws { BusinessException } 2300006 - Failed to resolve the host name.
+     * @throws { BusinessException } 2300007 - Failed to connect to the server.
+     * @throws { BusinessException } 2300008 - Invalid server response.
+     * @throws { BusinessException } 2300009 - Access to the remote resource denied.
      * @throws { BusinessException } 2300016 - Error in the HTTP2 framing layer.
      * @throws { BusinessException } 2300018 - Transferred a partial file.
-     * @throws { BusinessException } 2300023 - Failed writing received data to disk/application.
+     * @throws { BusinessException } 2300023 - Failed to write the received data to the disk or application.
      * @throws { BusinessException } 2300025 - Upload failed.
-     * @throws { BusinessException } 2300026 - Failed to open/read local data from file/application.
+     * @throws { BusinessException } 2300026 - Failed to open or read local data from the file or application.
      * @throws { BusinessException } 2300027 - Out of memory.
-     * @throws { BusinessException } 2300028 - Timeout was reached.
-     * @throws { BusinessException } 2300047 - Number of redirects hit maximum amount.
-     * @throws { BusinessException } 2300052 - Server returned nothing (no headers, no data).
-     * @throws { BusinessException } 2300055 - Failed sending data to the peer.
-     * @throws { BusinessException } 2300056 - Failure when receiving data from the peer.
-     * @throws { BusinessException } 2300058 - Problem with the local SSL certificate.
-     * @throws { BusinessException } 2300059 - Couldn't use specified SSL cipher.
-     * @throws { BusinessException } 2300060 - SSL peer certificate or SSH remote key was not OK.
-     * @throws { BusinessException } 2300061 - Unrecognized or bad HTTP Content or Transfer-Encoding.
+     * @throws { BusinessException } 2300028 - Operation timeout.
+     * @throws { BusinessException } 2300047 - The number of redirections reaches the maximum allowed.
+     * @throws { BusinessException } 2300052 - The server returned nothing (no header or data).
+     * @throws { BusinessException } 2300055 - Failed to send data to the peer.
+     * @throws { BusinessException } 2300056 - Failed to receive data from the peer.
+     * @throws { BusinessException } 2300058 - Local SSL certificate error.
+     * @throws { BusinessException } 2300059 - The specified SSL cipher cannot be used.
+     * @throws { BusinessException } 2300060 - Invalid SSL peer certificate or SSH remote key.
+     * @throws { BusinessException } 2300061 - Invalid HTTP encoding format.
      * @throws { BusinessException } 2300063 - Maximum file size exceeded.
-     * @throws { BusinessException } 2300070 - Disk full or allocation exceeded.
+     * @throws { BusinessException } 2300070 - Remote disk full.
      * @throws { BusinessException } 2300073 - Remote file already exists.
-     * @throws { BusinessException } 2300077 - Problem with the SSL CA cert (path? access rights?).
+     * @throws { BusinessException } 2300077 - The SSL CA certificate does not exist or is inaccessible.
      * @throws { BusinessException } 2300078 - Remote file not found.
-     * @throws { BusinessException } 2300094 - An authentication function returned an error.
+     * @throws { BusinessException } 2300094 - Authentication error.
      * @throws { BusinessException } 2300997 - Cleartext traffic not permitted.
      * @throws { BusinessException } 2300998 - It is not allowed to access this domain.
-     * @throws { BusinessException } 2300999 - Unknown Other Error.
+     * @throws { BusinessException } 2300999 - Internal error.
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.INTERNET",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func requestInStream(url: String, callback: AsyncCallback<UInt32>): Unit {
         if (requested) {
@@ -536,12 +533,14 @@ public class HttpRequest {
 
     /**
      * Registers an observer for HTTP Response Header events.
-     * @param { (HashMap<String, String>) -> Unit } callback - the callback used to return the result.
+     * @param { HttpRequestEvent } event - Indicates Event type.
+     * @param { Callback1Argument<HashMap<String, String>> } callback - the callback used to return the result.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<HashMap<String, String>>): Unit {
         HTTP_LOG.info("HttpRequest register onHeadersReceive start")
@@ -560,12 +559,14 @@ public class HttpRequest {
 
     /**
      * Registers a one-time observer for HTTP Response Header events.
-     * @param { (HashMap<String, String>) -> Unit } callback - the callback used to return the result.
+     * @param { HttpRequestEvent } event - Indicates Event type.
+     * @param { Callback1Argument<HashMap<String, String>> } callback - the callback used to return the result.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func once(event: HttpRequestEvent, callback: Callback1Argument<HashMap<String, String>>): Unit {
         HTTP_LOG.info("HttpRequest register onceHeadersReceive start")
@@ -586,12 +587,14 @@ public class HttpRequest {
 
     /**
      * Registers an observer for receiving HTTP Response data events continuously.
-     * @param { callback: (Array<Byte>) -> Unit } callback - the callback used to return the result.
+     * @param { HttpRequestEvent } event - Indicates Event type.
+     * @param { Callback1Argument<Array<Byte>> } callback - the callback used to return the result.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<Array<Byte>>): Unit {
         HTTP_LOG.info("HttpRequest register onDataReceive start")
@@ -611,12 +614,14 @@ public class HttpRequest {
 
     /**
      * Registers an observer for receiving HTTP Response data ends events.
-     * @param { () -> Unit } callback - the callback used to return the result.
+     * @param { HttpRequestEvent } event - Indicates Event type.
+     * @param { Callback0Argument } callback - the callback used to return the result.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func on(event: HttpRequestEvent, callback: Callback0Argument): Unit {
         HTTP_LOG.info("HttpRequest register onDataEnd start")
@@ -630,12 +635,14 @@ public class HttpRequest {
 
     /**
      * Registers an observer for progress of receiving HTTP Response data events.
-     * @param { (DataReceiveProgressInfo) -> Unit } callback - the callback used to return the result.
+     * @param { HttpRequestEvent } event - Indicates Event type.
+     * @param { Callback1Argument<DataReceiveProgressInfo> } callback - the callback used to return the result.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<DataReceiveProgressInfo>): Unit {
         HTTP_LOG.info("HttpRequest register onDataReceiveProgress start")
@@ -651,12 +658,14 @@ public class HttpRequest {
 
     /**
      * Registers an observer for progress of sendSize HTTP Response data events.
-     * @param { (DataSendProgressInfo) -> Unit } callback - the callback of on.
+     * @param { HttpRequestEvent } event - Indicates Event type.
+     * @param { Callback1Argument<DataSendProgressInfo> } callback - the callback of on.
      * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func on(event: HttpRequestEvent, callback: Callback1Argument<DataSendProgressInfo>): Unit {
         HTTP_LOG.info("HttpRequest register onDataSendProgress start")
@@ -672,11 +681,14 @@ public class HttpRequest {
 
     /**
      * Unregisters the observer for HttpRequest.
-     * @throws { IllegalArgumentException } The parameter check failed.
+     * @param { HttpRequestEvent } event - Indicates Event type.
+     * @param { ?CallbackObject } [callback] - the callback used to return the result.
+     * @throws { BusinessException } 2100001 - Invalid parameter value.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        throwexception: true
     ]
     public func off(event: HttpRequestEvent, callback!: ?CallbackObject = None): Unit {
         HTTP_LOG.info("unsubscribe stateChange")
@@ -702,11 +714,11 @@ public class HttpResponseCache {
     init() {}
     /**
      * Writes data in the cache to the file system so that all the cached data can be accessed in the next HTTP request.
-     * @returns { Unit } The promise returned by the flush.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        workerthread: true
     ]
     public func flush(): Unit {
         HTTP_LOG.info("HttpResponseCache flush start")
@@ -720,11 +732,11 @@ public class HttpResponseCache {
 
     /**
      * Disables a cache and deletes the data in it.
-     * @returns { Unit } The promise returned by the delete.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Communication.NetStack"
+        syscap: "SystemCapability.Communication.NetStack",
+        workerthread: true
     ]
     public func delete(): Unit {
         HTTP_LOG.info("HttpResponseCache delete start")
