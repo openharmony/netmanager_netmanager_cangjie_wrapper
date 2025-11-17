@@ -150,7 +150,7 @@ struct CHttpRequestOptions {
                 LibC.free<CClientCert>(this.clientCert)
                 this.dnsServers.free()
                 this.multiFormDataList.free()
-                throw e
+                throw BusinessException(2300027, "Out of memory.")
             }
         }
     }
@@ -187,7 +187,7 @@ func parseUsingProxy(usingProxy: UsingProxy): (Bool, CPointer<CHttpProxy>) {
                     useProxy.write(CHttpProxy(proxy))
                 } catch (e: Exception) {
                     LibC.free(useProxy)
-                    throw e
+                    throw BusinessException(2300027, "Out of memory.")
                 }
 
                 (false, useProxy)
@@ -396,7 +396,7 @@ struct CMultiFormData {
                 LibC.free(contentType)
                 LibC.free(remoteFileName)
                 LibC.free<UInt8>(data.head)
-                throw e
+                throw BusinessException(2300027, "Out of memory.")
             }
         }
     }

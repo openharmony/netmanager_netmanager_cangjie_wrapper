@@ -1027,7 +1027,7 @@ public class ClientCert {
             }
         } catch (e: Exception) {
             cert.free()
-            throw e
+            throw BusinessException(2300027, "Out of memory.")
         }
         return cert
     }
@@ -1141,7 +1141,7 @@ unsafe func map2CArrString(map: HashMap<String, String>): CArrString {
             LibC.free(ptr.read(i))
         }
         LibC.free(ptr)
-        throw e
+        throw BusinessException(2300027, "Out of memory.")
     }
     CArrString(ptr, arrLen)
 }
