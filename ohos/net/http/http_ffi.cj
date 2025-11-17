@@ -108,6 +108,9 @@ struct CHttpRequestOptions {
     var maxLimit: UInt32
     var multiFormDataList: CArrMultiFormData
 
+    /**
+     * @throws { BusinessException } 2300027 - Out of memory.
+     */
     init(ops: HttpRequestOptions) {
         this.method = CString(CPointer())
         this.extraData = ops.extraData.getCData()
@@ -176,6 +179,10 @@ struct CHttpRequestOptions {
     }
 }
 
+/**
+ * @throws { BusinessException } 2300027 - Out of memory.
+ * @throws { BusinessException } 2100001 - Invalid parameter value.
+ */
 func parseUsingProxy(usingProxy: UsingProxy): (Bool, CPointer<CHttpProxy>) {
     unsafe {
         match (usingProxy) {
@@ -379,6 +386,9 @@ struct CMultiFormData {
         var filePath: CString
     ) {}
 
+    /**
+     * @throws { BusinessException } 2300027 - Out of memory.
+     */
     init(formData: MultiFormData) {
         this.name = CString(CPointer())
         this.contentType = CString(CPointer())
