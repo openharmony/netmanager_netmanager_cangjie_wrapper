@@ -1062,6 +1062,9 @@ public class ClientCert {
         this.keyPassword = keyPassword
     }
 
+    /**
+     * @throws { BusinessException } 2300027 - Out of memory.
+     */
     func toCClientCert(): CClientCert {
         var cert = CClientCert(CString(CPointer()), CString(CPointer()), CString(CPointer()), CString(CPointer()))
         try {
@@ -1172,6 +1175,9 @@ func cArrString2Map(cArrString: CArrString): HashMap<String, String> {
     map
 }
 
+/**
+ * @throws { BusinessException } 2300027 - Out of memory.
+ */
 unsafe func map2CArrString(map: HashMap<String, String>): CArrString {
     if (map.isEmpty()) {
         return CArrString(CPointer<CString>(), 0)
