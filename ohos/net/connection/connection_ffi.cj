@@ -82,6 +82,9 @@ struct CNetSpecifier {
         let hasSpecifier!: Bool = false
     ) {}
 
+    /**
+     * @throws { BusinessException } 2100003 - System internal error.
+     */
     init(netSpecifier: NetSpecifier) {
         this.netCapabilities = CNetCapabilities(netSpecifier.netCapabilities)
         this.bearerPrivateIdentifier = try {
@@ -115,6 +118,10 @@ protected struct CHttpProxy {
         protected let exclusionList: CPointer<CString>,
         protected let exclusionListSize: Int64
     ) {}
+
+    /**
+     * @throws { BusinessException } 2100003 - System internal error.
+     */
     protected init(httpProxy: HttpProxy) {
         this.host = unsafe { LibC.mallocCString(httpProxy.host) }
         this.port = UInt16(httpProxy.port)
@@ -214,6 +221,9 @@ struct CNetCapabilities {
         let networkCap: CPointer<Int32>
     ) {}
 
+    /**
+     * @throws { BusinessException } 2100003 - System internal error.
+     */
     init(netCapabilities: NetCapabilities) {
         this.linkUpBandwidthKbps = netCapabilities.linkUpBandwidthKbps
         this.linkDownBandwidthKbps = netCapabilities.linkDownBandwidthKbps
