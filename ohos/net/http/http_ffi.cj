@@ -54,6 +54,12 @@ foreign {
     func CJ_OnDataSendProgress(id: Int64, callback: Int64): Unit
 
     func CJ_OffDataSendProgress(id: Int64): Unit
+
+    func FFiOHOSNetHttpFreeCString(p: CString): Unit
+
+    func FFiOHOSNetHttpFreeCArrString(arr: CArrString): Unit
+    
+    func FFiOHOSNetHttpFreeCArrUI8(arr: CArrUI8): Unit
 }
 
 @C
@@ -272,11 +278,11 @@ struct CHttpResponse {
 
     func free(): Unit {
         unsafe {
-            LibC.free(errMsg)
-            LibC.free(cookies)
-            LibC.free(result.head)
-            header.free()
-            setCookie.free()
+            FFiOHOSNetHttpFreeCString(errMsg)
+            FFiOHOSNetHttpFreeCString(cookies)
+            FFiOHOSNetHttpFreeCArrUI8(result)
+            FFiOHOSNetHttpFreeCArrString(header)
+            FFiOHOSNetHttpFreeCArrString(setCookie)
         }
     }
 }

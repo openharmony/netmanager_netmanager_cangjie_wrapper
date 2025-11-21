@@ -242,13 +242,13 @@ public class HttpRequest {
             HTTP_LOG.info("request callback called")
             if (resp.errCode != SUCCESS_CODE) {
                 let errMsg = resp.errMsg.toString()
-                unsafe { LibC.free(resp.errMsg) }
                 HTTP_LOG.error("HttpRequest request failed: ${resp.errCode}")
                 let error = BusinessException(resp.errCode, "HttpRequest request failed: ${errMsg}")
                 callback(error, None)
             } else {
                 callback(None, HttpResponse(resp))
             }
+            resp.free()
             HTTP_LOG.info("request callback end")
         }
         let registerCall = Callback1Param<CHttpResponse, Unit>(wrapper)
@@ -256,7 +256,7 @@ public class HttpRequest {
         let retCode = ret.code
         let errMsg = ret.data.toString()
         unsafe {
-            LibC.free(ret.data)
+            FFiOHOSNetHttpFreeCString(ret.data)
             LibC.free(c_url)
             freeOptions(optPtr)
         }
@@ -322,13 +322,13 @@ public class HttpRequest {
             HTTP_LOG.info("request callback called")
             if (resp.errCode != SUCCESS_CODE) {
                 let errMsg = resp.errMsg.toString()
-                unsafe { LibC.free(resp.errMsg) }
                 HTTP_LOG.error("HttpRequest request failed: ${resp.errCode}")
                 let error = BusinessException(resp.errCode, "HttpRequest request failed: ${errMsg}")
                 callback(error, None)
             } else {
                 callback(None, HttpResponse(resp))
             }
+            resp.free()
             HTTP_LOG.info("request callback end")
         }
         let registerCall = Callback1Param<CHttpResponse, Unit>(wrapper)
@@ -336,7 +336,7 @@ public class HttpRequest {
         let retCode = ret.code
         let errMsg = ret.data.toString()
         unsafe {
-            LibC.free(ret.data)
+            FFiOHOSNetHttpFreeCString(ret.data)
             LibC.free(c_url)
             freeOptions(optPtr)
         }
@@ -419,7 +419,7 @@ public class HttpRequest {
         let retCode = ret.code
         let errMsg = ret.data.toString()
         unsafe {
-            LibC.free(ret.data)
+            FFiOHOSNetHttpFreeCString(ret.data)
             LibC.free(c_url)
             freeOptions(optPtr)
         }
@@ -503,7 +503,7 @@ public class HttpRequest {
         let retCode = ret.code
         let errMsg = ret.data.toString()
         unsafe {
-            LibC.free(ret.data)
+            FFiOHOSNetHttpFreeCString(ret.data)
             LibC.free(c_url)
             freeOptions(optPtr)
         }
@@ -551,7 +551,7 @@ public class HttpRequest {
         commonSubscribe1Arg(event, callback) {
             cArrString: CArrString =>
             let map = cArrString2Map(cArrString)
-            cArrString.free()
+            unsafe { FFiOHOSNetHttpFreeCArrString(cArrString) }
             return map
         }
         HTTP_LOG.info("HttpRequest register onHeadersReceive end")
@@ -577,7 +577,7 @@ public class HttpRequest {
         let wrapper = {
             cArrString: CArrString =>
             let map = cArrString2Map(cArrString)
-            cArrString.free()
+            unsafe { FFiOHOSNetHttpFreeCArrString(cArrString) }
             callback.invoke(None, map)
         }
         let registerCall = Callback1Param<CArrString, Unit>(wrapper)
@@ -605,7 +605,7 @@ public class HttpRequest {
         commonSubscribe1Arg(event, callback) {
             cstr: CArrUI8 => unsafe {
                 let bytes = cArr2cjArr<UInt8, UInt8>(cstr.size, cstr.head, {i => i})
-                LibC.free(cstr.head)
+                FFiOHOSNetHttpFreeCArrUI8(cstr)
                 return bytes
             }
         }
