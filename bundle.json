@@ -37,7 +37,14 @@
                 "//foundation/communication/netmanager_cangjie_wrapper/ohos/net:ohos.net",
                 "//foundation/communication/netmanager_cangjie_wrapper/kit/NetworkKit:kit.NetworkKit"
             ],
-            "inner_kits": [],
+            "inner_kits": [
+                {
+                  "name": "//foundation/communication/netmanager_cangjie_wrapper:copy_sdk_netmanager_cangjie_libs"
+                },
+                {
+                  "name": "//foundation/communication/netmanager_cangjie_wrapper:copy_sdk_netmanager_cangjie_libs_kit"
+                }
+            ],
             "test": []
         }
     }
