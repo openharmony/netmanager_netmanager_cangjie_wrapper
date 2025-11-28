@@ -12,10 +12,7 @@
     "component": {
         "name": "netmanager_cangjie_wrapper",
         "subsystem": "communication",
-        "syscap": [
-            "SystemCapability.Communication.NetManager.Core",
-            "SystemCapability.Communication.NetStack"
-        ],
+        "syscap": [],
         "features": [],
         "adapted_system_type": [
             "standard"
