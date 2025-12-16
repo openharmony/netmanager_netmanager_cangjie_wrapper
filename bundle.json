@@ -31,6 +31,7 @@
             "sub_component": [
                 "//foundation/communication/netmanager_cangjie_wrapper/ohos/net/connection:ohos.net.connection",
                 "//foundation/communication/netmanager_cangjie_wrapper/ohos/net/http:ohos.net.http",
+                "//foundation/communication/netmanager_cangjie_wrapper/ohos/net/web_socket:ohos.net.web_socket",
                 "//foundation/communication/netmanager_cangjie_wrapper/ohos/net:ohos.net",
                 "//foundation/communication/netmanager_cangjie_wrapper/kit/NetworkKit:kit.NetworkKit"
             ],
