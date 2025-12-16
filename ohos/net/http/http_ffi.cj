@@ -43,9 +43,13 @@ foreign {
 
     func CJ_OffDataReceive(id: Int64): Unit
 
+    func CJ_OffOneDataReceive(id: Int64, callback: Int64): Unit
+
     func CJ_OnDataEnd(id: Int64, callback: Int64): Unit
 
     func CJ_OffDataEnd(id: Int64): Unit
+
+    func CJ_OffOneDataEnd(id: Int64, callback: Int64): Unit
 
     func CJ_OnDataReceiveProgress(id: Int64, callback: Int64): Unit
 

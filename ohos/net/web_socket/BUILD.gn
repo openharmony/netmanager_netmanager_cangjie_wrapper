@@ -16,14 +16,28 @@
 import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
-ohos_cangjie_shared_library("kit.NetworkKit") {
-  sources = [ "index.cj" ]
+ohos_cangjie_shared_library("ohos.net.web_socket") {
+  sources = [
+    "cj_websocket_common.cj",
+    "cj_websocket_enum.cj",
+    "cj_websocket_ffi.cj",
+    "cj_websocket_manager.cj",
+    "cj_websocket_utils.cj",
+    "web_socket.cj",
+  ]
+
+  external_deps = [ "netstack:cj_net_websocket_ffi" ]
+
+  cj_external_deps = [
+    "cangjie_ark_interop:ohos.business_exception",
+    "cangjie_ark_interop:ohos.callback_invoke",
+    "cangjie_ark_interop:ohos.ffi",
+    "cangjie_ark_interop:ohos.labels",
+    "hiviewdfx_cangjie_wrapper:ohos.hilog",
+  ]
 
   cj_deps = [
-    "../../ohos/net:ohos.net",
-    "../../ohos/net/connection:ohos.net.connection",
-    "../../ohos/net/http:ohos.net.http",
-    "../../ohos/net/web_socket:ohos.net.web_socket",
+    "../connection:ohos.net.connection",
   ]
 
   subsystem_name = "netmanager"
