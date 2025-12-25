@@ -291,7 +291,7 @@ public class RouteInfo {
     ]
     public var interfaceName: String
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var iface: String = ""
 
     /**
@@ -330,7 +330,7 @@ public class RouteInfo {
     ]
     public var isDefaultRoute: Bool
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var isExcludedRoute: Bool = false
 
     /**
@@ -604,10 +604,10 @@ public enum NetCap {
     ]
     NetCapabilityValidated
     |
-    @!Hide
+    @!Hide[isChecked: true]
     NetCapabilityPortal
     |
-    @!Hide
+    @!Hide[isChecked: true]
     NetCapabilityCheckingConnectivity
     | ...
 
@@ -666,7 +666,7 @@ public enum NetBearType {
     ]
     BearerWifi
     |
-    @!Hide
+    @!Hide[isChecked: true]
     BearerBluetooth
     |
     /**
@@ -678,7 +678,7 @@ public enum NetBearType {
     ]
     BearerEthernet
     |
-    @!Hide
+    @!Hide[isChecked: true]
     BearerVpn
     | ...
 
