@@ -324,7 +324,7 @@ public enum HttpDataType {
     since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
-public enum HttpData {
+public enum HttpData <: ToString {
     /**
      * String form.
      */
@@ -355,6 +355,23 @@ public enum HttpData {
     func getCData(): CArrUI8 {
         let data = getData()
         unsafe { CArrUI8(cjArr2CArr<UInt8, UInt8>(data, {i => i}), data.size) }
+    }
+
+    /**
+     * Return the string of the HttpData value.
+     *
+     * @returns { String } Returns the HttpData value.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func toString(): String {
+        match (this) {
+            case StringData(str) => str
+            case ArrayData(arr) => "${arr}"
+            case _ => throw BusinessException(2100001, "Invalid parameter value.")
+        }
     }
 }
 
@@ -718,7 +735,7 @@ public class HttpRequestOptions {
     since: "22",
     syscap: "SystemCapability.Communication.NetStack"
 ]
-public class HttpResponse {
+public class HttpResponse <: ToString {
     /**
      * result can be a string or byte array.
      * If expectDataType is set, the system preferentially returns this parameter.
@@ -784,6 +801,19 @@ public class HttpResponse {
             this.cookies = resp.cookies.toString()
             this.performanceTiming = PerformanceTiming(resp.performanceTiming)
         }
+    }
+
+    /**
+     * Return the string of the HttpResponse value.
+     *
+     * @returns { String } Returns the HttpResponse value.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func toString(): String {
+        "${responseCode}\r\n${header}\r\n${cookies}\r\n${performanceTiming.toString()}"
     }
 }
 
@@ -915,6 +945,21 @@ public class PerformanceTiming {
         this.responseHeaderTiming = timing.responseHeaderTiming
         this.responseBodyTiming = timing.responseBodyTiming
         this.totalTiming = timing.totalTiming
+    }
+
+    func toString(): String {
+        let sb = StringBuilder()
+        sb.append("dnsTiming=${dnsTiming}\r\n")
+        sb.append("tcpTiming=${tcpTiming},\r\n")
+        sb.append("tlsTiming=${tlsTiming},\r\n")
+        sb.append("firstSendTiming=${firstSendTiming},\r\n")
+        sb.append("firstReceiveTiming=${firstReceiveTiming},\r\n")
+        sb.append("totalFinishTiming=${totalFinishTiming},\r\n")
+        sb.append("redirectTiming=${redirectTiming},\r\n")
+        sb.append("responseHeaderTiming=${responseHeaderTiming},\r\n")
+        sb.append("responseBodyTiming=${responseBodyTiming},\r\n")
+        sb.append("totalTiming=${totalTiming},\r\n")
+        sb.toString()
     }
 }
 

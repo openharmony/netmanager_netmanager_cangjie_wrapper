@@ -17,6 +17,7 @@ netmanager_cangjie_wrapper_packages_ohos = [
   "//foundation/communication/netmanager_cangjie_wrapper/ohos/net/http:ohos.net.http",
   "//foundation/communication/netmanager_cangjie_wrapper/ohos/net/connection:ohos.net.connection",
   "//foundation/communication/netmanager_cangjie_wrapper/ohos/net:ohos.net",
+  "//foundation/communication/netmanager_cangjie_wrapper/ohos/net/web_socket:ohos.net.web_socket",
 ]
 netmanager_cangjie_wrapper_packages_kit = [ "//foundation/communication/netmanager_cangjie_wrapper/kit/NetworkKit:kit.NetworkKit" ]
 copy_ohos_cangjie_sdk_api_lib("copy_sdk_netmanager_cangjie_libs") {
