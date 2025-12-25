@@ -20,3 +20,4 @@ package kit.NetworkKit
 public import ohos.net.*
 public import ohos.net.connection.*
 public import ohos.net.http.*
+public import ohos.net.web_socket.*

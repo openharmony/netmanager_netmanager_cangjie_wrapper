@@ -24,12 +24,14 @@ import ohos.ffi.{CArrString, CArrUI8, SUCCESS_CODE, Callback1Param, safeMalloc, 
 import ohos.hilog.HilogChannel
 import std.collection.{HashMap, ArrayList}
 import ohos.labels.APILevel
+import std.sync.Mutex
 
 let HTTP_LOG = HilogChannel(0, 0xD0015B0, "CJ-net-Http")
 const MAX_CACHE_SIZE: UInt32 = 10 * 1024 * 1024
 /**
  * Creates an HTTP request task.
- * @returns { HttpRequest } the HttpRequest of the createHttp.
+ *
+ * @returns { HttpRequest } Returns the HttpRequest of the createHttp.
  */
 @!APILevel[
     since: "22",
@@ -42,8 +44,8 @@ public func createHttp(): HttpRequest {
 
 /**
  * Creates a default HttpResponseCache object to store the responses of HTTP access requests.
- * @param { UInt32 } [cacheSize] - the size of cache(max value is 10MB), default is 10*1024*1024(10MB).
- * @returns { HttpResponseCache } the HttpResponseCache of the createHttpResponseCache.
+ * @param { UInt32 } [ cacheSize ] - the size of cache(max value is 10MB), default is 10*1024*1024(10MB).
+ * @returns { HttpResponseCache } Returns the HttpResponseCache of the createHttpResponseCache.
  */
 @!APILevel[
     since: "22",
@@ -70,6 +72,10 @@ public func createHttpResponseCache(cacheSize!: UInt32 = MAX_CACHE_SIZE): HttpRe
 ]
 public class HttpRequest {
     private var requested: Bool = false
+    let dataEndList = ArrayList<(CallbackObject, Int64)>()
+    let dataEndMutex = Mutex()
+    let dataReceiveList = ArrayList<(CallbackObject, Int64)>()
+    let dataReceiveMutex = Mutex()
 
     // id is RemoteData id, it`s not register to global map
     // will be released when destroy called
@@ -701,6 +707,152 @@ public class HttpRequest {
         }
         callBackMap[event].clear()
     }
+
+    /**
+     * Registers an observer for receiving HTTP Response data ends events.
+     *
+     * @param { Callback0Argument } callback - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func onDataEnd(callback: Callback0Argument): Unit {
+        synchronized(dataEndMutex) {
+            let callbackList = dataEndList
+            if (findCallbackObject(callbackList, callback)) {
+                HTTP_LOG.error("HttpRequest on failed: ${paramError("callback object", "different")}")
+                return
+            }
+            unsafe {
+                let wrapper = { => callback.invoke(None) }
+                let registerCall = Callback0Param<Unit>(wrapper)
+                unsafe { CJ_OnDataEnd(id, registerCall.getID()) }
+                callbackList.add((callback, registerCall.getID()))
+            }
+        }
+    }
+
+    /**
+     * Unregisters an observer for receiving HTTP Response data ends events.
+     *
+     * @param { ?Callback0Argument } [ callback ] - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func offDataEnd(callback!: ?Callback0Argument = None): Unit {
+        if (dataEndList.size == 0) {
+            HTTP_LOG.error("HttpRequest Off failed: The event is not registered")
+            return
+        }
+        synchronized(dataEndMutex) {
+            match (callback) {
+                case Some(cb) =>
+                    unsafe {
+                        dataEndList.removeIf(
+                            {
+                                item => if (refEq(item[0], cb)) {
+                                    CJ_OffOneDataEnd(id, item[1])
+                                    true
+                                } else {
+                                    false
+                                }
+                            })
+                    }
+                case None => unsafe { CJ_OffDataEnd(id) }
+            }
+        }
+    }
+
+    /**
+     * Registers an observer for receiving HTTP Response data events continuously.
+     *
+     * @param { Callback1Argument<Array<Byte>> } callback - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func onDataReceive(callback: Callback1Argument<Array<Byte>>): Unit {
+        synchronized(dataReceiveMutex) {
+            let callbackList = dataReceiveList
+            if (findCallbackObject(callbackList, callback)) {
+                HTTP_LOG.error("HttpRequest on failed: ${paramError("callback object", "different")}")
+                return
+            }
+            unsafe {
+                let wrapper = {
+                    cstr: CArrUI8 => unsafe {
+                        let bytes = cArr2cjArr<UInt8, UInt8>(cstr.size, cstr.head, {i => i})
+                        LibC.free(cstr.head)
+                        callback.invoke(None, bytes)
+                    }
+                }
+                let registerCall = Callback1Param<CArrUI8, Unit>(wrapper)
+                unsafe { CJ_OnDataReceive(id, registerCall.getID()) }
+                callbackList.add((callback, registerCall.getID()))
+            }
+        }
+    }
+
+    /**
+     * Unregisters an observer for receiving HTTP Response data events continuously.
+     *
+     * @param { ?Callback1Argument<Array<Byte>> } [ callback ] - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func offDataReceive(callback!: ?Callback1Argument<Array<Byte>> = None): Unit {
+        if (dataReceiveList.size == 0) {
+            HTTP_LOG.error("HttpRequest Off failed: The event is not registered")
+            return
+        }
+        synchronized(dataReceiveMutex) {
+            match (callback) {
+                case Some(cb) =>
+                    unsafe {
+                        dataReceiveList.removeIf(
+                            {
+                                item => if (refEq(item[0], cb)) {
+                                    CJ_OffOneDataReceive(id, item[1])
+                                    true
+                                } else {
+                                    false
+                                }
+                            })
+                    }
+                case None => unsafe { CJ_OffDataReceive(id) }
+            }
+        }
+    }
+
+    /**
+     * Registers an observer for HTTP Response Header events.
+     *
+     * @param { Callback1Argument<HashMap<String, String>> } callback - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func onceHeadersReceive(callback: Callback1Argument<HashMap<String, String>>): Unit {
+        headersReceive(true, callback)
+    }
+
+    private func headersReceive(once: Bool, callback: Callback1Argument<HashMap<String, String>>): Unit {
+        let wrapper = {
+            cArrString: CArrString =>
+            let map = cArrString2Map(cArrString)
+            cArrString.free()
+            callback.invoke(None, map)
+        }
+        let registerCall = Callback1Param<CArrString, Unit>(wrapper)
+        unsafe { CJ_OnHeadersReceive(id, once, registerCall.getID()) }
+    }
 }
 
 /**
@@ -747,4 +899,17 @@ public class HttpResponseCache {
         }
         HTTP_LOG.info("HttpResponseCache delete success")
     }
+}
+
+func paramError(needed: String, mustbe: String): String {
+    return "Parameter error. The " + needed + " must be " + mustbe + "."
+}
+
+func findCallbackObject(list: ArrayList<(CallbackObject, Int64)>, callback: CallbackObject): Bool {
+    for (item in list) {
+        if (refEq(callback, item[0])) {
+            return true
+        }
+    }
+    return false
 }
