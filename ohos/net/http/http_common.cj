@@ -24,50 +24,50 @@ import std.collection.HashMap
 import std.deriving.Derive
 import ohos.business_exception.BusinessException
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum SslType {
-    @!Hide
+    @!Hide[isChecked: true]
     Tls
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Tlcp
     | ...
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum RemoteValidation {
-    @!Hide
+    @!Hide[isChecked: true]
     System
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Skip
     | ...
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum TlsOptions {
-    @!Hide
+    @!Hide[isChecked: true]
     System
     | ...
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum AddressFamily {
-    @!Hide
+    @!Hide[isChecked: true]
     Default
     |
-    @!Hide
+    @!Hide[isChecked: true]
     OnlyV4
     |
-    @!Hide
+    @!Hide[isChecked: true]
     OnlyV6
     | ...
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal class CertificatePinning {}
 
-@!Hide
+@!Hide[isChecked: true]
 internal class ServerAuthentication {}
 
 /**
@@ -287,7 +287,7 @@ public enum HttpDataType {
     ]
     StringValue
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Object
     |
     /**
@@ -554,13 +554,13 @@ public class HttpRequestOptions {
     ]
     public var caPath: String
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var caData: ?String = Option<String>.None
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var sslType: SslType = SslType.Tls
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var clientEncCert: ?ClientCert = Option<ClientCert>.None
 
     /**
@@ -637,19 +637,19 @@ public class HttpRequestOptions {
     ]
     public var multiFormDataList: Array<MultiFormData>
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var certificatePinning: Array<CertificatePinning> = Array<CertificatePinning>()
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var remoteValidation: ?RemoteValidation = Option<RemoteValidation>.None
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var tlsOptions: ?TlsOptions = Option<TlsOptions>.None
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var serverAuthentication: ?ServerAuthentication = Option<ServerAuthentication>.None
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var addressFamily: AddressFamily = AddressFamily.Default
 
     /**
