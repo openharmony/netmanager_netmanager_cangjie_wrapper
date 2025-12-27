@@ -24,8 +24,6 @@ import ohos.business_exception.BusinessException
 import ohos.callback_invoke.{Callback0Argument, Callback1Argument}
 import ohos.labels.{APILevel, PermissionValue}
 
-import std.deriving.Derive
-
 let CONNECTION_LOG = HilogChannel(0, 0xD0015B0, "CJ-net-Connection")
 
 /**

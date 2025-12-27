@@ -17,7 +17,7 @@
 
 package ohos.net.connection
 
-import ohos.ffi.{cjArr2CArr, RetDataCArrI32, cArr2cjArr}
+import ohos.ffi.{cjArr2CArr, RetDataCArrI32}
 import ohos.business_exception.BusinessException
 
 foreign {
