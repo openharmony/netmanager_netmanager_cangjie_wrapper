@@ -61,7 +61,7 @@ public class WebSocket <: RemoteDataLite {
     /**
      * Initiates a WebSocket request to establish a WebSocket connection to a given URL.
      *
-     * @param { String } url URL for establishing a WebSocket connection.
+     * @param { String } url - URL for establishing a WebSocket connection.
      * @param { WebSocketRequestOptions } [ options ] - Optional parameters {@link WebSocketRequestOptions}.
      * @returns { Bool } Returns whether the connection was successful.
      * @throws { BusinessException } 201 - Permission denied.
@@ -133,6 +133,7 @@ public class WebSocket <: RemoteDataLite {
      * Closes a WebSocket connection.
      *
      * @param { WebSocketCloseOptions } [ options ] - Optional parameters {@link WebSocketCloseOptions}.
+     * @returns { Bool } Returns whether the close request was created successfully.
      * @throws { BusinessException } 201 - Permission denied.
      */
     @!APILevel[

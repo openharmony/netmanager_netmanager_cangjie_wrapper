@@ -19,7 +19,7 @@ package ohos.net.web_socket
 
 import std.collection.{ArrayList, HashMap}
 import ohos.business_exception.BusinessException
-import ohos.callback_invoke.{ CallbackObject, Callback1Argument, Callback0Argument }
+import ohos.callback_invoke.{CallbackObject, Callback1Argument, Callback0Argument}
 import std.sync.Mutex
 
 class CallbackList {
