@@ -231,8 +231,8 @@ public class WebSocketCloseOptions {
     /**
      * CloseResult constructor.
      *
-     * @param { UInt32 } code - Error code.
-     * @param { String } reason - Error cause.
+     * @param { UInt32 } [ code ] - Error code.
+     * @param { String } [ reason ] - Error cause.
      */
     @!APILevel[
         since: "24",
