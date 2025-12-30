@@ -19,7 +19,7 @@ package ohos.net.web_socket
 
 import std.collection.HashMap
 import ohos.labels.APILevel
-import ohos.ffi.{ CArrUI8, cjArr2CArr }
+import ohos.ffi.{CArrUI8, cjArr2CArr}
 import ohos.business_exception.BusinessException
 import ohos.net.connection.HttpProxy
 
