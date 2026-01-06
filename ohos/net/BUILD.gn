@@ -17,7 +17,12 @@ import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.net") {
-  sources = ["net.cj"]
+
+  if (is_mingw || is_mac){
+    sources = [ "../../mock/ohos.net.cj" ]
+  } else {
+    sources = [ "net.cj" ]
+  }
 
   subsystem_name = "netmanager"
   part_name = "netmanager_cangjie_wrapper"
