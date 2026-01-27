@@ -20,15 +20,27 @@ import ohos.callback_invoke.*
 import ohos.labels.*
 import std.collection.*
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class NetSpecifier {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var netCapabilities: NetCapabilities
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var bearerPrivateIdentifier: String
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public init(netCapabilities: NetCapabilities, bearerPrivateIdentifier!: String = "") {
         super()
         this.netCapabilities = NetCapabilities(
@@ -41,12 +53,21 @@ public class NetSpecifier {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class NetCapabilityInfo {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var netHandle: NetHandle
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var netCap: NetCapabilities
     
     public init() {
@@ -61,21 +82,39 @@ public class NetCapabilityInfo {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class NetCapabilities {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var bearerTypes: Array<NetBearType>
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var linkUpBandwidthKbps: UInt32
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var linkDownBandwidthKbps: UInt32
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var networkCap: Array<NetCap>
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public init(bearerTypes: Array<NetBearType>, linkUpBandwidthKbps!: UInt32 = 0, linkDownBandwidthKbps!: UInt32 = 0,
         networkCap!: Array<NetCap> = Array<NetCap>()) {
         super()
@@ -86,24 +125,45 @@ public class NetCapabilities {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class ConnectionProperties {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var interfaceName: String
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var domains: String
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var linkAddresses: Array<LinkAddress>
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var dnses: Array<NetAddress>
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var routes: Array<RouteInfo>
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var mtu: UInt32
     
     public init() {
@@ -117,21 +177,39 @@ public class ConnectionProperties {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class RouteInfo {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var interfaceName: String
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var destination: LinkAddress
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var gateway: NetAddress
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var hasGateway: Bool
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var isDefaultRoute: Bool
     
     public init() {
@@ -148,12 +226,21 @@ public class RouteInfo {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class LinkAddress {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var address: NetAddress
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var prefixLength: Int32
     
     public init() {
@@ -167,18 +254,33 @@ public class LinkAddress {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class NetAddress {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var address: String
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var family: UInt32
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var port: UInt32
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public init(address: String, family!: UInt32 = 1, port!: UInt32 = 0) {
         super()
         this.address = String()
@@ -187,24 +289,45 @@ public class NetAddress {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class HttpProxy {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var host: String
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var port: UInt32
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var exclusionList: Array<String>
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var username: String
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var password: String
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public init(host: String, port: UInt32, exclusionList: Array<String>, username!: String = "", password!: String = "") {
         super()
         this.host = String()
@@ -215,17 +338,39 @@ public class HttpProxy {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public enum NetCap {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetCapabilityMms
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetCapabilityNotMetered
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetCapabilityInternet
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetCapabilityNotVpn
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetCapabilityValidated
     | ...
 
@@ -258,13 +403,27 @@ public enum NetCap {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public enum NetBearType {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     BearerCellular
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     BearerWifi
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     BearerEthernet
     | ...
     
@@ -293,46 +452,92 @@ public enum NetBearType {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public enum NetConnectionEvent {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetAvailable
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetBlockStatusChange
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetCapabilitiesChange
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetConnectionPropertiesChange
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetLost
-    | @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     NetUnavailable
     | ...
 }
 
 extend NetConnectionEvent <: Equatable<NetConnectionEvent> {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public operator func ==(other: NetConnectionEvent): Bool {
         return true
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public operator func !=(other: NetConnectionEvent): Bool {
         return true
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public func createNetConnection(netSpecifier!: ?NetSpecifier = None, timeout!: UInt32 = 0): NetConnection {
     return NetConnection()
 }
 
-@!APILevel[since: "22", permission: "ohos.permission.GET_NETWORK_INFO", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    permission: "ohos.permission.GET_NETWORK_INFO",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func getDefaultNet(): NetHandle {
     return NetHandle()
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func getDefaultHttpProxy(): HttpProxy {
     return HttpProxy(
         String(),
@@ -343,27 +548,56 @@ public func getDefaultHttpProxy(): HttpProxy {
     )
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func getAppNet(): NetHandle {
     return NetHandle()
 }
 
-@!APILevel[since: "22", permission: "ohos.permission.INTERNET", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    permission: "ohos.permission.INTERNET",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func setAppNet(netHandle: NetHandle): Unit {
     return ()
 }
 
-@!APILevel[since: "22", permission: "ohos.permission.GET_NETWORK_INFO", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    permission: "ohos.permission.GET_NETWORK_INFO",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func getAllNets(): Array<NetHandle> {
     return Array()
 }
 
-@!APILevel[since: "22", permission: "ohos.permission.GET_NETWORK_INFO", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    permission: "ohos.permission.GET_NETWORK_INFO",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func getConnectionProperties(netHandle: NetHandle): ConnectionProperties {
     return ConnectionProperties()
 }
 
-@!APILevel[since: "22", permission: "ohos.permission.GET_NETWORK_INFO", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    permission: "ohos.permission.GET_NETWORK_INFO",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func getNetCapabilities(netHandle: NetHandle): NetCapabilities {
     return NetCapabilities(
         Array(),
@@ -373,64 +607,128 @@ public func getNetCapabilities(netHandle: NetHandle): NetCapabilities {
     )
 }
 
-@!APILevel[since: "22", permission: "ohos.permission.GET_NETWORK_INFO", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    permission: "ohos.permission.GET_NETWORK_INFO",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func isDefaultNetMetered(): Bool {
     return true
 }
 
-@!APILevel[since: "22", permission: "ohos.permission.GET_NETWORK_INFO", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    permission: "ohos.permission.GET_NETWORK_INFO",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func hasDefaultNet(): Bool {
     return true
 }
 
-@!APILevel[since: "22", permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func reportNetConnected(netHandle: NetHandle): Unit {
     return ()
 }
 
-@!APILevel[since: "22", permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    permission: "ohos.permission.GET_NETWORK_INFO" & "ohos.permission.INTERNET",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func reportNetDisconnected(netHandle: NetHandle): Unit {
     return ()
 }
 
-@!APILevel[since: "22", permission: "ohos.permission.INTERNET", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+@!APILevel[
+    since: "22",
+    permission: "ohos.permission.INTERNET",
+    syscap: "SystemCapability.Communication.NetManager.Core",
+    throwexception: true,
+    workerthread: true
+]
 public func getAddressesByName(host: String): Array<NetAddress> {
     return Array()
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class NetConnection {
-    @!APILevel[since: "22", permission: "ohos.permission.GET_NETWORK_INFO", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+    @!APILevel[
+        since: "22",
+        permission: "ohos.permission.GET_NETWORK_INFO",
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true,
+        workerthread: true
+    ]
     public func register(): Unit {
         return ()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true,
+        workerthread: true
+    ]
     public func unregister(): Unit {
         return ()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true
+    ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetHandle>): Unit {
         return ()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true
+    ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetBlockStatusInfo>): Unit {
         return ()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true
+    ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetCapabilityInfo>): Unit {
         return ()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true
+    ]
     public func on(event: NetConnectionEvent, callback: Callback1Argument<NetConnectionPropertyInfo>): Unit {
         return ()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true
+    ]
     public func on(event: NetConnectionEvent, callback: Callback0Argument): Unit {
         return ()
     }
@@ -440,17 +738,35 @@ public class NetConnection {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class NetHandle {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var netId: Int32
 
-    @!APILevel[since: "22", permission: "ohos.permission.INTERNET", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+    @!APILevel[
+        since: "22",
+        permission: "ohos.permission.INTERNET",
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true,
+        workerthread: true
+    ]
     public func getAddressesByName(host: String): Array<NetAddress> {
         return Array()
     }
 
-    @!APILevel[since: "22", permission: "ohos.permission.INTERNET", syscap: "SystemCapability.Communication.NetManager.Core", throwexception: true, workerthread: true]
+    @!APILevel[
+        since: "22",
+        permission: "ohos.permission.INTERNET",
+        syscap: "SystemCapability.Communication.NetManager.Core",
+        throwexception: true,
+        workerthread: true
+    ]
     public func getAddressByName(host: String): NetAddress {
         return NetAddress(
             String(),
@@ -465,12 +781,21 @@ public class NetHandle {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class NetConnectionPropertyInfo {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var netHandle: NetHandle
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var connectionProperties: ConnectionProperties
     
     public init() {
@@ -480,12 +805,21 @@ public class NetConnectionPropertyInfo {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Communication.NetManager.Core"
+]
 public class NetBlockStatusInfo {
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var netHandle: NetHandle
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Communication.NetManager.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Communication.NetManager.Core"
+    ]
     public var blocked: Bool
     
     public init() {
