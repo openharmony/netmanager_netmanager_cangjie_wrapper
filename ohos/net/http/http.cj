@@ -70,10 +70,13 @@ public func createHttpResponseCache(cacheSize!: UInt32 = MAX_CACHE_SIZE): HttpRe
 ]
 public class HttpRequest {
     private var requested: Bool = false
+    private let id: Int64
 
     // id is RemoteData id, it`s not register to global map
     // will be released when destroy called
-    HttpRequest(private let id: Int64) {}
+    init(id: Int64) {
+        this.id = id
+    }
 
     private unsafe func parseParam(url: String, options: ?HttpRequestOptions): (CString, CPointer<CHttpRequestOptions>) {
         let c_url = LibC.mallocCString(url)
