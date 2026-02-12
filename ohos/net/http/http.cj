@@ -709,6 +709,28 @@ public class HttpRequest {
     }
 
     /**
+     * Registers a one-time observer for HTTP Response Header events.
+     *
+     * @param { Callback1Argument<HashMap<String, String>> } callback - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func onceHeadersReceive(callback: Callback1Argument<HashMap<String, String>>): Unit {
+        HTTP_LOG.info("HttpRequest once headersReceive start")
+        let wrapper = {
+            cArrString: CArrString =>
+            let map = cArrString2Map(cArrString)
+            unsafe { FFiOHOSNetHttpFreeCArrString(cArrString) }
+            callback.invoke(None, map)
+        }
+        let registerCall = Callback1Param<CArrString, Unit>(wrapper)
+        unsafe { CJ_OnHeadersReceive(id, true, registerCall.getID()) }
+        HTTP_LOG.info("HttpRequest once headersReceive end")
+    }
+
+    /**
      * Registers an observer for receiving HTTP Response data ends events.
      *
      * @param { Callback0Argument } callback - the callback used to return the result.
@@ -718,52 +740,7 @@ public class HttpRequest {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func onDataEnd(callback: Callback0Argument): Unit {
-        synchronized(dataEndMutex) {
-            let callbackList = dataEndList
-            if (findCallbackObject(callbackList, callback)) {
-                HTTP_LOG.error("HttpRequest on failed: ${paramError("callback object", "different")}")
-                return
-            }
-            unsafe {
-                let wrapper = { => callback.invoke(None) }
-                let registerCall = Callback0Param<Unit>(wrapper)
-                unsafe { CJ_OnDataEnd(id, registerCall.getID()) }
-                callbackList.add((callback, registerCall.getID()))
-            }
-        }
-    }
-
-    /**
-     * Unregisters an observer for receiving HTTP Response data ends events.
-     *
-     * @param { ?Callback0Argument } [ callback ] - the callback used to return the result.
-     */
-    @!APILevel[
-        since: "24",
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
-    public func offDataEnd(callback!: ?Callback0Argument = None): Unit {
-        if (dataEndList.size == 0) {
-            HTTP_LOG.error("HttpRequest Off failed: The event is not registered")
-            return
-        }
-        synchronized(dataEndMutex) {
-            match (callback) {
-                case Some(cb) =>
-                    unsafe {
-                        dataEndList.removeIf(
-                            {
-                                item => if (refEq(item[0], cb)) {
-                                    CJ_OffOneDataEnd(id, item[1])
-                                    true
-                                } else {
-                                    false
-                                }
-                            })
-                    }
-                case None => unsafe { CJ_OffDataEnd(id) }
-            }
-        }
+        commonSubscribe0Arg(HttpRequestEvent.DataEnd, callback)
     }
 
     /**
@@ -776,82 +753,47 @@ public class HttpRequest {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func onDataReceive(callback: Callback1Argument<Array<Byte>>): Unit {
-        synchronized(dataReceiveMutex) {
-            let callbackList = dataReceiveList
-            if (findCallbackObject(callbackList, callback)) {
-                HTTP_LOG.error("HttpRequest on failed: ${paramError("callback object", "different")}")
-                return
+        commonSubscribe1Arg(HttpRequestEvent.DataReceive, callback) {
+            cstr: CArrUI8 => unsafe {
+                let bytes = cArr2cjArr<UInt8, UInt8>(cstr.size, cstr.head, {i => i})
+                FFiOHOSNetHttpFreeCArrUI8(cstr)
+                return bytes
             }
-            unsafe {
-                let wrapper = {
-                    cstr: CArrUI8 => unsafe {
-                        let bytes = cArr2cjArr<UInt8, UInt8>(cstr.size, cstr.head, {i => i})
-                        LibC.free(cstr.head)
-                        callback.invoke(None, bytes)
-                    }
-                }
-                let registerCall = Callback1Param<CArrUI8, Unit>(wrapper)
-                unsafe { CJ_OnDataReceive(id, registerCall.getID()) }
-                callbackList.add((callback, registerCall.getID()))
-            }
+        }
+    }
+
+    /**
+     * Unregisters an observer for receiving HTTP Response data ends events.
+     *
+     * @param { ?Callback0Argument } [callback] - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func offDataEnd(callback!: ?Callback0Argument = None): Unit {
+        if (let Some(c) <- callback) {
+            findCallbackObject(HttpRequestEvent.DataEnd, c, remove: true)
+        } else {
+            callBackMap[HttpRequestEvent.DataEnd].clear()
         }
     }
 
     /**
      * Unregisters an observer for receiving HTTP Response data events continuously.
      *
-     * @param { ?Callback1Argument<Array<Byte>> } [ callback ] - the callback used to return the result.
+     * @param { ?Callback1Argument<Array<Byte>> } [callback] - the callback used to return the result.
      */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public func offDataReceive(callback!: ?Callback1Argument<Array<Byte>> = None): Unit {
-        if (dataReceiveList.size == 0) {
-            HTTP_LOG.error("HttpRequest Off failed: The event is not registered")
-            return
+        if (let Some(c) <- callback) {
+            findCallbackObject(HttpRequestEvent.DataReceive, c, remove: true)
+        } else {
+            callBackMap[HttpRequestEvent.DataReceive].clear()
         }
-        synchronized(dataReceiveMutex) {
-            match (callback) {
-                case Some(cb) =>
-                    unsafe {
-                        dataReceiveList.removeIf(
-                            {
-                                item => if (refEq(item[0], cb)) {
-                                    CJ_OffOneDataReceive(id, item[1])
-                                    true
-                                } else {
-                                    false
-                                }
-                            })
-                    }
-                case None => unsafe { CJ_OffDataReceive(id) }
-            }
-        }
-    }
-
-    /**
-     * Registers an observer for HTTP Response Header events.
-     *
-     * @param { Callback1Argument<HashMap<String, String>> } callback - the callback used to return the result.
-     */
-    @!APILevel[
-        since: "24",
-        syscap: "SystemCapability.Communication.NetStack"
-    ]
-    public func onceHeadersReceive(callback: Callback1Argument<HashMap<String, String>>): Unit {
-        headersReceive(true, callback)
-    }
-
-    private func headersReceive(once: Bool, callback: Callback1Argument<HashMap<String, String>>): Unit {
-        let wrapper = {
-            cArrString: CArrString =>
-            let map = cArrString2Map(cArrString)
-            cArrString.free()
-            callback.invoke(None, map)
-        }
-        let registerCall = Callback1Param<CArrString, Unit>(wrapper)
-        unsafe { CJ_OnHeadersReceive(id, once, registerCall.getID()) }
     }
 }
 
