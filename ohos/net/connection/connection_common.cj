@@ -20,7 +20,7 @@ package ohos.net.connection
 import ohos.labels.{APILevel, Hide}
 import ohos.ffi.cArr2cjArr
 import ohos.business_exception.{getUniversalErrorMsg, BusinessException}
-import std.collection.HashMap
+import std.collection.{HashMap, ArrayList}
 import std.deriving.Derive
 
 /**
@@ -179,13 +179,26 @@ public class NetCapabilities {
         let nc = cNetCapabilities.networkCap
         this.linkUpBandwidthKbps = cNetCapabilities.linkUpBandwidthKbps
         this.linkDownBandwidthKbps = cNetCapabilities.linkDownBandwidthKbps
-        this.bearerTypes = Array<NetBearType>(
-            bearedTypeSize,
-            {
-                i => NetBearType.parse(unsafe { bt.read(i) })
+
+        let validBearerTypes = ArrayList<NetBearType>(bearedTypeSize)
+        for (i in 0..bearedTypeSize) {
+            try {
+                validBearerTypes.add(NetBearType.parse(unsafe { bt.read(i) }))
+            } catch (e: Exception) {
+                CONNECTION_LOG.warn("add NetBearType failed: ${e.message}")
             }
-        )
-        this.networkCap = Array<NetCap>(networkCapSize, {i => NetCap.parse(unsafe { nc.read(i) })})
+        }
+        this.bearerTypes = validBearerTypes.toArray()
+
+        let validNetworkCap = ArrayList<NetCap>(networkCapSize)
+        for (i in 0..networkCapSize) {
+            try {
+                validNetworkCap.add(NetCap.parse(unsafe { nc.read(i) }))
+            } catch (e: Exception) {
+                CONNECTION_LOG.warn("add NetCap failed: ${e.message}")
+            }
+        }
+        this.networkCap = validNetworkCap.toArray()
     }
 }
 
@@ -291,7 +304,7 @@ public class RouteInfo {
     ]
     public var interfaceName: String
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var iface: String = ""
 
     /**
@@ -330,7 +343,7 @@ public class RouteInfo {
     ]
     public var isDefaultRoute: Bool
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var isExcludedRoute: Bool = false
 
     /**
@@ -604,10 +617,10 @@ public enum NetCap {
     ]
     NetCapabilityValidated
     |
-    @!Hide
+    @!Hide[isChecked: true]
     NetCapabilityPortal
     |
-    @!Hide
+    @!Hide[isChecked: true]
     NetCapabilityCheckingConnectivity
     | ...
 
@@ -666,7 +679,7 @@ public enum NetBearType {
     ]
     BearerWifi
     |
-    @!Hide
+    @!Hide[isChecked: true]
     BearerBluetooth
     |
     /**
@@ -678,7 +691,7 @@ public enum NetBearType {
     ]
     BearerEthernet
     |
-    @!Hide
+    @!Hide[isChecked: true]
     BearerVpn
     | ...
 

@@ -17,11 +17,15 @@ import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.net.http") {
-  sources = [
-    "http.cj",
-    "http_common.cj",
-    "http_ffi.cj",
-  ]
+  if (is_mingw || is_mac){
+    sources = [ "../../../mock/ohos.net.http.cj" ]
+  } else {
+    sources = [
+      "http.cj",
+      "http_common.cj",
+      "http_ffi.cj",
+    ]
+  }
 
   external_deps = [ "netstack:cj_net_http_ffi" ]
 

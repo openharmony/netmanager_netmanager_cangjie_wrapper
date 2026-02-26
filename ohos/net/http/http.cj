@@ -72,6 +72,7 @@ public func createHttpResponseCache(cacheSize!: UInt32 = MAX_CACHE_SIZE): HttpRe
 ]
 public class HttpRequest {
     private var requested: Bool = false
+    private let id: Int64
     let dataEndList = ArrayList<(CallbackObject, Int64)>()
     let dataEndMutex = Mutex()
     let dataReceiveList = ArrayList<(CallbackObject, Int64)>()
@@ -79,7 +80,9 @@ public class HttpRequest {
 
     // id is RemoteData id, it`s not register to global map
     // will be released when destroy called
-    HttpRequest(private let id: Int64) {}
+    init(id: Int64) {
+        this.id = id
+    }
 
     private unsafe func parseParam(url: String, options: ?HttpRequestOptions): (CString, CPointer<CHttpRequestOptions>) {
         let c_url = LibC.mallocCString(url)
@@ -782,7 +785,7 @@ public class HttpRequest {
     /**
      * Unregisters an observer for receiving HTTP Response data events continuously.
      *
-     * @param { ?Callback1Argument<Array<Byte>> } [callback] - the callback used to return the result.
+     * @param { ?Callback1Argument<Array<Byte>> } [ callback ] - the callback used to return the result.
      */
     @!APILevel[
         since: "24",
