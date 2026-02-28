@@ -1,4 +1,4 @@
-# Copyright (c) 2025 Huawei Device Co., Ltd.
+# Copyright (c) 2026 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -17,14 +17,18 @@ import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.net.web_socket") {
-  sources = [
-    "cj_websocket_common.cj",
-    "cj_websocket_enum.cj",
-    "cj_websocket_ffi.cj",
-    "cj_websocket_manager.cj",
-    "cj_websocket_utils.cj",
-    "web_socket.cj",
-  ]
+  if (is_mingw || is_mac){
+    sources = [ "../../../mock/ohos.net.web_socket.cj" ]
+  } else {
+    sources = [
+      "cj_websocket_common.cj",
+      "cj_websocket_enum.cj",
+      "cj_websocket_ffi.cj",
+      "cj_websocket_manager.cj",
+      "cj_websocket_utils.cj",
+      "web_socket.cj",
+    ]
+  }
 
   external_deps = [ "netstack:cj_net_websocket_ffi" ]
 
