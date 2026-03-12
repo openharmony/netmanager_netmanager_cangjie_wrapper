@@ -70,8 +70,6 @@ foreign {
     func CJ_OnNetLost(connId: Int64, callbackId: Int64): Unit
 
     func CJ_OnNetUnavailable(connId: Int64, callbackId: Int64): Unit
-
-    func CJ_NetHandleBindSocket(netId: Int32, socketFd: IntNative): Int32
 }
 
 @C
