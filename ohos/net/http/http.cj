@@ -70,10 +70,13 @@ public func createHttpResponseCache(cacheSize!: UInt32 = MAX_CACHE_SIZE): HttpRe
 ]
 public class HttpRequest {
     private var requested: Bool = false
+    private let id: Int64
 
     // id is RemoteData id, it`s not register to global map
     // will be released when destroy called
-    HttpRequest(private let id: Int64) {}
+    init(id: Int64) {
+        this.id = id
+    }
 
     private unsafe func parseParam(url: String, options: ?HttpRequestOptions): (CString, CPointer<CHttpRequestOptions>) {
         let c_url = LibC.mallocCString(url)
@@ -700,6 +703,94 @@ public class HttpRequest {
             return
         }
         callBackMap[event].clear()
+    }
+
+    /**
+     * Registers a one-time observer for HTTP Response Header events.
+     *
+     * @param { Callback1Argument<HashMap<String, String>> } callback - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func onceHeadersReceive(callback: Callback1Argument<HashMap<String, String>>): Unit {
+        HTTP_LOG.info("HttpRequest once headersReceive start")
+        let wrapper = {
+            cArrString: CArrString =>
+            let map = cArrString2Map(cArrString)
+            unsafe { FFiOHOSNetHttpFreeCArrString(cArrString) }
+            callback.invoke(None, map)
+        }
+        let registerCall = Callback1Param<CArrString, Unit>(wrapper)
+        unsafe { CJ_OnHeadersReceive(id, true, registerCall.getID()) }
+        HTTP_LOG.info("HttpRequest once headersReceive end")
+    }
+
+    /**
+     * Registers an observer for receiving HTTP Response data ends events.
+     *
+     * @param { Callback0Argument } callback - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func onDataEnd(callback: Callback0Argument): Unit {
+        commonSubscribe0Arg(HttpRequestEvent.DataEnd, callback)
+    }
+
+    /**
+     * Registers an observer for receiving HTTP Response data events continuously.
+     *
+     * @param { Callback1Argument<Array<Byte>> } callback - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func onDataReceive(callback: Callback1Argument<Array<Byte>>): Unit {
+        commonSubscribe1Arg(HttpRequestEvent.DataReceive, callback) {
+            cstr: CArrUI8 => unsafe {
+                let bytes = cArr2cjArr<UInt8, UInt8>(cstr.size, cstr.head, {i => i})
+                FFiOHOSNetHttpFreeCArrUI8(cstr)
+                return bytes
+            }
+        }
+    }
+
+    /**
+     * Unregisters an observer for receiving HTTP Response data ends events.
+     *
+     * @param { ?Callback0Argument } [callback] - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func offDataEnd(callback!: ?Callback0Argument = None): Unit {
+        if (let Some(c) <- callback) {
+            findCallbackObject(HttpRequestEvent.DataEnd, c, remove: true)
+        } else {
+            callBackMap[HttpRequestEvent.DataEnd].clear()
+        }
+    }
+
+    /**
+     * Unregisters an observer for receiving HTTP Response data events continuously.
+     *
+     * @param { ?Callback1Argument<Array<Byte>> } [callback] - the callback used to return the result.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Communication.NetStack"
+    ]
+    public func offDataReceive(callback!: ?Callback1Argument<Array<Byte>> = None): Unit {
+        if (let Some(c) <- callback) {
+            findCallbackObject(HttpRequestEvent.DataReceive, c, remove: true)
+        } else {
+            callBackMap[HttpRequestEvent.DataReceive].clear()
+        }
     }
 }
 
