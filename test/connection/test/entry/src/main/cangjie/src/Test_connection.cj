@@ -269,7 +269,11 @@ public class Test_connection {
             handle.getAddressByName("test")
             @Expect(false)
         } catch (e: BusinessException) {
-            @Expect(e.code, 2100001)
+            if (DeviceInfo.deviceType == "car") {
+                @Expect(e.code, 2100002)
+            } else {
+                @Expect(e.code, 2100001)
+            }
         }
     }
 
