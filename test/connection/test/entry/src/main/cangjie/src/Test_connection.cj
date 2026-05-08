@@ -28,6 +28,7 @@ import ohos.base.*
 import ohos.hilog.Hilog
 import ohos.callback_invoke.*
 import ohos.business_exception.*
+import kit.BasicServicesKit.*
 
 @Test
 public class Test_connection {
