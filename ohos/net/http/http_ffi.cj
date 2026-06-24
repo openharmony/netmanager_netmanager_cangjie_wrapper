@@ -229,7 +229,12 @@ func mallocClientCertOp(cert: ?ClientCert): CPointer<CClientCert> {
     match (cert) {
         case Some(v) => unsafe {
             let ptr = safeMalloc<CClientCert>()
-            ptr.write(v.toCClientCert())
+            try {
+                ptr.write(v.toCClientCert())
+            } catch (e: Exception) {
+                LibC.free(ptr)
+                throw e
+            }
             ptr
         }
         case None => CPointer<CClientCert>()

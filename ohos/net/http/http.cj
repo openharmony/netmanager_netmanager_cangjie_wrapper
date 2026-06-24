@@ -247,11 +247,13 @@ public class HttpRequest {
                 let errMsg = resp.errMsg.toString()
                 HTTP_LOG.error("HttpRequest request failed: ${resp.errCode}")
                 let error = BusinessException(resp.errCode, "HttpRequest request failed: ${errMsg}")
+                resp.free()
                 callback(error, None)
             } else {
-                callback(None, HttpResponse(resp))
+                let response = HttpResponse(resp)
+                resp.free()
+                callback(None, response)
             }
-            resp.free()
             HTTP_LOG.info("request callback end")
         }
         let registerCall = Callback1Param<CHttpResponse, Unit>(wrapper)
@@ -327,11 +329,13 @@ public class HttpRequest {
                 let errMsg = resp.errMsg.toString()
                 HTTP_LOG.error("HttpRequest request failed: ${resp.errCode}")
                 let error = BusinessException(resp.errCode, "HttpRequest request failed: ${errMsg}")
+                resp.free()
                 callback(error, None)
             } else {
-                callback(None, HttpResponse(resp))
+                let response = HttpResponse(resp)
+                resp.free()
+                callback(None, response)
             }
-            resp.free()
             HTTP_LOG.info("request callback end")
         }
         let registerCall = Callback1Param<CHttpResponse, Unit>(wrapper)
@@ -409,11 +413,13 @@ public class HttpRequest {
                 let errMsg = resp.errMsg.toString()
                 HTTP_LOG.error("HttpRequest requestInStream failed: ${resp.errCode}")
                 let error = BusinessException(resp.errCode, "HttpRequest requestInStream failed: ${errMsg}")
+                resp.free()
                 callback(error, None)
             } else {
-                callback(None, resp.responseCode)
+                let responseCode = resp.responseCode
+                resp.free()
+                callback(None, responseCode)
             }
-            resp.free()
             HTTP_LOG.info("requestInStream callback end")
         }
         let registerCall = Callback1Param<CHttpResponse, Unit>(wrapper)
@@ -493,11 +499,13 @@ public class HttpRequest {
                 let errMsg = resp.errMsg.toString()
                 HTTP_LOG.error("HttpRequest requestInStream failed: ${resp.errCode}")
                 let error = BusinessException(resp.errCode, "HttpRequest requestInStream failed: ${errMsg}")
+                resp.free()
                 callback(error, None)
             } else {
-                callback(None, resp.responseCode)
+                let responseCode = resp.responseCode
+                resp.free()
+                callback(None, responseCode)
             }
-            resp.free()
             HTTP_LOG.info("requestInStream callback end")
         }
         let registerCall = Callback1Param<CHttpResponse, Unit>(wrapper)
