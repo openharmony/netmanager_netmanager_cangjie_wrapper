@@ -90,14 +90,6 @@ public class NetCapabilityInfo {
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var netCap: NetCapabilities
-    
-    /**
-     * NetCapabilityInfo constructor
-     */
-    init(netHandle: NetHandle, netCap: NetCapabilities) {
-        this.netHandle = netHandle
-        this.netCap = netCap
-    }
 
     /**
      * NetCapabilityInfo constructor
@@ -258,18 +250,6 @@ public class ConnectionProperties {
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var mtu: UInt32
-
-    /**
-     * ConnectionProperties constructor
-     */
-    init(interfaceName: String, domains: String, linkAddresses: Array<LinkAddress>, dnses: Array<NetAddress>, routes: Array<RouteInfo>, mtu: UInt32) {
-        this.interfaceName = interfaceName
-        this.domains = domains
-        this.linkAddresses = linkAddresses
-        this.dnses = dnses
-        this.routes = routes
-        this.mtu = mtu
-    }
     
     /**
      * ConnectionProperties constructor
@@ -345,17 +325,6 @@ public class RouteInfo {
 
     @!Hide[isChecked: true]
     internal var isExcludedRoute: Bool = false
-
-    /**
-     * RouteInfo constructor
-     */
-    init(interfaceName: String, destination: LinkAddress, gateway: NetAddress, hasGateway: Bool, isDefaultRoute: Bool) {
-        this.interfaceName = interfaceName
-        this.destination = destination
-        this.gateway = gateway
-        this.hasGateway = hasGateway
-        this.isDefaultRoute = isDefaultRoute
-    }
     
     /**
      * RouteInfo constructor
@@ -393,14 +362,6 @@ public class LinkAddress {
         syscap: "SystemCapability.Communication.NetManager.Core"
     ]
     public var prefixLength: Int32
- 
-    /**
-     * LinkAddress constructor
-     */
-    init(address: NetAddress, prefixLength: Int32) {
-        this.address = address
-        this.prefixLength = prefixLength
-    }
 
     /**
      * LinkAddress constructor
