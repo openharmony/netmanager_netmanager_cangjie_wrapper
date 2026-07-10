@@ -39,11 +39,7 @@ foreign {
 
     func CJ_GetConnectionProperties(netId: Int32, ret: CPointer<CConnectionProperties>): Int32
 
-    func CJ_GetGlobalHttpProxy(chttpProxy: CPointer<CHttpProxy>): Int32
-
     func CJ_GetDefaultHttpProxy(chttpProxy: CPointer<CHttpProxy>): Int32
-
-    func CJ_SetGlobalHttpProxy(cHttpProxy: CHttpProxy): Int32
 
     func CJ_GetAllNets(): RetDataCArrI32
 
@@ -74,11 +70,9 @@ foreign {
 
 @C
 struct CNetSpecifier {
-    CNetSpecifier(
-        let netCapabilities: CNetCapabilities,
-        let bearerPrivateIdentifier: CString,
-        let hasSpecifier!: Bool = false
-    ) {}
+    let netCapabilities: CNetCapabilities
+    let bearerPrivateIdentifier: CString
+    let hasSpecifier: Bool
 
     /**
      * @throws { BusinessException } 2100003 - System internal error.
@@ -97,13 +91,6 @@ struct CNetSpecifier {
         this.hasSpecifier = false
         this.bearerPrivateIdentifier = CString(CPointer<UInt8>())
         this.netCapabilities = CNetCapabilities()
-    }
-
-    func free(): Unit {
-        unsafe {
-            LibC.free(bearerPrivateIdentifier)
-            netCapabilities.free()
-        }
     }
 }
 

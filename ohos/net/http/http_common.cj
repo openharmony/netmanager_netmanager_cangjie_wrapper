@@ -885,25 +885,6 @@ public class PerformanceTiming {
     ]
     public var totalTiming: Float64
 
-    /**
-     * init PerformanceTiming
-     */
-    init(dnsTiming: Float64, tcpTiming: Float64, tlsTiming: Float64,
-        firstSendTiming: Float64, firstReceiveTiming: Float64, totalFinishTiming: Float64,
-        redirectTiming: Float64, responseHeaderTiming: Float64, responseBodyTiming: Float64,
-        totalTiming: Float64) {
-        this.dnsTiming = dnsTiming
-        this.tcpTiming = tcpTiming
-        this.tlsTiming = tlsTiming
-        this.firstSendTiming = firstSendTiming
-        this.firstReceiveTiming = firstReceiveTiming
-        this.totalFinishTiming = totalFinishTiming
-        this.redirectTiming = redirectTiming
-        this.responseHeaderTiming = responseHeaderTiming
-        this.responseBodyTiming = responseBodyTiming
-        this.totalTiming = totalTiming
-    }
-
     init(timing: CPerformanceTiming) {
         this.dnsTiming = timing.dnsTiming
         this.tcpTiming = timing.tcpTiming
@@ -944,14 +925,6 @@ public class DataReceiveProgressInfo {
     ]
     public var totalSize: Int64
 
-    /**
-     * init the DataReceiveProgressInfo
-     */
-    init(receiveSize: Int64, totalSize: Int64) {
-        this.receiveSize = receiveSize
-        this.totalSize = totalSize
-    }
-
     init(info: CDataReceiveProgressInfo) {
         this.receiveSize = Int64(info.receiveSize)
         this.totalSize = Int64(info.totalSize)
@@ -983,13 +956,6 @@ public class DataSendProgressInfo {
         syscap: "SystemCapability.Communication.NetStack"
     ]
     public var totalSize: Int64
-    /**
-     * init the DataSendProgressInfo
-     */
-    init(sendSize: Int64, totalSize: Int64) {
-        this.sendSize = sendSize
-        this.totalSize = totalSize
-    }
 
     init(info: CDataSendProgressInfo) {
         this.sendSize = Int64(info.sendSize)

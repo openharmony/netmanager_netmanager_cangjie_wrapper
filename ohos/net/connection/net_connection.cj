@@ -476,7 +476,7 @@ public class NetConnection <: RemoteDataLite {
             info: CNetCapabilityInfo =>
             CONNECTION_LOG.info("onNetCapabilitiesChange callback called")
             let capabilitiesInfo = NetCapabilityInfo(info)
-            info.netCap.free()
+            info.free()
             callback.invoke(None, capabilitiesInfo)
             CONNECTION_LOG.info("onNetCapabilitiesChange callback end")
         }
